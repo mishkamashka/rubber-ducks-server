@@ -16,7 +16,7 @@ public class Request {      //TODO: user-request one-many; duck-request one-many
     @Column
     private Long duckId;
 
-    @Column
+    @Column(name = "is_approved")
     private boolean isApproved = false;
 
     Request(Long userId, Long duckId){
