@@ -1,15 +1,13 @@
 package se.ifmo.ru;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "DUCK")
 public class Duck {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -19,12 +17,12 @@ public class Duck {
     private String description;
 
     @Column(name = "feature_set_id", nullable = false)
-    private long featureSetId;
+    private Long featureSetId;
 
     @Column(name = "owner_id", nullable = false)
-    private long ownerId;
+    private Long ownerId;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

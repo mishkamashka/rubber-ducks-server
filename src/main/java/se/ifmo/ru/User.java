@@ -11,6 +11,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false)
+    private String nickname;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -20,7 +23,7 @@ public class User {
     @Column
     private char gender;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
     @Column(name = "birth_date")
@@ -43,4 +46,104 @@ public class User {
 
     @Column(name = "building_letter")
     private char buildingLetter;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getBuiding() {
+        return buiding;
+    }
+
+    public void setBuiding(int buiding) {
+        this.buiding = buiding;
+    }
+
+    public char getBuildingLetter() {
+        return buildingLetter;
+    }
+
+    public void setBuildingLetter(char buildingLetter) {
+        this.buildingLetter = buildingLetter;
+    }
 }
