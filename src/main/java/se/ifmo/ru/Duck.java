@@ -16,11 +16,26 @@ public class Duck {
     @Column
     private String description;
 
-    @Column(name = "feature_set_id", nullable = false)
-    private Long featureSetId;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "feature_set_id", nullable = false)
+    private FeatureSet featureSet;
 
-    @Column(name = "owner_id", nullable = false)
-    private Long ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    Duck(String name, FeatureSet featureSet, User owner) {
+        this.name = name;
+        this.featureSet = featureSet;
+        this.owner = owner;
+    }
+
+    Duck(String name, FeatureSet featureSet, User owner, String description) {
+        this.name = name;
+        this.featureSet = featureSet;
+        this.owner = owner;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -34,12 +49,12 @@ public class Duck {
         return description;
     }
 
-    public long getFeatureSetId() {
-        return featureSetId;
+    public FeatureSet getFeatureSet() {
+        return featureSet;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public User getOwnerId() {
+        return owner;
     }
 
     public void setName(String name) {
@@ -50,7 +65,7 @@ public class Duck {
         this.description = description;
     }
 
-    public void setFeatureSetId(long featureSetId) {
-        this.featureSetId = featureSetId;
+    public void setFeatureSet(FeatureSet featureSetId) {
+        this.featureSet = featureSetId;
     }
 }

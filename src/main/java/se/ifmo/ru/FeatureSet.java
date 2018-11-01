@@ -31,6 +31,10 @@ public class FeatureSet {
     @Column(nullable = false)
     private boolean acceccability = false;
 
+    FeatureSet(boolean acceccability) {
+        this.acceccability = acceccability;
+    }
+
     public Long getId() {
         return id;
     }

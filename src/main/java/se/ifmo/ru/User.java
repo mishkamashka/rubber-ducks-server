@@ -1,7 +1,9 @@
 package se.ifmo.ru;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -46,6 +48,18 @@ public class User {
 
     @Column(name = "building_letter")
     private char buildingLetter;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Duck> ducks = new ArrayList<>();
+
+
+    /*
+        only not nullable, it'll be like if (something set) setSomething(something);
+     */
+    User(String nickname, String email) {
+        this.nickname = nickname;
+        this.email = email;
+    }
 
     public long getId() {
         return id;
@@ -145,5 +159,13 @@ public class User {
 
     public void setBuildingLetter(char buildingLetter) {
         this.buildingLetter = buildingLetter;
+    }
+
+    public List<Duck> getDucks() {
+        return ducks;
+    }
+
+    public void setDucks(List<Duck> ducks) {
+        this.ducks = ducks;
     }
 }
