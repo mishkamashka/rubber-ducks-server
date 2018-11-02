@@ -1,4 +1,4 @@
-package se.ifmo.ru;
+package se.ifmo.ru.model;
 
 import javax.persistence.*;
 

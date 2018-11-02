@@ -1,4 +1,4 @@
-package se.ifmo.ru;
+package se.ifmo.ru.model;
 
 import javax.persistence.*;
 
@@ -29,10 +29,10 @@ public class FeatureSet {
     private byte swimmingSkill;
 
     @Column(nullable = false)
-    private boolean acceccability = false;
+    private boolean accessibility = false;
 
-    FeatureSet(boolean acceccability) {
-        this.acceccability = acceccability;
+    FeatureSet(boolean accessibility) {
+        this.accessibility = accessibility;
     }
 
     public Long getId() {
@@ -63,8 +63,8 @@ public class FeatureSet {
         return swimmingSkill;
     }
 
-    public boolean isAcceccability() {
-        return acceccability;
+    public boolean isAccessibility() {
+        return accessibility;
     }
 
     public void setGender(char gender) {
@@ -91,7 +91,7 @@ public class FeatureSet {
         this.swimmingSkill = swimmingSkill;
     }
 
-    public void setAcceccability(boolean acceccability) {
-        this.acceccability = acceccability;
+    public void setAccessibility(boolean accessibility) {
+        this.accessibility = accessibility;
     }
 }

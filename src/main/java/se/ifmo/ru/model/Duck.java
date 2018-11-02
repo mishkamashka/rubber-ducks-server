@@ -1,4 +1,4 @@
-package se.ifmo.ru;
+package se.ifmo.ru.model;
 
 import javax.persistence.*;
 
@@ -16,13 +16,15 @@ public class Duck {
     @Column
     private String description;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feature_set_id", nullable = false)
     private FeatureSet featureSet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    public Duck() {}
 
     Duck(String name, FeatureSet featureSet, User owner) {
         this.name = name;

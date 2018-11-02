@@ -1,4 +1,4 @@
-package se.ifmo.ru;
+package se.ifmo.ru.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -53,9 +53,8 @@ public class User {
     private List<Duck> ducks = new ArrayList<>();
 
 
-    /*
-        only not nullable, it'll be like if (something set) setSomething(something);
-     */
+    public User() {}
+
     User(String nickname, String email) {
         this.nickname = nickname;
         this.email = email;
