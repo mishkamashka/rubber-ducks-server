@@ -55,7 +55,7 @@ public class Duck {
         return featureSet;
     }
 
-    public User getOwnerId() {
+    public User getOwner() {
         return owner;
     }
 
