@@ -44,7 +44,7 @@ public class User {
     private String street;
 
     @Column
-    private int buiding;
+    private int building;
 
     @Column(name = "building_letter")
     private char buildingLetter;
@@ -145,12 +145,12 @@ public class User {
         this.street = street;
     }
 
-    public int getBuiding() {
-        return buiding;
+    public int getBuilding() {
+        return building;
     }
 
-    public void setBuiding(int buiding) {
-        this.buiding = buiding;
+    public void setBuilding(int building) {
+        this.building = building;
     }
 
     public char getBuildingLetter() {
