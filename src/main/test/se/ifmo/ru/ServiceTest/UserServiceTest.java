@@ -6,10 +6,11 @@ import se.ifmo.ru.service.UserService;
 
 public class UserServiceTest {
 
+    private static final User user = new User("user", "email@mail.em");
+
     @Test
     public void userServiceSaveTest() {
         UserService userService = new UserService();
-        User user = new User("user", "email@mail.em");
         userService.save(user);
     }
 
@@ -23,7 +24,6 @@ public class UserServiceTest {
     @Test
     public void userServiceDeleteTest() {
         UserService userService = new UserService();
-        User user = new User("user", "email@mail.em");
         userService.delete(user);
     }
 }

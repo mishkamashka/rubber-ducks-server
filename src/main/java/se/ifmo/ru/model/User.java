@@ -49,7 +49,7 @@ public class User {
     @Column(name = "building_letter")
     private char buildingLetter = '-';
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Duck> ducks = new ArrayList<>();
 
 

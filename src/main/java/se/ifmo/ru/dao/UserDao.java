@@ -28,10 +28,12 @@ public class UserDao {
         session.close();
     }
 
+    //TODO: do something with removing, doesn't work
     public void delete(User user) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.delete(user);
+        User user1 = (User) session.merge(user);
+        session.delete(user1);
         transaction.commit();
         session.close();
     }
@@ -51,6 +53,6 @@ public class UserDao {
         return users;
     }
 
-    //TODO: get by nickname, name, lastname,
+    //TODO: get by nickname, name, lastname
 
 }
