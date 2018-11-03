@@ -11,7 +11,7 @@ public class FeatureSet {
     private Long id;
 
     @Column
-    private char gender;
+    private char gender = '-';
 
     @Column
     private String colour;

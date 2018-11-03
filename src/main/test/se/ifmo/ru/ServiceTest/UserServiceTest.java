@@ -4,7 +4,7 @@ import org.junit.Test;
 import se.ifmo.ru.model.User;
 import se.ifmo.ru.service.UserService;
 
-public class ServiceTest {
+public class UserServiceTest {
 
     @Test
     public void userServiceSaveTest() {
@@ -18,5 +18,12 @@ public class ServiceTest {
         UserService userService = new UserService();
         User user = userService.getById(1);
         System.out.println(user.toString());
+    }
+
+    @Test
+    public void userServiceDeleteTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.delete(user);
     }
 }

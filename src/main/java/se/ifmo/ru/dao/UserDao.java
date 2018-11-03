@@ -51,4 +51,6 @@ public class UserDao {
         return users;
     }
 
+    //TODO: get by nickname, name, lastname,
+
 }
