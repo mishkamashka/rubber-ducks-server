@@ -30,6 +30,7 @@ public class HibernateSessionFactoryUtil {
                 e.printStackTrace();
             }
         }
+        System.out.println("Db connection is set");
         return sessionFactory;
     }
 }

@@ -3,7 +3,7 @@ package se.ifmo.ru.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DUCK")
+@Table(name = "DUCKS")
 public class Duck {
 
     @Id

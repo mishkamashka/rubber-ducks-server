@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public class User {
 
     @Id
@@ -55,7 +55,7 @@ public class User {
 
     public User() {}
 
-    User(String nickname, String email) {
+    public User(String nickname, String email) {
         this.nickname = nickname;
         this.email = email;
     }

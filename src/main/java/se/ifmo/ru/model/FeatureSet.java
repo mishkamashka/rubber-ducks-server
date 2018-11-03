@@ -3,7 +3,7 @@ package se.ifmo.ru.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="FEATURE_SET")
+@Table(name="FEATURE_SETS")
 public class FeatureSet {
 
     @Id
@@ -31,7 +31,10 @@ public class FeatureSet {
     @Column(nullable = false)
     private boolean accessibility = false;
 
-    FeatureSet(boolean accessibility) {
+    public FeatureSet() {
+    }
+
+    public FeatureSet(boolean accessibility) {
         this.accessibility = accessibility;
     }
 

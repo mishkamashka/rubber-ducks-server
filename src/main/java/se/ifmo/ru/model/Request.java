@@ -3,7 +3,7 @@ package se.ifmo.ru.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="REQUEST")
+@Table(name="REQUESTS")
 public class Request {      //TODO: user-request one-many; duck-request one-many
 
     @Id
@@ -19,7 +19,10 @@ public class Request {      //TODO: user-request one-many; duck-request one-many
     @Column(name = "is_approved")
     private boolean isApproved = false;
 
-    Request(Long userId, Long duckId){
+    public Request() {
+    }
+
+    public Request(Long userId, Long duckId){
         this.duckId = duckId;
         this.userId = userId;
     }
