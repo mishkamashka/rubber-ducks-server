@@ -23,7 +23,7 @@ public class User {
     private String lastName;
 
     @Column
-    private char gender;
+    private char gender = '-';
 
     @Column(nullable = false)
     private String email;
@@ -47,7 +47,7 @@ public class User {
     private int building;
 
     @Column(name = "building_letter")
-    private char buildingLetter;
+    private char buildingLetter = '-';
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Duck> ducks = new ArrayList<>();
