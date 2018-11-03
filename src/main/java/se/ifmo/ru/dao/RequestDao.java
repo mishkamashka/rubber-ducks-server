@@ -14,14 +14,14 @@ public class RequestDao {
     private Transaction transaction;
     private Request request;
 
-    public Request getRequestById(long id) {
+    public Request getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         request = session.get(Request.class, id);
         session.close();
         return request;
     }
 
-    public void saveRequest(Request request) {
+    public void save(Request request) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(request);
@@ -29,7 +29,7 @@ public class RequestDao {
         session.close();
     }
 
-    public void deleteRequest(Request request) {
+    public void delete(Request request) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.delete(request);
@@ -37,7 +37,7 @@ public class RequestDao {
         session.close();
     }
 
-    public void updateRequest(Request request) {
+    public void update(Request request) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.update(request);
@@ -45,7 +45,7 @@ public class RequestDao {
         session.close();
     }
 
-    public List<Request> getAllRequests() {
+    public List<Request> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Request");
         List <Request> requests = ((org.hibernate.query.Query) query).list();

@@ -2,53 +2,52 @@ package se.ifmo.ru.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import se.ifmo.ru.model.FeatureSet;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
-import se.ifmo.ru.model.User;
+
 import javax.persistence.Query;
 import java.util.List;
 
-public class UserDao {
-
+public class FeatureSetDao {
     private Session session;
     private Transaction transaction;
-    private User user;
+    private FeatureSet featureSet;
 
-    public User getById(long id) {
+    public FeatureSet getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        user = session.get(User.class, id);
+        featureSet = session.get(FeatureSet.class, id);
         session.close();
-        return user;
+        return featureSet;
     }
 
-    public void save(User user) {
+    public void save(FeatureSet featureSet) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.save(user);
+        session.save(featureSet);
         transaction.commit();
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(FeatureSet featureSet) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.delete(user);
+        session.delete(featureSet);
         transaction.commit();
         session.close();
     }
 
-    public void update(User user) {
+    public void update(FeatureSet featureSet) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        session.update(user);
+        session.update(featureSet);
         transaction.commit();
         session.close();
     }
 
-    public List<User> getAll() {
+    public List<FeatureSet> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User");
-        List <User> users = ((org.hibernate.query.Query) query).list();
-        return users;
+        Query query = session.createQuery("from FeatureSet");
+        List <FeatureSet> featureSets = ((org.hibernate.query.Query) query).list();
+        return featureSets;
     }
-
 }

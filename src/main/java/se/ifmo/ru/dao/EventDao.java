@@ -14,14 +14,14 @@ public class EventDao {
     private Transaction transaction;
     private Event event;
 
-    public Event getEventById(long id) {
+    public Event getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         event = session.get(Event.class, id);
         session.close();
         return event;
     }
 
-    public void saveEvent(Event event) {
+    public void save(Event event) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(event);
@@ -29,7 +29,7 @@ public class EventDao {
         session.close();
     }
 
-    public void deleteEvent(Event event) {
+    public void delete(Event event) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.delete(event);
@@ -37,7 +37,7 @@ public class EventDao {
         session.close();
     }
 
-    public void updateEvent(Event event) {
+    public void update(Event event) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.update(event);
@@ -45,7 +45,7 @@ public class EventDao {
         session.close();
     }
 
-    public List<Event> getAllEvents() {
+    public List<Event> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Event");
         List <Event> events = ((org.hibernate.query.Query) query).list();

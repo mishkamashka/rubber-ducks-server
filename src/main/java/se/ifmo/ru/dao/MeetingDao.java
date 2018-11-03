@@ -14,14 +14,14 @@ public class MeetingDao {
     private Transaction transaction;
     private Meeting meeting;
 
-    public Meeting getMeetingById(long id) {
+    public Meeting getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         meeting = session.get(Meeting.class, id);
         session.close();
         return meeting;
     }
 
-    public void saveMeeting(Meeting meeting) {
+    public void save(Meeting meeting) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(meeting);
@@ -29,7 +29,7 @@ public class MeetingDao {
         session.close();
     }
 
-    public void deleteMeeting(Meeting meeting) {
+    public void delete(Meeting meeting) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.delete(meeting);
@@ -37,7 +37,7 @@ public class MeetingDao {
         session.close();
     }
 
-    public void updateMeeting(Meeting meeting) {
+    public void update(Meeting meeting) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.update(meeting);
@@ -45,7 +45,7 @@ public class MeetingDao {
         session.close();
     }
 
-    public List<Meeting> getAllMeetings() {
+    public List<Meeting> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Meeting");
         List <Meeting> meetings = ((org.hibernate.query.Query) query).list();

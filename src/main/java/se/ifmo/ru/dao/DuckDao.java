@@ -14,14 +14,14 @@ public class DuckDao {
     private Transaction transaction;
     private Duck duck;
 
-    public Duck getDuckById(long id) {
+    public Duck getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         duck = session.get(Duck.class, id);
         session.close();
         return duck;
     }
 
-    public void saveDuck(Duck duck) {
+    public void save(Duck duck) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(duck);
@@ -29,7 +29,7 @@ public class DuckDao {
         session.close();
     }
 
-    public void deleteDuck(Duck duck) {
+    public void delete(Duck duck) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.delete(duck);
@@ -37,7 +37,7 @@ public class DuckDao {
         session.close();
     }
 
-    public void updateDuck(Duck duck) {
+    public void update(Duck duck) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.update(duck);
@@ -45,7 +45,7 @@ public class DuckDao {
         session.close();
     }
 
-    public List<Duck> getAllDucks() {
+    public List<Duck> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Duck");
         List <Duck> ducks = ((org.hibernate.query.Query) query).list();

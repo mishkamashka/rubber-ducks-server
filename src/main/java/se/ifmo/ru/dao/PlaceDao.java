@@ -14,14 +14,14 @@ public class PlaceDao {
     private Transaction transaction;
     private Place place;
 
-    public Place getPlaceById(long id) {
+    public Place getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         place = session.get(Place.class, id);
         session.close();
         return place;
     }
 
-    public void savePlace(Place place) {
+    public void save(Place place) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.save(place);
@@ -29,7 +29,7 @@ public class PlaceDao {
         session.close();
     }
 
-    public void deletePlace(Place place) {
+    public void delete(Place place) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.delete(place);
@@ -37,7 +37,7 @@ public class PlaceDao {
         session.close();
     }
 
-    public void updatePlace(Place place) {
+    public void update(Place place) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
         session.update(place);
@@ -45,7 +45,7 @@ public class PlaceDao {
         session.close();
     }
 
-    public List<Place> getAllPlaces() {
+    public List<Place> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Place");
         List <Place> places = ((org.hibernate.query.Query) query).list();
