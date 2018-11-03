@@ -13,7 +13,7 @@ public class UserDao {
     private Transaction transaction;
     private User user;
 
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         user = session.get(User.class, id);
         session.close();

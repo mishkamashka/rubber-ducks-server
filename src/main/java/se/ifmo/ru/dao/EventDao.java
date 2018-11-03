@@ -14,7 +14,7 @@ public class EventDao {
     private Transaction transaction;
     private Event event;
 
-    public Event getEventById(int id) {
+    public Event getEventById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         event = session.get(Event.class, id);
         session.close();

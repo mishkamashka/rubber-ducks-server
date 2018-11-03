@@ -14,7 +14,7 @@ public class PlaceDao {
     private Transaction transaction;
     private Place place;
 
-    public Place getPlaceById(int id) {
+    public Place getPlaceById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         place = session.get(Place.class, id);
         session.close();

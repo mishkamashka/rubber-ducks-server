@@ -14,7 +14,7 @@ public class MeetingDao {
     private Transaction transaction;
     private Meeting meeting;
 
-    public Meeting getMeetingById(int id) {
+    public Meeting getMeetingById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         meeting = session.get(Meeting.class, id);
         session.close();

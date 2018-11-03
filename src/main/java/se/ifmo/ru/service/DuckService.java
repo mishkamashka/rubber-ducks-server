@@ -7,7 +7,7 @@ public class DuckService {
 
     private DuckDao duckDao = new DuckDao();
 
-    public Duck getDuckById(int id) {
+    public Duck getDuckById(long id) {
         return duckDao.getDuckById(id);
     }
 

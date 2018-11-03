@@ -14,7 +14,7 @@ public class DuckDao {
     private Transaction transaction;
     private Duck duck;
 
-    public Duck getDuckById(int id) {
+    public Duck getDuckById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         duck = session.get(Duck.class, id);
         session.close();

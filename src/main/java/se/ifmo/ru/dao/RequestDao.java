@@ -14,7 +14,7 @@ public class RequestDao {
     private Transaction transaction;
     private Request request;
 
-    public Request getRequestById(int id) {
+    public Request getRequestById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         request = session.get(Request.class, id);
         session.close();
