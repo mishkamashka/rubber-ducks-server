@@ -4,7 +4,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
+
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public class UserDao {
@@ -28,12 +30,10 @@ public class UserDao {
         session.close();
     }
 
-    //TODO: do something with removing, doesn't work
     public void delete(User user) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        User user1 = (User) session.merge(user);
-        session.delete(user1);
+        session.delete(user);
         transaction.commit();
         session.close();
     }
@@ -49,10 +49,57 @@ public class UserDao {
     public List<User> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from User");
-        List <User> users = ((org.hibernate.query.Query) query).list();
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
         return users;
     }
 
-    //TODO: get by nickname, name, lastname
+    public User getByNicknameAndEmail(String nickname, String email) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where nickname = :nickname and email = :email");
+        query.setParameter("nickname", nickname);
+        query.setParameter("email", email);
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        if (users != null && users.size() > 0)
+            return users.get(0);
+        else
+            return null;
+    }
+
+    /**
+     * @param nickname substring to look for
+     * @return users whose nicknames contain "nickname" parameter, first - most similar
+     */
+    public List<User> getByNickname(String nickname) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where nickname like '%" + nickname + "%' order by length(nickname)");
+//        query.setParameter("nickname", nickname);
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return users;
+    }
+
+    public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where first_name = :first_name and last_name = :email");
+        query.setParameter("first_name", firstName);
+        query.setParameter("last_name", lastName);
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return users;
+    }
+
+
+    public List<User> getByGender(char gender) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where gender = :gender");
+        query.setParameter("gender", gender);
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return users;
+    }
+
+    //TODO: get by nickname, name+lastname, name, lastname
 
 }

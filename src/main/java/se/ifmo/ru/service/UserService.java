@@ -5,6 +5,7 @@ import se.ifmo.ru.dao.UserDao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.User;
 
+import javax.validation.ConstraintViolationException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,10 +22,18 @@ public class UserService {
         userDao.save(user);
     }
 
+    /**
+     *
+     * @param user (must have id)
+     */
     public void update(User user) {
         userDao.update(user);
     }
 
+    /**
+     *
+     * @param user (must have id)
+     */
     public void delete(User user) {
         userDao.delete(user);
     }
@@ -36,11 +45,21 @@ public class UserService {
     public List<Duck> getDucks(User user) {
         List<Duck> allDucks = duckDao.getAll();
         LinkedList<Duck> ducks = new LinkedList<>();
-        for (int i = 0; i < allDucks.size(); i++) {
-            if (allDucks.get(i).getOwner().equals(user)) {
-                ducks.addLast(allDucks.get(i));
+        for (Duck allDuck : allDucks) {
+            if (allDuck.getOwner().equals(user)) {
+                ducks.addLast(allDuck);
             }
         }
         return ducks;
     }
+
+    public User getByNicknameAndEmail(String nickname, String email) {
+        return userDao.getByNicknameAndEmail(nickname, email);
+    }
+
+    public List<User> getByNickname(String nickname) {
+        return userDao.getByNickname(nickname);
+    }
+
+    //TODO: get by duck, nickname, email, last+first name, gender
 }
