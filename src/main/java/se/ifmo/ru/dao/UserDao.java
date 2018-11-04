@@ -82,7 +82,7 @@ public class UserDao {
 
     public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where first_name = :first_name and last_name = :email");
+        Query query = session.createQuery("from User where first_name = :first_name and last_name = :last_name");
         query.setParameter("first_name", firstName);
         query.setParameter("last_name", lastName);
         List<User> users = ((org.hibernate.query.Query) query).list();

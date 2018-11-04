@@ -57,6 +57,10 @@ public class UserService {
         return userDao.getByNicknameAndEmail(nickname, email);
     }
 
+    public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
+        return userDao.getByFirstNameAndLastName(firstName, lastName);
+    }
+
     public List<User> getByNickname(String nickname) {
         return userDao.getByNickname(nickname);
     }
