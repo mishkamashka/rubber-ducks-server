@@ -74,7 +74,22 @@ public class UserDao {
     public List<User> getByNickname(String nickname) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from User where nickname like '%" + nickname + "%' order by length(nickname)");
-//        query.setParameter("nickname", nickname);
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return users;
+    }
+
+    public List<User> getByFirstName(String firstName) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where first_name like '%" + firstName + "%' order by length(first_name)");
+        List<User> users = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return users;
+    }
+
+    public List<User> getByLastName(String lastName) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where last_name like '%" + lastName + "%' order by length(last_name)");
         List<User> users = ((org.hibernate.query.Query) query).list();
         session.close();
         return users;

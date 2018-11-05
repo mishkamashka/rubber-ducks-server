@@ -4,8 +4,6 @@ import se.ifmo.ru.dao.DuckDao;
 import se.ifmo.ru.dao.UserDao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.User;
-
-import javax.validation.ConstraintViolationException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,5 +63,17 @@ public class UserService {
         return userDao.getByNickname(nickname);
     }
 
-    //TODO: get by duck, nickname, email, last+first name, gender
+    public List<User> getByFirstName(String firstName) {
+        return userDao.getByFirstName(firstName);
+    }
+
+    public List<User> getByLastName(String lastName) {
+        return userDao.getByLastName(lastName);
+    }
+
+    public List<User> getByGender(char gender) {
+        return userDao.getByGender(gender);
+    }
+
+    //TODO: get by duck
 }

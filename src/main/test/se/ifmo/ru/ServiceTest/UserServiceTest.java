@@ -1,11 +1,9 @@
 package se.ifmo.ru.ServiceTest;
 
 import org.junit.Test;
-import org.postgresql.util.PSQLException;
 import se.ifmo.ru.model.User;
 import se.ifmo.ru.service.UserService;
 
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public class UserServiceTest {
@@ -35,23 +33,42 @@ public class UserServiceTest {
     @Test
     public void userServiceGetByNicknameTest() {
         UserService userService = new UserService();
-        User user = new User("test1", "whatever@mail.com");
+        User user = new User("test1", "whatever1@mail.com");
         userService.save(user);
-        user = new User("test2", "whatever1@mail.com");
+        user = new User("test2", "whatever2@mail.com");
         userService.save(user);
-        user = new User("test", "whatever2@mail.com");
+        user = new User("test", "whatever@mail.com");
         userService.save(user);
         List<User> users = userService.getByNickname("test");
         for (User user1 : users) {
             System.out.println(user1.getId() + " " + user1.getNickname());
         }
-        userService.delete(userService.getByNicknameAndEmail("test1", "whatever@mail.com"));
-        userService.delete(userService.getByNicknameAndEmail("test2", "whatever1@mail.com"));
-        userService.delete(userService.getByNicknameAndEmail("test", "whatever2@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test", "whatever@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test2", "whatever2@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test1", "whatever1@mail.com"));
     }
 
     @Test
-    public void userServiceGetByFirstNameAndLastNameTest() {
+    public void userServiceGetByFirstNameTest() {
+        UserService userService = new UserService();
+        User user = new User("test", "whatever@mail.com");
+        user.setFirstName("John");
+        user.setLastName("Black");
+        userService.save(user);
+        user = new User("test1", "whatever1@mail.com");
+        user.setFirstName("Johny");
+        user.setLastName("White");
+        userService.save(user);
+        List<User> users = userService.getByFirstName("John");
+        for (User user1 : users) {
+            System.out.println(user1.getId() + " " + user1.getNickname() + " " + user1.getFirstName() + " " + user1.getLastName());
+        }
+        userService.delete(userService.getByNicknameAndEmail("test", "whatever@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test1", "whatever1@mail.com"));
+    }
+
+    @Test
+    public void userServiceGetByLastNameTest() {
         UserService userService = new UserService();
         User user = new User("test", "whatever@mail.com");
         user.setFirstName("John");
@@ -59,9 +76,9 @@ public class UserServiceTest {
         userService.save(user);
         user = new User("test1", "whatever1@mail.com");
         user.setFirstName("John");
-        user.setLastName("Black");
+        user.setLastName("Blackberry");
         userService.save(user);
-        List<User> users = userService.getByFirstNameAndLastName("John", "Black");
+        List<User> users = userService.getByLastName("Black");
         for (User user1 : users) {
             System.out.println(user1.getId() + " " + user1.getNickname() + " " + user1.getFirstName() + " " + user1.getLastName());
         }
