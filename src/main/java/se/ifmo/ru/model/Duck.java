@@ -16,7 +16,7 @@ public class Duck {
     @Column
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "feature_set_id", nullable = false)
     private FeatureSet featureSet;
 
@@ -67,7 +67,7 @@ public class Duck {
         this.description = description;
     }
 
-    public void setFeatureSet(FeatureSet featureSetId) {
-        this.featureSet = featureSetId;
+    public void setFeatureSet(FeatureSet featureSet) {
+        this.featureSet = featureSet;
     }
 }

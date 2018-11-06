@@ -52,4 +52,20 @@ public class DuckDao {
         return ducks;
     }
 
+    public List<Duck> getByName(String name) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Duck where name like '%" + name + "%' order by length(name)");
+        List<Duck> duck = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return duck;
+    }
+
+    public List<Duck> getByOwnerId(long ownerId) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Duck where owner_id =" + ownerId);
+        List<Duck> duck = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return duck;
+    }
+
 }

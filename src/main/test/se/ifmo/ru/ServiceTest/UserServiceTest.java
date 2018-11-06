@@ -49,6 +49,29 @@ public class UserServiceTest {
     }
 
     @Test
+    public void userServiceGetByFirstNameAndLastNameTest() {
+        UserService userService = new UserService();
+        User user = new User("test", "whatever@mail.com");
+        user.setFirstName("John");
+        user.setLastName("Black");
+        userService.save(user);
+        user = new User("test1", "whatever1@mail.com");
+        user.setFirstName("Johny");
+        user.setLastName("White");
+        user = new User("test2", "whatever2@mail.com");
+        user.setFirstName("John");
+        user.setLastName("Black");
+        userService.save(user);
+        List<User> users = userService.getByFirstNameAndLastName("John","Black");
+        for (User user1 : users) {
+            System.out.println(user1.getId() + " " + user1.getNickname() + " " + user1.getFirstName() + " " + user1.getLastName());
+        }
+        userService.delete(userService.getByNicknameAndEmail("test", "whatever@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test1", "whatever1@mail.com"));
+        userService.delete(userService.getByNicknameAndEmail("test2", "whatever2@mail.com"));
+    }
+
+    @Test
     public void userServiceGetByFirstNameTest() {
         UserService userService = new UserService();
         User user = new User("test", "whatever@mail.com");

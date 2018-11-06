@@ -105,7 +105,6 @@ public class UserDao {
         return users;
     }
 
-
     public List<User> getByGender(char gender) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from User where gender = :gender");

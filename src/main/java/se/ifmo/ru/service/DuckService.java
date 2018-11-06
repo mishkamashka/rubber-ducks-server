@@ -29,4 +29,13 @@ public class DuckService {
         return duckDao.getAll();
     }
 
+    public List<Duck> getByName(String name) {
+        return duckDao.getByName(name);
+    }
+
+    //TODO: test this
+    public List<Duck> getByOwnerId(long ownerId) {
+        return duckDao.getByOwnerId(ownerId);
+    }
+
 }
