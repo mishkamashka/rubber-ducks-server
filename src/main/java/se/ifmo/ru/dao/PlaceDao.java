@@ -51,4 +51,14 @@ public class PlaceDao {
         List <Place> places = ((org.hibernate.query.Query) query).list();
         return places;
     }
+
+    public List<Place> getByName(String name) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Place where name like '%" + name + "%' order by length(name)");
+        List<Place> places = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return places;
+    }
+
+    //TODO: get by event id, meeting id
 }

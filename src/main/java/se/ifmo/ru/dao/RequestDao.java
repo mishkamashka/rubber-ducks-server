@@ -51,4 +51,6 @@ public class RequestDao {
         List <Request> requests = ((org.hibernate.query.Query) query).list();
         return requests;
     }
+
+    //TODO: get by user id, get by duck id, get by accessibility
 }

@@ -6,6 +6,7 @@ import se.ifmo.ru.model.Event;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 public class EventDao {
@@ -68,5 +69,25 @@ public class EventDao {
         return events;
     }
 
-    //TODO: get by date
+    public List<Event> getByDate(Date date) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Meeting where date =" + date);
+        List<Event> events = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return events;
+    }
+
+    public Event getByPlaceIdAndDate(long placeId, Date date) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Meeting where place_id =" + placeId + " and date = " + date);
+        List<Event> events= ((org.hibernate.query.Query) query).list();
+        session.close();
+        if (events != null && events.size() > 0) {
+            return events.get(0);
+        }
+        return null;
+    }
+
+
+    //TODO: get by date, date + place
 }

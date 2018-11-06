@@ -27,4 +27,9 @@ public class PlaceService {
     public List<Place> getAll() {
         return placeDao.getAll();
     }
+
+    //TODO: test
+    public List<Place> getByName(String name) {
+        return placeDao.getByName(name);
+    }
 }
