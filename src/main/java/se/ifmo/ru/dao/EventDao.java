@@ -51,4 +51,22 @@ public class EventDao {
         List <Event> events = ((org.hibernate.query.Query) query).list();
         return events;
     }
+
+    public List<Event> getByName(String name) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Event where name like '%" + name + "%' order by length(name)");
+        List<Event> events = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return events;
+    }
+
+    public List<Event> getByPlaceId(long placeId) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Event where place_id =" + placeId);
+        List<Event> events = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return events;
+    }
+
+    //TODO: get by date
 }

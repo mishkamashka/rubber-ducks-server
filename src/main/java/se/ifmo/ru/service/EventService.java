@@ -29,4 +29,6 @@ public class EventService {
         return eventDao.getAll();
     }
 
+    //TODO: get by name, place id
+
 }

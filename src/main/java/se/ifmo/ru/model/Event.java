@@ -14,8 +14,9 @@ public class Event {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "place_id", nullable = false)
-    private Long placeId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     @Column(nullable = false)
     private Date date;
@@ -35,12 +36,12 @@ public class Event {
         this.name = name;
     }
 
-    public Long getPlaceId() {
-        return placeId;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Date getDate() {
