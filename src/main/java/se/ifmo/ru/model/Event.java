@@ -73,4 +73,10 @@ public class Event {
     public void setCost(double cost) {
         this.cost = cost;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Event event = (Event) obj;
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(event.getId()));
+    }
 }

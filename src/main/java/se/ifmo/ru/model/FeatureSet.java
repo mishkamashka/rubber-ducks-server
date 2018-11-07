@@ -97,4 +97,9 @@ public class FeatureSet {
     public void setAccessibility(boolean accessibility) {
         this.accessibility = accessibility;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((FeatureSet) obj).id));
+    }
 }

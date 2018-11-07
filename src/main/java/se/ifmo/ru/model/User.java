@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String nickname;
@@ -166,5 +166,10 @@ public class User {
 
     public void setDucks(List<Duck> ducks) {
         this.ducks = ducks;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((User) obj).id));
     }
 }

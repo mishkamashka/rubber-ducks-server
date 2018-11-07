@@ -86,4 +86,9 @@ public class Place {
     public void setBuildingLetter(char buildingLetter) {
         this.buildingLetter = buildingLetter;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((Place) obj).id));
+    }
 }

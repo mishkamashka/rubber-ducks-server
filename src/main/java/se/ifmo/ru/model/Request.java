@@ -46,4 +46,9 @@ public class Request {      //TODO: user-request one-many; duck-request one-many
     public void setApproved(boolean approved) {
         isApproved = approved;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((Request) obj).id));
+    }
 }

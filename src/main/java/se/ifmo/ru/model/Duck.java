@@ -70,4 +70,9 @@ public class Duck {
     public void setFeatureSet(FeatureSet featureSet) {
         this.featureSet = featureSet;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((Duck) obj).id));
+    }
 }

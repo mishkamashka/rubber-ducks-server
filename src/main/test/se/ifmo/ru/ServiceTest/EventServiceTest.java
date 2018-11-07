@@ -1,16 +1,13 @@
 package se.ifmo.ru.ServiceTest;
 
-import org.junit.Assert;
 import org.junit.Test;
 import se.ifmo.ru.model.Event;
 import se.ifmo.ru.service.EventService;
 import se.ifmo.ru.service.PlaceService;
-
-import javax.validation.constraints.AssertTrue;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class EventServiceTest {
@@ -23,11 +20,10 @@ public class EventServiceTest {
         PlaceService placeService = new PlaceService();
         event.setPlace(placeService.getById(20));
         eventService.save(event);
-
-    //(eventService.getById(event.getId()).equals(event));
-//        eventService.delete(eventService.getById(23));
-//        eventService.delete(eventService.getById(25));
-//        eventService.delete(eventService.getById(26));
+        assertEquals(eventService.getById(event.getId()), event);
+        eventService.delete(event);
+//        eventService.delete(eventService.getById(27));
+//        eventService.delete(eventService.getById(28));
     }
 
     @Test

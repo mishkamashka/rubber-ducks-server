@@ -58,4 +58,9 @@ public class Meeting {
     public void setCost(double cost) {
         this.cost = cost;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getClass().equals(obj.getClass()) && this.id.equals(((Meeting) obj).id));
+    }
 }
