@@ -1,8 +1,11 @@
 package se.ifmo.ru.service;
 
+import org.joda.time.DateTime;
 import se.ifmo.ru.dao.EventDao;
 import se.ifmo.ru.model.Event;
+import se.ifmo.ru.util.DateFormatter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,23 +33,42 @@ public class EventService {
         return eventDao.getAll();
     }
 
-    //TODO: test
     public List<Event> getByName(String name) {
         return eventDao.getByName(name);
     }
 
-    //TODO: test
     public List<Event> getByPlaceId(long placeId) {
         return eventDao.getByPlaceId(placeId);
     }
 
-    //TODO: test
     public List<Event> getByDate(Date date) {
-        return eventDao.getByDate(date);
+        EventService eventService = new EventService();
+        List<Event> events = eventService.getAll();
+        List<Event> result = new ArrayList<>();
+        DateTime reqDate = new DateTime(date);
+        DateTime eventDate;
+        for (Event event1: events) {
+            eventDate = new DateTime(event1.getDate());
+            if (reqDate.equals(eventDate)) {
+                result.add(event1);
+            }
+        }
+        return result;
     }
 
     //TODO: test
     public Event getByPlaceIdAndDate(long placeId, Date date) {
-        return eventDao.getByPlaceIdAndDate(placeId, date);
+        EventService eventService = new EventService();
+        List<Event> events = eventService.getAll();
+        List<Event> result = new ArrayList<>();
+        DateTime reqDate = new DateTime(date);
+        DateTime eventDate;
+        for (Event event1: events) {
+            eventDate = new DateTime(event1.getDate());
+            if (reqDate.equals(eventDate) && event1.getPlace().getId() == placeId) {
+                result.add(event1);
+            }
+        }
+        return result.size() > 0 ? result.get(0) : null;
     }
 }

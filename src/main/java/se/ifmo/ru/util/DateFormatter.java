@@ -16,4 +16,9 @@ public class DateFormatter {
             return null;
         }
     }
+
+    public static String dateToSQLString(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(date);
+    }
 }

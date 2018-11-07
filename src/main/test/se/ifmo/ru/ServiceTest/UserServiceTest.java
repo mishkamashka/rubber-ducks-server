@@ -1,5 +1,6 @@
 package se.ifmo.ru.ServiceTest;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import se.ifmo.ru.model.User;
 import se.ifmo.ru.service.UserService;
@@ -13,10 +14,12 @@ public class UserServiceTest {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
         userService.save(user);
+        assertEquals(userService.getById(user.getId()), user);
+        userService.delete(user);
     }
 
     @Test
-    public void userServiceGetTest() {
+    public void userServiceGetByIdTest() {
         UserService userService = new UserService();
         User user = userService.getById(1);
         System.out.println(user.toString());
