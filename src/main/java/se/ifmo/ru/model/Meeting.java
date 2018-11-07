@@ -17,7 +17,7 @@ public class Meeting {
     @Column(name = "place_id", nullable = false)
     private Long placeId;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private Date date;
 
     @Column

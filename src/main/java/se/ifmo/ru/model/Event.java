@@ -1,5 +1,7 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.util.DateFormatter;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,7 +20,7 @@ public class Event {
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @Column
+    @Column(unique = true)
     private Date date;
 
     @Column
@@ -55,8 +57,13 @@ public class Event {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String dateString) {
+        try {
+            this.date = DateFormatter.stringToDate(dateString);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Not valid date");
+        }
     }
 
     public double getCost() {
