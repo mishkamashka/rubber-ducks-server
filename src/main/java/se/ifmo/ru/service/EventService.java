@@ -3,8 +3,6 @@ package se.ifmo.ru.service;
 import org.joda.time.DateTime;
 import se.ifmo.ru.dao.EventDao;
 import se.ifmo.ru.model.Event;
-import se.ifmo.ru.util.DateFormatter;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

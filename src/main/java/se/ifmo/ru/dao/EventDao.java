@@ -2,13 +2,10 @@ package se.ifmo.ru.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.joda.time.DateTime;
 import se.ifmo.ru.model.Event;
-import se.ifmo.ru.util.DateFormatter;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 
 import javax.persistence.Query;
-import java.util.Date;
 import java.util.List;
 
 public class EventDao {

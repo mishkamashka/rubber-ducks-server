@@ -1,15 +1,11 @@
 package se.ifmo.ru.ServiceTest;
 
-import org.joda.time.DateTime;
 import org.junit.Test;
 import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Place;
 import se.ifmo.ru.service.EventService;
 import se.ifmo.ru.service.PlaceService;
 import se.ifmo.ru.util.DateFormatter;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
