@@ -1,6 +1,8 @@
 package se.ifmo.ru.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PLACES")
@@ -27,6 +29,12 @@ public class Place {
 
     @Column(name = "building_letter")
     private char buildingLetter = '-';
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Meeting> meetings = new ArrayList<>();
 
     public Place() {
     }
@@ -85,6 +93,22 @@ public class Place {
 
     public void setBuildingLetter(char buildingLetter) {
         this.buildingLetter = buildingLetter;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public List<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public void setMeetings(List<Meeting> meetings) {
+        this.meetings = meetings;
     }
 
     @Override

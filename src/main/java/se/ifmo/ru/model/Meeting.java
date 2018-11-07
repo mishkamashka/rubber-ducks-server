@@ -14,10 +14,11 @@ public class Meeting {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "place_id", nullable = false)
-    private Long placeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
 
-    @Column(unique = true)
+    @Column
     private Date date;
 
     @Column
@@ -35,12 +36,12 @@ public class Meeting {
         this.name = name;
     }
 
-    public Long getPlaceId() {
-        return placeId;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Date getDate() {

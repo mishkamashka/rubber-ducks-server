@@ -54,7 +54,6 @@ public class EventService {
         return result;
     }
 
-    //TODO: test
     public Event getByPlaceIdAndDate(long placeId, Date date) {
         EventService eventService = new EventService();
         List<Event> events = eventService.getAll();

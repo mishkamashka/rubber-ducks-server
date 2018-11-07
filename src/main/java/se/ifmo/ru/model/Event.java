@@ -16,11 +16,11 @@ public class Event {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @Column(unique = true)
+    @Column
     private Date date;
 
     @Column

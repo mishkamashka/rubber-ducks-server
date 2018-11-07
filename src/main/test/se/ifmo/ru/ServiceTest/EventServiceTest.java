@@ -23,7 +23,6 @@ public class EventServiceTest {
         eventService.save(event);
         assertEquals(eventService.getById(event.getId()), event);
         eventService.delete(event);
-//        eventService.delete(eventService.getById(28));
     }
 
     @Test
@@ -62,6 +61,25 @@ public class EventServiceTest {
     }
 
     @Test
+    public void eventGetAll() {
+        EventService eventService = new EventService();
+//        Event event = new Event("My Event");
+//        event.setDate("12-09-2020-10-00");
+//        PlaceService placeService = new PlaceService();
+//        Place place = new Place("Super cafe");
+//        placeService.save(place);
+//        event.setPlace(place);
+//        eventService.save(event);
+        List<Event> events = eventService.getAll();
+        for (Event event1 : events) {
+            Place place1 = event1.getPlace();
+            System.out.println(event1.getId() + " " + event1.getName() + " " + place1.getId());
+        }
+//        eventService.delete(event);
+//        placeService.delete(place);
+    }
+
+    @Test
     public void eventGetByPlaceId() {
         EventService eventService = new EventService();
         Event event = new Event("My Event");
@@ -74,9 +92,10 @@ public class EventServiceTest {
         List<Event> events = eventService.getByPlaceId(place.getId());
         for (Event event1 : events) {
             Place place1 = event1.getPlace();
-            System.out.println(event1.getId() + " " + event1.getName() + " " + place1.getName());
+            System.out.println(event1.getId() + " " + event1.getName() + " " + place1.getId());
         }
         eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test
