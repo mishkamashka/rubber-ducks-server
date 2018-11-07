@@ -28,8 +28,9 @@ public class PlaceService {
         return placeDao.getAll();
     }
 
-    //TODO: test
     public List<Place> getByName(String name) {
         return placeDao.getByName(name);
     }
+
+    //TODO: get by event id, meeting id
 }

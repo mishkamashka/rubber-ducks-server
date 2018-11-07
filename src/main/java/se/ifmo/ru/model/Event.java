@@ -18,11 +18,18 @@ public class Event {
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @Column(nullable = false)
+    @Column
     private Date date;
 
     @Column
     private double cost;
+
+    public Event() {
+    }
+
+    public Event(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

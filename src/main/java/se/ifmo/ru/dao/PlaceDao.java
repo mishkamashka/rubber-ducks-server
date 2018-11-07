@@ -60,5 +60,4 @@ public class PlaceDao {
         return places;
     }
 
-    //TODO: get by event id, meeting id
 }

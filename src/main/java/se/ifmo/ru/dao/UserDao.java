@@ -6,7 +6,6 @@ import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 
 import javax.persistence.Query;
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public class UserDao {

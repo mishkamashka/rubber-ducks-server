@@ -26,7 +26,14 @@ public class Place {
     private int buiding;
 
     @Column(name = "building_letter")
-    private char buildingLetter;
+    private char buildingLetter = '-';
+
+    public Place() {
+    }
+
+    public Place(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
