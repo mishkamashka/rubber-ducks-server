@@ -14,13 +14,11 @@ public class EventDao {
 
     private Session session;
     private Transaction transaction;
-    private Event event;
 
     public Event getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.id = " + id);
-        event = this.handleJoinResult(query).get(0);
-        return event;
+        return this.handleJoinResult(query).get(0);
     }
 
     public void save(Event event) {

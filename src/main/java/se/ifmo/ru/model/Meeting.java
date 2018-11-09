@@ -1,5 +1,7 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.util.DateFormatter;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,6 +25,15 @@ public class Meeting {
 
     @Column
     private double cost;
+
+    @Column
+    private int maxPeople;
+
+    public Meeting() {}
+
+    public Meeting(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -48,8 +59,13 @@ public class Meeting {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String dateString) {
+        try {
+            this.date = DateFormatter.stringToDate(dateString);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Not valid date");
+        }
     }
 
     public double getCost() {
@@ -58,6 +74,14 @@ public class Meeting {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public int getMaxPeople() {
+        return maxPeople;
+    }
+
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
     @Override

@@ -74,10 +74,10 @@ public class EventServiceTest {
         Place place = new Place("Super Cafe");
         placeService.save(place);
         event.setPlace(place);
-        eventService.save(event); //TODO: probably everywhere should be donr through inner join to access places
+        eventService.save(event);
         List<Event> events = eventService.getByDate(DateFormatter.stringToDate("12-09-2020-10-00"));
         for (Event event1 : events) {
-            System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getDate());
+            System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getDate() + " " + event1.getPlace().getName());
         }
         eventService.delete(event);
         placeService.delete(place);
@@ -132,7 +132,7 @@ public class EventServiceTest {
         event.setPlace(place);
         eventService.save(event);
         Event event1 = eventService.getByPlaceIdAndDate(place.getId(), DateFormatter.stringToDate("12-09-2020-10-00"));
-        System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getPlace().getName() + " " + event1.getDate());
+        System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getPlace().getName() + " " + event1.getDate() + " " + event1.getPlace().getName());
         eventService.delete(event);
     }
 
