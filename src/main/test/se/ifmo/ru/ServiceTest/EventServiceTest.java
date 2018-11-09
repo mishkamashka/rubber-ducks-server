@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-
 public class EventServiceTest {
 
     @Test
@@ -19,10 +18,13 @@ public class EventServiceTest {
         Event event = new Event("Duck Race");
         event.setDate("12-11-2020-15-00");
         PlaceService placeService = new PlaceService();
-        event.setPlace(placeService.getById(59));
+        Place place = new Place("Awesome restaurant");
+        placeService.save(place);
+        event.setPlace(place);
         eventService.save(event);
         assertEquals(eventService.getById(event.getId()), event);
         eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test

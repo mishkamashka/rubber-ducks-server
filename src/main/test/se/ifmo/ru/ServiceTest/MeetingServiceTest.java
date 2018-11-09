@@ -19,10 +19,13 @@ public class MeetingServiceTest {
         Meeting meeting = new Meeting("Duck Race");
         meeting.setDate("12-11-2020-15-00");
         PlaceService placeService = new PlaceService();
-        meeting.setPlace(placeService.getById(59));
+        Place place = new Place("Awesome restaurant");
+        placeService.save(place);
+        meeting.setPlace(place);
         meetingService.save(meeting);
         assertEquals(meetingService.getById(meeting.getId()), meeting);
         meetingService.delete(meeting);
+        placeService.delete(place);
     }
 
     @Test
