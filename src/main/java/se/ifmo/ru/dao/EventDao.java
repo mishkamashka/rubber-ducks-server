@@ -51,8 +51,19 @@ public class EventDao {
 
     public List<Event> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id");
+        Query query = session.createQuery("from Event e right join e.place p where p.id = e.place.id");
         List <Event> events = ((org.hibernate.query.Query) query).list();
+        List<Object[]> objects = query.getResultList();
+        Object[] obj = objects.get(0);
+        Event ev = (Event) obj[0];
+        Place pl = (Place) obj[1];
+        System.out.println(events.size());
+        Event event = events.get(0);
+        System.out.println(events.get(0).toString());
+
+
+        System.out.println(objects.size());
+//        System.out.println(objects.get(0).toString());
 
 //        List<Event> events = new ArrayList<>();
 //        List<Object[]> objects = query.getResultList();

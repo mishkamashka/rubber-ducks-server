@@ -14,6 +14,18 @@ import static org.junit.Assert.assertEquals;
 public class EventServiceTest {
 
     @Test
+    public void eventServiceSaveTest() {
+        EventService eventService = new EventService();
+        Event event = new Event("Duck Race");
+        event.setDate("12-11-2020-15-00");
+        PlaceService placeService = new PlaceService();
+        event.setPlace(placeService.getById(59));
+        eventService.save(event);
+        assertEquals(eventService.getById(event.getId()), event);
+        eventService.delete(event);
+    }
+
+    @Test
     public void eventServiceSaveAndGetByIdTest() {
         EventService eventService = new EventService();
         Event event = new Event("Another Event");

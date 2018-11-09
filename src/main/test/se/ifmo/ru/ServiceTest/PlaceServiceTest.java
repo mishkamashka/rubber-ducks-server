@@ -11,7 +11,7 @@ public class PlaceServiceTest {
     @Test
     public void placeServiceSaveTest() {
         PlaceService placeService = new PlaceService();
-        Place place = new Place("My Place");
+        Place place = new Place("Cosy Place");
         placeService.save(place);
     }
 
