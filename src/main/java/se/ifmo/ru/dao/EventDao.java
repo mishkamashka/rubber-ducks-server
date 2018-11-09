@@ -3,8 +3,6 @@ package se.ifmo.ru.dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import se.ifmo.ru.model.Event;
-import se.ifmo.ru.model.Place;
-import se.ifmo.ru.service.PlaceService;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 
 import javax.persistence.Query;
@@ -20,8 +18,8 @@ public class EventDao {
 
     public Event getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        event = session.get(Event.class, id);
-        session.close();
+        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.id = " + id);
+        event = this.handleJoinResult(query).get(0);
         return event;
     }
 
@@ -52,6 +50,22 @@ public class EventDao {
     public List<Event> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id");
+        return this.handleJoinResult(query);
+    }
+
+    public List<Event> getByName(String name) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.name like '%" + name + "%' order by length(e.name)");
+        return this.handleJoinResult(query);
+    }
+
+    public List<Event> getByPlaceId(long placeId) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and place_id =" + placeId);
+        return this.handleJoinResult(query);
+    }
+
+    private List<Event> handleJoinResult(Query query) {
         List<Event> events = new ArrayList<>();
         List<Object[]> objects = ((org.hibernate.query.Query) query).list();
         Iterator iterator = objects.iterator();
@@ -61,23 +75,7 @@ public class EventDao {
 //            Place place = (Place) obj[1];
             events.add(event);
         }
-        return events;
-    }
-
-    public List<Event> getByName(String name) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e where e.name like '%" + name + "%' order by length(e.name)");
-        List<Event> events = ((org.hibernate.query.Query) query).list();
         session.close();
         return events;
     }
-
-    public List<Event> getByPlaceId(long placeId) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event where place_id =" + placeId);
-        List<Event> events = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return events;
-    }
-
 }

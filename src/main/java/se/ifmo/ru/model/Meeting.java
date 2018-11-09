@@ -15,7 +15,7 @@ public class Meeting {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
+    @JoinColumn(name = "place_id", nullable = false)
     private Place place;
 
     @Column

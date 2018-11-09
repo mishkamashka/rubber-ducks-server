@@ -31,7 +31,9 @@ public class EventServiceTest {
         Event event = new Event("Another Event");
         event.setDate("12-09-2020-13-00");
         PlaceService placeService = new PlaceService();
-        event.setPlace(placeService.getById(20));
+        Place place = new Place("Place to Be");
+        placeService.save(place);
+        event.setPlace(place);
         eventService.save(event);
         assertEquals(eventService.getById(event.getId()), event);
         eventService.delete(event);
@@ -43,11 +45,15 @@ public class EventServiceTest {
         Event event = new Event("My Event");
         event.setDate("12-09-2020-13-00");
         PlaceService placeService = new PlaceService();
-        event.setPlace(placeService.getById(20));
+        Place place = new Place("New place");
+        placeService.save(place);
+        event.setPlace(place);
         eventService.save(event);
         Event event2 = new Event("Mysterious Event");
         event2.setDate("12-09-2020-14-00");
-        event2.setPlace(placeService.getById(20));
+        Place place2 = new Place("One more");
+        placeService.save(place2);
+        event2.setPlace(place2);
         eventService.save(event2);
         List<Event> events = eventService.getByName("My");
         for (Event event1 : events) {
@@ -55,6 +61,8 @@ public class EventServiceTest {
         }
         eventService.delete(event);
         eventService.delete(event2);
+        placeService.delete(place);
+        placeService.delete(place2);
     }
 
     @Test
@@ -63,32 +71,35 @@ public class EventServiceTest {
         Event event = new Event("My Event");
         event.setDate("12-09-2020-10-00");
         PlaceService placeService = new PlaceService();
-        event.setPlace(placeService.getById(20));
-        eventService.save(event);
+        Place place = new Place("Super Cafe");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event); //TODO: probably everywhere should be donr through inner join to access places
         List<Event> events = eventService.getByDate(DateFormatter.stringToDate("12-09-2020-10-00"));
         for (Event event1 : events) {
             System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getDate());
         }
         eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test
     public void eventGetAll() {
         EventService eventService = new EventService();
-//        Event event = new Event("My Event");
-//        event.setDate("12-09-2020-10-00");
-//        PlaceService placeService = new PlaceService();
-//        Place place = new Place("Super cafe");
-//        placeService.save(place);
-//        event.setPlace(place);
-//        eventService.save(event);
+        Event event = new Event("My Event");
+        event.setDate("12-09-2020-10-00");
+        PlaceService placeService = new PlaceService();
+        Place place = new Place("Super cafe");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event);
         List<Event> events = eventService.getAll();
         for (Event event1 : events) {
             Place place1 = event1.getPlace();
             System.out.println(event1.getId() + " " + event1.getName() + " " + place1.getId());
         }
-//        eventService.delete(event);
-//        placeService.delete(place);
+        eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test
