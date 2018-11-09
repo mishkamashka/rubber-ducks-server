@@ -51,36 +51,16 @@ public class EventDao {
 
     public List<Event> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e right join e.place p where p.id = e.place.id");
-        List <Event> events = ((org.hibernate.query.Query) query).list();
-        List<Object[]> objects = query.getResultList();
-        Object[] obj = objects.get(0);
-        Event ev = (Event) obj[0];
-        Place pl = (Place) obj[1];
-        System.out.println(events.size());
-        Event event = events.get(0);
-        System.out.println(events.get(0).toString());
-
-
-        System.out.println(objects.size());
-//        System.out.println(objects.get(0).toString());
-
-//        List<Event> events = new ArrayList<>();
-//        List<Object[]> objects = query.getResultList();
-//        Iterator iterator = objects.iterator();
-//        PlaceService placeService = new PlaceService();
-//        while (iterator.hasNext()) {
-//            Object[] obj = (Object[]) iterator.next();
-//            Event event = new Event();
-//            event.setId((Long) obj[0]);
-//            event.setCost((double) obj[1]);
-//            event.setDate((String) obj[2]);
-//            event.setName((String) obj[3]);
-//            Place place = placeService.getById((long) obj[4]);
-//            event.setPlace(place);
-//            events.add(event);
-//        }
-
+        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id");
+        List<Event> events = new ArrayList<>();
+        List<Object[]> objects = ((org.hibernate.query.Query) query).list();
+        Iterator iterator = objects.iterator();
+        while (iterator.hasNext()) {
+            Object[] obj = (Object[]) iterator.next();
+            Event event = (Event) obj[0];
+//            Place place = (Place) obj[1];
+            events.add(event);
+        }
         return events;
     }
 
