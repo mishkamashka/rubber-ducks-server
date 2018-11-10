@@ -70,6 +70,7 @@ public class UserService {
         return userDao.getByLastName(lastName);
     }
 
+    //TODO: test
     public List<User> getByGender(char gender) {
         List<User> allUsers = this.getAll();
         List<User> requiredUsers = new LinkedList<>();

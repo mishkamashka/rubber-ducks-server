@@ -115,10 +115,6 @@ public class UserDao {
         return users;
     }
 
-//    public User getByDuck(Duck duck) {
-//
-//    }
-
     private List<User> handleJoinResult(Query query) {
         List<User> users = new ArrayList<>();
         List<Object[]> objects = ((org.hibernate.query.Query) query).list();

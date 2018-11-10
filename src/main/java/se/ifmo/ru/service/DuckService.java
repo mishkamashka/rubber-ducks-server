@@ -40,6 +40,7 @@ public class DuckService {
         return duckDao.getByOwnerId(ownerId);
     }
 
+    //TODO: test
     public List<Duck> getAccessible() {
         List<Duck> allDucks = this.getAll();
         List<Duck> accessibleDucks = new LinkedList<>();

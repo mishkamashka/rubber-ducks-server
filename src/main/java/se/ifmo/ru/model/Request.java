@@ -1,5 +1,7 @@
 package se.ifmo.ru.model;
 
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +12,13 @@ public class Request {      //TODO: user-request one-many; duck-request one-many
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 
-    @Column
-    private Long duckId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="duck_id", nullable = false)
+    private Duck duck;
 
     @Column(name = "is_approved")
     private boolean isApproved = false;
@@ -22,21 +26,21 @@ public class Request {      //TODO: user-request one-many; duck-request one-many
     public Request() {
     }
 
-    public Request(Long userId, Long duckId){
-        this.duckId = duckId;
-        this.userId = userId;
+    public Request(User user, Duck duck){
+        this.duck = duck;
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Long getDuckId() {
-        return duckId;
+    public Duck getDuck() {
+        return duck;
     }
 
     public boolean isApproved() {
