@@ -21,7 +21,7 @@ public class Duck {
     private FeatureSet featureSet;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     public Duck() {}
@@ -57,6 +57,10 @@ public class Duck {
 
     public User getOwner() {
         return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public void setName(String name) {

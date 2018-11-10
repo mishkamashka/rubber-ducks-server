@@ -1,0 +1,10 @@
+To add duck to existing user:
+
+create featureSet
+save featureSet
+create duck
+set featureSet to duck
+set user (owner) to duck
+get ducks from user
+add duck to user ducks
+save duck

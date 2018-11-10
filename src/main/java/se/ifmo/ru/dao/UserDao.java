@@ -6,19 +6,21 @@ import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+//TODO: ad join to all gets to extract list of ducks
 
 public class UserDao {
 
     private Session session;
     private Transaction transaction;
-    private User user;
 
     public User getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        user = session.get(User.class, id);
-        session.close();
-        return user;
+        Query query = session.createQuery("from User e inner join e.ducks p where (p.owner = e.id or e.id = null) and e.id = " + id);
+        return this.handleJoinResult(query).get(0);
     }
 
     public void save(User user) {
@@ -113,6 +115,18 @@ public class UserDao {
         return users;
     }
 
-    //TODO: get by nickname, name+lastname, name, lastname
+    private List<User> handleJoinResult(Query query) {
+        List<User> users = new ArrayList<>();
+        List<Object[]> objects = ((org.hibernate.query.Query) query).list();
+        Iterator iterator = objects.iterator();
+        while (iterator.hasNext()) {
+            Object[] obj = (Object[]) iterator.next();
+            User event = (User) obj[0];
+//            Place place = (Place) obj[1];
+            users.add(event);
+        }
+        session.close();
+        return users;
+    }
 
 }

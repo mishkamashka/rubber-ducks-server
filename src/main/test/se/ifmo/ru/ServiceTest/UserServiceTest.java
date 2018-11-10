@@ -2,7 +2,11 @@ package se.ifmo.ru.ServiceTest;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import se.ifmo.ru.model.Duck;
+import se.ifmo.ru.model.FeatureSet;
 import se.ifmo.ru.model.User;
+import se.ifmo.ru.service.DuckService;
+import se.ifmo.ru.service.FeatureSetService;
 import se.ifmo.ru.service.UserService;
 
 import java.util.List;
@@ -14,7 +18,20 @@ public class UserServiceTest {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
         userService.save(user);
-        assertEquals(userService.getById(user.getId()), user);
+
+        DuckService duckService = new DuckService();
+        Duck duck = new Duck();
+        duck.setName("ducky");
+        FeatureSetService featureSetService = new FeatureSetService();
+        FeatureSet featureSet = new FeatureSet();
+        featureSetService.save(featureSet);
+        duck.setFeatureSet(featureSet);
+        duck.setOwner(user);
+        user.getDucks().add(duck);
+        duckService.save(duck);
+//        User user = userService.getById(1); //if user already exists
+        System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(0).getName());
+//        assertEquals(userService.getById(1), user);
         userService.delete(user);
     }
 

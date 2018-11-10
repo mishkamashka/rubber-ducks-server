@@ -1,5 +1,7 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.service.DuckService;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,7 +51,7 @@ public class User {
     @Column(name = "building_letter")
     private char buildingLetter = '-';
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Duck> ducks = new ArrayList<>();
 
 
