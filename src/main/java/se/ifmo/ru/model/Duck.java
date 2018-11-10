@@ -27,6 +27,9 @@ public class Duck {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
+    @Column(nullable = false, name="accessibility")
+    private boolean isAccessible = false;
+
     public Duck() {}
 
     Duck(String name, FeatureSet featureSet, User owner) {
@@ -62,6 +65,14 @@ public class Duck {
         return this.owner;
 //        UserService userService = new UserService();
 //        return userService.getByDuck(this);
+    }
+
+    public boolean isAccessible() {
+        return isAccessible;
+    }
+
+    public void setAccessibility(boolean isAccessible) {
+        this.isAccessible = isAccessible;
     }
 
     public void setOwner(User owner) {

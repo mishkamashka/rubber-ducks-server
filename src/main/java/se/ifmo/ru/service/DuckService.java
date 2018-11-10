@@ -3,6 +3,8 @@ package se.ifmo.ru.service;
 import se.ifmo.ru.dao.DuckDao;
 import se.ifmo.ru.model.Duck;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DuckService {
@@ -33,9 +35,19 @@ public class DuckService {
         return duckDao.getByName(name);
     }
 
-    //TODO: test this
+    //TODO: test
     public List<Duck> getByOwnerId(long ownerId) {
         return duckDao.getByOwnerId(ownerId);
+    }
+
+    public List<Duck> getAccessible() {
+        List<Duck> allDucks = this.getAll();
+        List<Duck> accessibleDucks = new LinkedList<>();
+        for (Duck duck : allDucks) {
+            if (duck.isAccessible())
+                accessibleDucks.add(duck);
+        }
+        return accessibleDucks;
     }
 
 }

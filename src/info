@@ -32,6 +32,8 @@ How ducks can be retrieved?
     - from request (request -> user -> duck)
     - global search (get all)
 
+How requests can be retrieved?
+
 How users can be retrieved?
     - from duck (duck search -> duck -> user)
     - from request (request -> user)

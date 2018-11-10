@@ -28,14 +28,7 @@ public class FeatureSet {
     @Column(name="swimming_skill")
     private byte swimmingSkill;
 
-    @Column(nullable = false)
-    private boolean accessibility = false;
-
     public FeatureSet() {
-    }
-
-    public FeatureSet(boolean accessibility) {
-        this.accessibility = accessibility;
     }
 
     public Long getId() {
@@ -66,10 +59,6 @@ public class FeatureSet {
         return swimmingSkill;
     }
 
-    public boolean isAccessibility() {
-        return accessibility;
-    }
-
     public void setGender(char gender) {
         this.gender = gender;
     }
@@ -92,10 +81,6 @@ public class FeatureSet {
 
     public void setSwimmingSkill(byte swimmingSkill) {
         this.swimmingSkill = swimmingSkill;
-    }
-
-    public void setAccessibility(boolean accessibility) {
-        this.accessibility = accessibility;
     }
 
     @Override

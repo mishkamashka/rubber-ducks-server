@@ -71,15 +71,12 @@ public class UserService {
     }
 
     public List<User> getByGender(char gender) {
-        return userDao.getByGender(gender);
+        List<User> allUsers = this.getAll();
+        List<User> requiredUsers = new LinkedList<>();
+        for (User user : allUsers) {
+            if (user.getGender() == gender)
+                requiredUsers.add(user);
+        }
+        return requiredUsers;
     }
-
-//    public User getByDuck(Duck duck) {
-//        List<User> users = this.getAll();
-//        for (User user1 : users) {
-//            if (user1.equals() )
-//        }
-    }
-
-    //TODO: get by duck
 }
