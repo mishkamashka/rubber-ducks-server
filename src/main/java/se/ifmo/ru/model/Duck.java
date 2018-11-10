@@ -1,5 +1,8 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.service.DuckService;
+import se.ifmo.ru.service.UserService;
+
 import javax.persistence.*;
 
 @Entity
@@ -56,7 +59,9 @@ public class Duck {
     }
 
     public User getOwner() {
-        return owner;
+        return this.owner;
+//        UserService userService = new UserService();
+//        return userService.getByDuck(this);
     }
 
     public void setOwner(User owner) {

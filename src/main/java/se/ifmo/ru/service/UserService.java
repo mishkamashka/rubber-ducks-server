@@ -4,6 +4,7 @@ import se.ifmo.ru.dao.DuckDao;
 import se.ifmo.ru.dao.UserDao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.User;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param user (must have id)
      */
     public void update(User user) {
@@ -29,7 +29,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param user (must have id)
      */
     public void delete(User user) {
@@ -73,6 +72,13 @@ public class UserService {
 
     public List<User> getByGender(char gender) {
         return userDao.getByGender(gender);
+    }
+
+//    public User getByDuck(Duck duck) {
+//        List<User> users = this.getAll();
+//        for (User user1 : users) {
+//            if (user1.equals() )
+//        }
     }
 
     //TODO: get by duck

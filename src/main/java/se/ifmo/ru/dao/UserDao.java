@@ -2,6 +2,7 @@ package se.ifmo.ru.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 
@@ -20,8 +21,6 @@ public class UserDao {
         User user = session.get(User.class, id);
         session.close();
         return user;
-//        Query query = session.createQuery("from User e inner join e.ducks p where (p.owner = e.id or e.id = null) and e.id = " + id);
-//        return this.handleJoinResult(query).get(0);
     }
 
     public void save(User user) {
@@ -115,6 +114,10 @@ public class UserDao {
         session.close();
         return users;
     }
+
+//    public User getByDuck(Duck duck) {
+//
+//    }
 
     private List<User> handleJoinResult(Query query) {
         List<User> users = new ArrayList<>();
