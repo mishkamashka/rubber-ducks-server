@@ -6,19 +6,19 @@ import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.Duck;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DuckDao {
 
     private Session session;
     private Transaction transaction;
-    private Duck duck;
 
     public Duck getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        duck = session.get(Duck.class, id);
-        session.close();
-        return duck;
+        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id");
+        return this.handleJoinResult(query).get(0);
     }
 
     public void save(Duck duck) {
@@ -47,23 +47,31 @@ public class DuckDao {
 
     public List<Duck> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Duck");
-        List <Duck> ducks = ((org.hibernate.query.Query) query).list();
-        return ducks;
+        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id");
+        return this.handleJoinResult(query);
     }
 
     public List<Duck> getByName(String name) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Duck where name like '%" + name + "%' order by length(name)");
-        List<Duck> ducks = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return ducks;
+        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id and d.name like '%" + name + "%' order by length(d.name)");
+        return this.handleJoinResult(query);
     }
 
     public List<Duck> getByOwnerId(long ownerId) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Duck where owner_id =" + ownerId);
-        List<Duck> ducks = ((org.hibernate.query.Query) query).list();
+        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id and d.owner_id =" + ownerId);
+        return this.handleJoinResult(query);
+    }
+
+    private List<Duck> handleJoinResult(Query query) {
+        List<Duck> ducks = new ArrayList<>();
+        List<Object[]> objects = ((org.hibernate.query.Query) query).list();
+        Iterator iterator = objects.iterator();
+        while (iterator.hasNext()) {
+            Object[] obj = (Object[]) iterator.next();
+            Duck duck = (Duck) obj[0];
+            ducks.add(duck);
+        }
         session.close();
         return ducks;
     }

@@ -29,7 +29,7 @@ public class UserServiceTest {
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
-//        User user = userService.getById(1); //if user already exists
+//        User user = userService.getById(7); //if user already exists
         System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(0).getName());
 //        assertEquals(userService.getById(1), user);
         userService.delete(user);

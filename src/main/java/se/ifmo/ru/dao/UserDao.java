@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//TODO: ad join to all gets to extract list of ducks
-
 public class UserDao {
 
     private Session session;
@@ -19,8 +17,11 @@ public class UserDao {
 
     public User getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User e inner join e.ducks p where (p.owner = e.id or e.id = null) and e.id = " + id);
-        return this.handleJoinResult(query).get(0);
+        User user = session.get(User.class, id);
+        session.close();
+        return user;
+//        Query query = session.createQuery("from User e inner join e.ducks p where (p.owner = e.id or e.id = null) and e.id = " + id);
+//        return this.handleJoinResult(query).get(0);
     }
 
     public void save(User user) {
