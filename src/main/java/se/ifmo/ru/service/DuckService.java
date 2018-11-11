@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+//TODO: different methods for extracting with and without user/feature set
+
 public class DuckService {
 
     private DuckDao duckDao = new DuckDao();

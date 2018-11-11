@@ -1,8 +1,5 @@
 package se.ifmo.ru.model;
 
-import se.ifmo.ru.service.DuckService;
-import se.ifmo.ru.service.UserService;
-
 import javax.persistence.*;
 
 @Entity
