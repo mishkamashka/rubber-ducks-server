@@ -26,6 +26,18 @@ public class Event {
     @Column
     private double cost;
 
+    /**
+     * available for non-members or not
+     */
+    @Column
+    private boolean isClubOnly = false;
+
+    /**
+     *  0 - no limit
+     */
+    @Column
+    private int maxPeople = 0;
+
     public Event() {
     }
 
@@ -76,6 +88,22 @@ public class Event {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public boolean isClubOnly() {
+        return isClubOnly;
+    }
+
+    public void setClubOnly(boolean clubOnly) {
+        isClubOnly = clubOnly;
+    }
+
+    public int getMaxPeople() {
+        return maxPeople;
+    }
+
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
     @Override

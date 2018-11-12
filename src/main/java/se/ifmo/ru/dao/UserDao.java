@@ -2,7 +2,6 @@ package se.ifmo.ru.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 

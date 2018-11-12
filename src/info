@@ -30,12 +30,34 @@ from event/meeting:
 How ducks can be retrieved?
     - from user
     - from request (request -> user -> duck)
-    - global search (get all)
+    - global search (get all) (with user)
 
 How requests can be retrieved?
 
 How users can be retrieved?
     - from duck (duck search -> duck -> user)
     - from request (request -> user)
-    - global search (get all)
+    - global search (get all) (only user)
     - from event/meeting (TODO: add organiser fields and joins in db requests)
+
+
+Global duck search:
+
+search by feature set
+get all ducks with feature sets and owners
+
+Global person search:
+
+search by nickname/email/whatever
+get users by nickname/email/whatever
+
+*after clicking on user*
+going to profile
+get ducks by owner id
+
+In your profile:
+
+get with ducks
+
+*after clicking my requests*
+get with requests

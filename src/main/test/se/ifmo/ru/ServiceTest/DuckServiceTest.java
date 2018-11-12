@@ -13,7 +13,8 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 public class DuckServiceTest {
-    
+
+
     @Test
     public void duckServiceSaveAndGetByIdTest() {
         UserService userService = new UserService();
@@ -29,7 +30,28 @@ public class DuckServiceTest {
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
-        Duck duck1 = duckService.getById(duck.getId());
+        Duck duck1 = duckService.getByIdWithOwnerAndFeatureSet(duck.getId());
+        System.out.println(duck1.getId() + " " + duck1.getName());
+        assertEquals(duck1, duck);
+        userService.delete(user);
+    }
+
+    @Test
+    public void duckServiceSaveAndGetByIdWithOwnerAndFeatureSetTest() {
+        UserService userService = new UserService();
+        User user = new User("test", "email");
+        userService.save(user);
+        DuckService duckService = new DuckService();
+        FeatureSetService featureSetService = new FeatureSetService();
+        FeatureSet featureSet = new FeatureSet();
+        featureSetService.save(featureSet);
+        Duck duck = new Duck();
+        duck.setName("duck_name");
+        duck.setFeatureSet(featureSet);
+        duck.setOwner(user);
+        user.getDucks().add(duck);
+        duckService.save(duck);
+        Duck duck1 = duckService.getByIdWithOwnerAndFeatureSet(duck.getId());
         System.out.println(duck1.getId() + " " + duck1.getName() + " " + duck1.getOwner().getNickname());
         assertEquals(duck1, duck);
         userService.delete(user);

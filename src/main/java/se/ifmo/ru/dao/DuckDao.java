@@ -17,7 +17,12 @@ public class DuckDao {
 
     public Duck getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id");
+        return session.get(Duck.class, id);
+    }
+
+    public Duck getByIdWithOwnerAndFeatureSet(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id and d.id = " + id);
         return this.handleJoinResult(query).get(0);
     }
 

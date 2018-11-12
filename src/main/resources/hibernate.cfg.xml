@@ -23,7 +23,6 @@
         <mapping class="se.ifmo.ru.model.FeatureSet"/>
         <mapping class="se.ifmo.ru.model.Event"/>
         <mapping class="se.ifmo.ru.model.Place"/>
-        <mapping class="se.ifmo.ru.model.Meeting"/>
         <mapping class="se.ifmo.ru.model.Request"/>
 
     </session-factory>

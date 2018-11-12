@@ -52,5 +52,8 @@ public class RequestDao {
         return requests;
     }
 
+
+    //get by user id
+
     //TODO: get by user id, get by duck id, get by accessibility
 }
