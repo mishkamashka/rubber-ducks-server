@@ -52,11 +52,23 @@ public class DuckDao {
 
     public List<Duck> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Duck");
+        return ((org.hibernate.query.Query) query).list();
+    }
+
+    public List<Duck> getAllWithOwnerAndFeatureSet() {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id");
         return this.handleJoinResult(query);
     }
 
     public List<Duck> getByName(String name) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Duck where name like '%" + name + "%' order by length(name)");
+        return ((org.hibernate.query.Query) query).list();
+    }
+
+    public List<Duck> getByNameWithOwnerAndFeatureSet(String name) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id and d.name like '%" + name + "%' order by length(d.name)");
         return this.handleJoinResult(query);
@@ -64,8 +76,8 @@ public class DuckDao {
 
     public List<Duck> getByOwnerId(long ownerId) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Duck d inner join d.owner o inner join d.featureSet f where o.id = d.owner.id and f.id = d.featureSet.id and d.owner_id =" + ownerId);
-        return this.handleJoinResult(query);
+        Query query = session.createQuery("from Duck where owner_id =" + ownerId);
+        return ((org.hibernate.query.Query) query).list();
     }
 
     private List<Duck> handleJoinResult(Query query) {

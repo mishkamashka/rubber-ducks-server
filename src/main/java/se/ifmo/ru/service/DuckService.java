@@ -37,18 +37,25 @@ public class DuckService {
         return duckDao.getAll();
     }
 
+    public List<Duck> getAllWithOwnerAndFeatureSet() {
+        return duckDao.getAllWithOwnerAndFeatureSet();
+    }
+
     public List<Duck> getByName(String name) {
         return duckDao.getByName(name);
     }
 
-    //TODO: test
+    public List<Duck> getByNameWithOwnerAndFeatureSet(String name) {
+        return duckDao.getByNameWithOwnerAndFeatureSet(name);
+    }
+
     public List<Duck> getByOwnerId(long ownerId) {
         return duckDao.getByOwnerId(ownerId);
     }
 
     //TODO: test
-    public List<Duck> getAccessible() {
-        List<Duck> allDucks = this.getAll();
+    public List<Duck> getAccessibleWithOwnerAndFeatureSet() {
+        List<Duck> allDucks = this.getAllWithOwnerAndFeatureSet();
         List<Duck> accessibleDucks = new LinkedList<>();
         for (Duck duck : allDucks) {
             if (duck.isAccessible())

@@ -18,7 +18,6 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Duck.class);
                 configuration.addAnnotatedClass(Event.class);
-                configuration.addAnnotatedClass(Meeting.class);
                 configuration.addAnnotatedClass(Place.class);
                 configuration.addAnnotatedClass(FeatureSet.class);
                 configuration.addAnnotatedClass(Request.class);

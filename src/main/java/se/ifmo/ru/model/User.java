@@ -57,7 +57,6 @@ public class User {
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    private List<Request> requests = new ArrayList<>();
 
-
     public User() {}
 
     public User(String nickname, String email) {

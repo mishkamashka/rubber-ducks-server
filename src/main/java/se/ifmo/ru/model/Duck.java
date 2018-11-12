@@ -17,7 +17,7 @@ public class Duck {
     private String description;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "feature_set_id", nullable = false)
+    @JoinColumn(name = "feature_set_id", nullable = false, unique = true)
     private FeatureSet featureSet;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -24,7 +24,7 @@ from duck:
     - user
     - feature set
 
-from event/meeting:
+from event:
     - place
 
 How ducks can be retrieved?
@@ -38,7 +38,7 @@ How users can be retrieved?
     - from duck (duck search -> duck -> user)
     - from request (request -> user)
     - global search (get all) (only user)
-    - from event/meeting (TODO: add organiser fields and joins in db requests)
+    - from event (TODO: add organiser fields and joins in db requests)
 
 
 Global duck search:

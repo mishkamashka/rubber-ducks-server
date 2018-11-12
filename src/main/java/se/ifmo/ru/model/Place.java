@@ -33,9 +33,6 @@ public class Place {
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Event> events = new ArrayList<>();
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Meeting> meetings = new ArrayList<>();
-
     public Place() {
     }
 
@@ -99,16 +96,8 @@ public class Place {
         return events;
     }
 
-    public List<Meeting> getMeetings() {
-        return meetings;
-    }
-
     public void setEvents(List<Event> events) {
         this.events = events;
-    }
-
-    public void setMeetings(List<Meeting> meetings) {
-        this.meetings = meetings;
     }
 
     @Override
