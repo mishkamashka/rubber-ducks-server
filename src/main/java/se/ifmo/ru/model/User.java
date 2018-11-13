@@ -51,11 +51,11 @@ public class User {
     @Column(name = "building_letter")
     private char buildingLetter = '-';
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Duck> ducks = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    private List<Request> requests = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Request> requests = new ArrayList<>();
 
     public User() {}
 
@@ -168,8 +168,8 @@ public class User {
         return ducks;
     }
 
-    public void setDucks(List<Duck> ducks) {
-        this.ducks = ducks;
+    public List<Request> getRequests() {
+        return requests;
     }
 
     @Override

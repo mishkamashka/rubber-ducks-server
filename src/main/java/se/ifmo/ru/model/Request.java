@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="REQUESTS")
-public class Request {      //TODO: user-request one-many; duck-request one-many
+public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

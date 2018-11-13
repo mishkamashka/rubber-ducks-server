@@ -1,11 +1,16 @@
 package se.ifmo.ru.dao;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +25,28 @@ public class UserDao {
         User user = session.get(User.class, id);
         session.close();
         return user;
+    }
+
+    public User getByIdWithDucksAndRequests(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Query query = session.createQuery("from User u left join fetch u.ducks d left join fetch u.requests r where d.owner.id = u.id or r.user.id = u.id and u.id = " + id);
+//        Query query = session.createQuery("from User u inner join u.ducks d where d.owner.id = u.id and u.id = " + id);
+//        User user = (User) session.createCriteria(User.class)
+//                .add(Restrictions.eq("id", id))
+//                .uniqueResult();
+//        session.close();
+//        return user;
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery.where(criteriaBuilder.equal(userRoot.get("id"), id));
+        User user = session.createQuery(criteriaQuery).getSingleResult();
+        Hibernate.initialize(user.getDucks().size());
+        Hibernate.initialize(user.getRequests().size());
+        session.close();
+        return user;
+//        return this.handleJoinResult(query).get(0);
     }
 
     public void save(User user) {
@@ -120,9 +147,9 @@ public class UserDao {
         Iterator iterator = objects.iterator();
         while (iterator.hasNext()) {
             Object[] obj = (Object[]) iterator.next();
-            User event = (User) obj[0];
-//            Place place = (Place) obj[1];
-            users.add(event);
+            User user = (User) obj[0];
+            Duck duck = (Duck) obj[1];
+            users.add(user);
         }
         session.close();
         return users;

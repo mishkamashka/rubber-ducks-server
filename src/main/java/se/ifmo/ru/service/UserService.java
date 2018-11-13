@@ -17,6 +17,10 @@ public class UserService {
         return userDao.getById(id);
     }
 
+    public User getByIdWithDucksAndRequests(long id) {
+        return userDao.getByIdWithDucksAndRequests(id);
+    }
+
     public void save(User user) {
         userDao.save(user);
     }
