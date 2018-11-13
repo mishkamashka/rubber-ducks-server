@@ -17,7 +17,9 @@ public class DuckDao {
 
     public Duck getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        return session.get(Duck.class, id);
+        Duck duck = session.get(Duck.class, id);
+        session.close();
+        return duck;
     }
 
     public Duck getByIdWithOwnerAndFeatureSet(long id) {

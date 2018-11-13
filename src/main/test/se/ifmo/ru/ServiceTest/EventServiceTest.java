@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class EventServiceTest {
 
     @Test
-    public void eventServiceSaveTest() {
+    public void eventServiceSaveAndGetByIdTest() {
         EventService eventService = new EventService();
         Event event = new Event("Duck Race");
         event.setDate("12-11-2020-15-00");
@@ -28,7 +28,7 @@ public class EventServiceTest {
     }
 
     @Test
-    public void eventServiceSaveAndGetByIdTest() {
+    public void eventServiceSaveAndGetByIdWithPlaceTest() {
         EventService eventService = new EventService();
         Event event = new Event("Another Event");
         event.setDate("12-09-2020-13-00");
@@ -37,8 +37,11 @@ public class EventServiceTest {
         placeService.save(place);
         event.setPlace(place);
         eventService.save(event);
-        assertEquals(eventService.getById(event.getId()), event);
+        Event event1 = eventService.getByIdWithPlace(event.getId());
+        System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getPlace().getName());
+        assertEquals(eventService.getByIdWithPlace(event.getId()), event);
         eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test

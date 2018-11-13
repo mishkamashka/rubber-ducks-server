@@ -74,8 +74,7 @@ public class DuckServiceTest {
         duckService.save(duck);
         List <Duck> ducks = duckService.getByName("duck");
         for (Duck duck1: ducks) {
-            System.out.println(duck1.getId() + " " + duck1.getName() + " " + duck1.getOwner().getNickname() +
-                    " " + duck1.getFeatureSet().getId());
+            System.out.println(duck1.getId() + " " + duck1.getName());
         }
         userService.delete(user);
     }
@@ -95,9 +94,10 @@ public class DuckServiceTest {
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
-        List <Duck> ducks = duckService.getByName("duck");
+        List <Duck> ducks = duckService.getByNameWithOwnerAndFeatureSet("duck");
         for (Duck duck1: ducks) {
-            System.out.println(duck1.getId() + " " + duck1.getName());
+            System.out.println(duck1.getId() + " " + duck1.getName()+ " " + duck1.getOwner().getNickname() +
+                    " " + duck1.getFeatureSet().getId());
         }
         userService.delete(user);
     }

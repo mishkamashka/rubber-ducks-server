@@ -12,11 +12,10 @@ public class PlaceDao {
 
     private Session session;
     private Transaction transaction;
-    private Place place;
 
     public Place getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        place = session.get(Place.class, id);
+        Place place = session.get(Place.class, id);
         session.close();
         return place;
     }

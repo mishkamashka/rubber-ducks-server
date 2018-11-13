@@ -17,6 +17,12 @@ public class EventDao {
 
     public Event getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Event where id = " + id);
+        return (Event)((org.hibernate.query.Query) query).list().get(0);
+    }
+
+    public Event getByIdWithPlace(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.id = " + id);
         return this.handleJoinResult(query).get(0);
     }
@@ -47,19 +53,19 @@ public class EventDao {
 
     public List<Event> getAll() {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id");
+        Query query = session.createQuery("from Event");
         return this.handleJoinResult(query);
     }
 
     public List<Event> getByName(String name) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.name like '%" + name + "%' order by length(e.name)");
+        Query query = session.createQuery("from Event where name like '%" + name + "%' order by length(e.name)");
         return this.handleJoinResult(query);
     }
 
     public List<Event> getByPlaceId(long placeId) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and place_id =" + placeId);
+        Query query = session.createQuery("from Event where place_id = " + placeId);
         return this.handleJoinResult(query);
     }
 
@@ -70,7 +76,6 @@ public class EventDao {
         while (iterator.hasNext()) {
             Object[] obj = (Object[]) iterator.next();
             Event event = (Event) obj[0];
-//            Place place = (Place) obj[1];
             events.add(event);
         }
         session.close();
