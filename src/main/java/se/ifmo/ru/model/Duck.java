@@ -1,6 +1,8 @@
 package se.ifmo.ru.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "DUCKS")
@@ -23,6 +25,9 @@ public class Duck {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    @OneToMany(mappedBy = "duck", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Request> requests = new ArrayList<>();
 
     @Column(nullable = false, name="accessibility")
     private boolean isAccessible = false;
@@ -86,6 +91,10 @@ public class Duck {
 
     public void setFeatureSet(FeatureSet featureSet) {
         this.featureSet = featureSet;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
     }
 
     @Override

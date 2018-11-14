@@ -19,6 +19,10 @@ public class DuckService {
         return duckDao.getByIdWithOwnerAndFeatureSet(id);
     }
 
+    public Duck getByIdWithRequests(long id) {
+        return duckDao.getByIdWithRequests(id);
+    }
+
     public void save(Duck duck) {
         duckDao.save(duck);
     }
