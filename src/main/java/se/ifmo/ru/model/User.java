@@ -1,6 +1,9 @@
 package se.ifmo.ru.model;
 
 import se.ifmo.ru.service.DuckService;
+import se.ifmo.ru.service.FeatureSetService;
+import se.ifmo.ru.service.RequestService;
+import se.ifmo.ru.service.UserService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -170,6 +173,28 @@ public class User {
 
     public List<Request> getRequests() {
         return requests;
+    }
+
+    //TODO: test
+    public void addDuck(Duck duck) {
+        UserService userService = new UserService();
+        DuckService duckService = new DuckService();
+        User user = userService.getByIdWithDucksAndRequests(this.id);
+        duck.setOwner(user);
+        user.getDucks().add(duck);
+        duckService.save(duck);
+    }
+
+    //TODO: test
+    public void addRequest(Request request, Duck duck) {
+        UserService userService = new UserService();
+        DuckService duckService = new DuckService();
+        RequestService requestService = new RequestService();
+        User user = userService.getByIdWithDucksAndRequests(this.id);
+        duck = duckService.getByIdWithRequests(duck.getId());
+        user.getRequests().add(request);
+        duck.getRequests().add(request);
+        requestService.save(request);
     }
 
     @Override

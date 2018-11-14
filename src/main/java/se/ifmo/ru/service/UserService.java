@@ -25,9 +25,6 @@ public class UserService {
         userDao.save(user);
     }
 
-    /**
-     * @param user (must have id)
-     */
     public void update(User user) {
         userDao.update(user);
     }
