@@ -30,6 +30,15 @@ public class UserDao {
         return user;
     }
 
+    public User getByIdWithAttendingEvents(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        User user = session.get(User.class, id);
+        Hibernate.initialize(user.getAttendingEvents().size());
+//        Hibernate.initialize(user.getRequests().size());
+        session.close();
+        return user;
+    }
+
     public void save(User user) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();

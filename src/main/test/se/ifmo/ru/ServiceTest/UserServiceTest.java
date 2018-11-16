@@ -2,12 +2,8 @@ package se.ifmo.ru.ServiceTest;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import se.ifmo.ru.model.Duck;
-import se.ifmo.ru.model.FeatureSet;
-import se.ifmo.ru.model.User;
-import se.ifmo.ru.service.DuckService;
-import se.ifmo.ru.service.FeatureSetService;
-import se.ifmo.ru.service.UserService;
+import se.ifmo.ru.model.*;
+import se.ifmo.ru.service.*;
 
 import java.util.List;
 
@@ -61,6 +57,35 @@ public class UserServiceTest {
             System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(i).getName());
         }
         userService.delete(user);
+    }
+
+    @Test
+    public void userServiceSaveAndGetByIdWithAttendingEventsTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        EventService eventService = new EventService();
+        Event event = new Event("Another Event");
+        event.setDate("12-09-2020-13-00");
+        PlaceService placeService = new PlaceService();
+        Place place = new Place("Place to Be");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event);
+
+        user.getAttendingEvents().add(event);
+        event.getParticipants().add(user);
+
+        userService.update(user);
+
+        user = userService.getByIdWithAttendingEvents(user.getId());
+        for (int i = 0; i < user.getAttendingEvents().size(); i++) {
+            System.out.println(user.getId() + " " + user.getNickname() + " " + user.getAttendingEvents().get(0).getName());
+        }
+        userService.delete(user);
+        eventService.delete(event);
+        placeService.delete(place);
     }
 
     @Test

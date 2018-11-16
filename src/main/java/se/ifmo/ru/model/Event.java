@@ -3,9 +3,7 @@ package se.ifmo.ru.model;
 import se.ifmo.ru.util.DateFormatter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "EVENTS")
@@ -41,10 +39,10 @@ public class Event {
     private int maxPeople = 0;
 
     @ManyToMany(mappedBy = "attendingEvents")
-    private Set<User> participants = new HashSet<>();
+    private List<User> participants = new ArrayList<>();
 
     @ManyToMany(mappedBy = "organizedEvents")
-    private Set<User> organizers = new HashSet<>();
+    private List<User> organizers = new ArrayList<>();
 
     public Event() {
     }
@@ -114,11 +112,11 @@ public class Event {
         this.maxPeople = maxPeople;
     }
 
-    public Set<User> getParticipants() {
+    public List<User> getParticipants() {
         return participants;
     }
 
-    public Set<User> getOrganizers() {
+    public List<User> getOrganizers() {
         return organizers;
     }
 

@@ -21,6 +21,10 @@ public class UserService {
         return userDao.getByIdWithDucksAndRequests(id);
     }
 
+    public User getByIdWithAttendingEvents(long id) {
+        return userDao.getByIdWithAttendingEvents(id);
+    }
+
     public void save(User user) {
         userDao.save(user);
     }

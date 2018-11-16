@@ -63,14 +63,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> attendingEvents = new HashSet<>();
+    private List<Event> attendingEvents = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "EVENT_ORGANIZER",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> organizedEvents = new HashSet<>();
+    private List<Event> organizedEvents = new ArrayList<>();
 
     public User() {}
 
@@ -187,8 +187,12 @@ public class User {
         return requests;
     }
 
-    public Set<Event> getAttendingEvents() {
+    public List<Event> getAttendingEvents() {
         return attendingEvents;
+    }
+
+    public List<Event> getOrganizedEvents() {
+        return organizedEvents;
     }
 
     //TODO: test
