@@ -63,9 +63,9 @@ public class EventServiceTest {
 
         user.addAttendingEvent(event);
 
-        Event event1 = eventService.getByIdWithPartcipants(event.getId());
+        Event event1 = eventService.getByIdWithParticipants(event.getId());
         System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getParticipants().get(0).getNickname());
-        assertEquals(eventService.getByIdWithPartcipants(event.getId()), event);
+        assertEquals(eventService.getByIdWithParticipants(event.getId()), event);
         userService.delete(user);
         eventService.delete(event);
         placeService.delete(place);
@@ -90,7 +90,7 @@ public class EventServiceTest {
 
         Event event1 = eventService.getByIdWithOrganizers(event.getId());
         System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getOrganizers().get(0).getNickname());
-        assertEquals(eventService.getByIdWithPartcipants(event.getId()), event);
+        assertEquals(eventService.getByIdWithParticipants(event.getId()), event);
         userService.delete(user);
         eventService.delete(event);
         placeService.delete(place);

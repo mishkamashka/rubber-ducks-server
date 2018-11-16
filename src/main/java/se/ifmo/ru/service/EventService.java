@@ -19,8 +19,8 @@ public class EventService {
         return eventDao.getByIdWithPlace(id);
     }
 
-    public Event getByIdWithPartcipants(long id) {
-        return eventDao.getByIdWithPartcipants(id);
+    public Event getByIdWithParticipants(long id) {
+        return eventDao.getByIdWithParticipants(id);
     }
 
     public Event getByIdWithOrganizers(long id) {

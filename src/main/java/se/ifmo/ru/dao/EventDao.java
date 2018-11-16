@@ -29,7 +29,7 @@ public class EventDao {
         return this.handleJoinResult(query).get(0);
     }
 
-    public Event getByIdWithPartcipants(long id) {
+    public Event getByIdWithParticipants(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Event event = session.get(Event.class, id);
         Hibernate.initialize(event.getParticipants().size());
