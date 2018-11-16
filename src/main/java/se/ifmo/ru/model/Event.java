@@ -4,6 +4,8 @@ import se.ifmo.ru.util.DateFormatter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "EVENTS")
@@ -37,6 +39,9 @@ public class Event {
      */
     @Column
     private int maxPeople = 0;
+
+    @ManyToMany(mappedBy = "attentingEvents")
+    private Set<User> participants = new HashSet<>();
 
     public Event() {
     }
@@ -104,6 +109,10 @@ public class Event {
 
     public void setMaxPeople(int maxPeople) {
         this.maxPeople = maxPeople;
+    }
+
+    public Set<User> getParticipants() {
+        return participants;
     }
 
     @Override

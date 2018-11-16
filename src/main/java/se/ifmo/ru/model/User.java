@@ -6,9 +6,7 @@ import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "USERS")
@@ -59,6 +57,20 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "EVENT_PARTICIPATION",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> attentingEvents = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "EVENT_ORGANIZER",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> participatedEvents = new HashSet<>();
 
     public User() {}
 
@@ -173,6 +185,10 @@ public class User {
 
     public List<Request> getRequests() {
         return requests;
+    }
+
+    public Set<Event> getParticipatedEvents() {
+        return participatedEvents;
     }
 
     //TODO: test
