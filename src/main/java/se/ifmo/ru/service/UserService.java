@@ -17,6 +17,10 @@ public class UserService {
         return userDao.getById(id);
     }
 
+    public User getByIdWithDucks(long id) {
+        return userDao.getByIdWithDucks(id);
+    }
+
     public User getByIdWithDucksAndRequests(long id) {
         return userDao.getByIdWithDucksAndRequests(id);
     }

@@ -1,5 +1,7 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.service.FeatureSetService;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +67,6 @@ public class Duck {
 
     public User getOwner() {
         return this.owner;
-//        UserService userService = new UserService();
-//        return userService.getByDuck(this);
     }
 
     public boolean isAccessible() {
@@ -90,6 +90,8 @@ public class Duck {
     }
 
     public void setFeatureSet(FeatureSet featureSet) {
+        FeatureSetService featureSetService = new FeatureSetService();
+        featureSetService.save(featureSet);
         this.featureSet = featureSet;
     }
 

@@ -14,45 +14,37 @@ public class UserServiceTest {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
         userService.save(user);
-        DuckService duckService = new DuckService();
+
         Duck duck = new Duck();
         duck.setName("ducky");
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         duck.setFeatureSet(featureSet);
-        duck.setOwner(user);
-        user.getDucks().add(duck);
-        duckService.save(duck);
+        user.addDuck(duck);
+
         user = userService.getById(user.getId());
         System.out.println(user.getId() + " " + user.getNickname());
         userService.delete(user);
     }
 
     @Test
-    public void userServiceSaveAndGetByIdWithDucksAndRequestsTest() {
+    public void userServiceSaveAndGetByIdWithDucksTest() {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
         userService.save(user);
-        DuckService duckService = new DuckService();
+
         Duck duck = new Duck();
         duck.setName("ducky");
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         duck.setFeatureSet(featureSet);
-        duck.setOwner(user);
-        user.getDucks().add(duck);
-        duckService.save(duck);
+        user.addDuck(duck);
+
         duck = new Duck();
         duck.setName("another_duck");
         featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         duck.setFeatureSet(featureSet);
-        duck.setOwner(user);
-        user.getDucks().add(duck);
-        duckService.save(duck);
-        user = userService.getByIdWithDucksAndRequests(user.getId());
+        user.addDuck(duck);
+
+        user = userService.getByIdWithDucks(user.getId());
         for (int i = 0; i < user.getDucks().size(); i++) {
             System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(i).getName());
         }
@@ -114,13 +106,6 @@ public class UserServiceTest {
         userService.delete(user);
         eventService.delete(event);
         placeService.delete(place);
-    }
-
-    @Test
-    public void userServiceGetByIdTest() {
-        UserService userService = new UserService();
-        User user = userService.getById(1);
-        System.out.println(user.toString());
     }
 
     @Test
@@ -264,5 +249,36 @@ public class UserServiceTest {
         User user = userService.getById(1);
         if (user != null)
             userService.delete(user);
+    }
+
+    @Test
+    public void userAddDuckTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        Duck duck = new Duck();
+        duck.setName("ducky");
+        FeatureSetService featureSetService = new FeatureSetService();
+        FeatureSet featureSet = new FeatureSet();
+        featureSetService.save(featureSet);
+        duck.setFeatureSet(featureSet);
+
+        user.addDuck(duck);
+
+        duck = new Duck();
+        duck.setName("another_duck");
+        featureSet = new FeatureSet();
+        featureSetService.save(featureSet);
+        duck.setFeatureSet(featureSet);
+
+
+        user.addDuck(duck);
+
+        user = userService.getByIdWithDucksAndRequests(user.getId());
+        for (int i = 0; i < user.getDucks().size(); i++) {
+            System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(i).getName());
+        }
+        userService.delete(user);
     }
 }

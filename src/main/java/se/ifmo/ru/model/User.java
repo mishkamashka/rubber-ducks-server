@@ -195,7 +195,6 @@ public class User {
         return organizedEvents;
     }
 
-    //TODO: test
     public void addDuck(Duck duck) {
         UserService userService = new UserService();
         DuckService duckService = new DuckService();
