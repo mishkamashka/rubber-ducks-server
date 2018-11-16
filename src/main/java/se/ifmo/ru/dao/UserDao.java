@@ -21,6 +21,22 @@ public class UserDao {
         return user;
     }
 
+    public User getByIdWithDucks(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        User user = session.get(User.class, id);
+        Hibernate.initialize(user.getDucks().size());
+        session.close();
+        return user;
+    }
+
+    public User getByIdWithRequests(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        User user = session.get(User.class, id);
+        Hibernate.initialize(user.getRequests().size());
+        session.close();
+        return user;
+    }
+
     public User getByIdWithDucksAndRequests(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         User user = session.get(User.class, id);
@@ -34,7 +50,14 @@ public class UserDao {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         User user = session.get(User.class, id);
         Hibernate.initialize(user.getAttendingEvents().size());
-//        Hibernate.initialize(user.getRequests().size());
+        session.close();
+        return user;
+    }
+
+    public User getByIdWithOrganizedEvents(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        User user = session.get(User.class, id);
+        Hibernate.initialize(user.getOrganizedEvents().size());
         session.close();
         return user;
     }

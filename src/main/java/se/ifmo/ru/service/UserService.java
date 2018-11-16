@@ -25,6 +25,10 @@ public class UserService {
         return userDao.getByIdWithAttendingEvents(id);
     }
 
+    public User getByIdWithOrganizedEvents(long id) {
+        return userDao.getByIdWithOrganizedEvents(id);
+    }
+
     public void save(User user) {
         userDao.save(user);
     }

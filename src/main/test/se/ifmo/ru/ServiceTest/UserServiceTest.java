@@ -76,12 +76,40 @@ public class UserServiceTest {
 
         user.getAttendingEvents().add(event);
         event.getParticipants().add(user);
-
         userService.update(user);
 
         user = userService.getByIdWithAttendingEvents(user.getId());
         for (int i = 0; i < user.getAttendingEvents().size(); i++) {
             System.out.println(user.getId() + " " + user.getNickname() + " " + user.getAttendingEvents().get(0).getName());
+        }
+        userService.delete(user);
+        eventService.delete(event);
+        placeService.delete(place);
+    }
+
+    @Test
+    public void userServiceSaveAndGetByIdWithOrganizedEventsTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        EventService eventService = new EventService();
+        Event event = new Event("Another Event");
+        event.setDate("12-09-2020-13-00");
+        PlaceService placeService = new PlaceService();
+        Place place = new Place("Place to Be");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event);
+
+        user.getOrganizedEvents().add(event);
+        event.getOrganizers().add(user);
+
+        userService.update(user);
+
+        user = userService.getByIdWithOrganizedEvents(user.getId());
+        for (int i = 0; i < user.getOrganizedEvents().size(); i++) {
+            System.out.println(user.getId() + " " + user.getNickname() + " " + user.getOrganizedEvents().get(0).getName());
         }
         userService.delete(user);
         eventService.delete(event);
