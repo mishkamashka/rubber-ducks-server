@@ -70,7 +70,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> participatedEvents = new HashSet<>();
+    private Set<Event> organizedEvents = new HashSet<>();
 
     public User() {}
 

@@ -43,6 +43,9 @@ public class Event {
     @ManyToMany(mappedBy = "attendingEvents")
     private Set<User> participants = new HashSet<>();
 
+    @ManyToMany(mappedBy = "organizedEvents")
+    private Set<User> organizers = new HashSet<>();
+
     public Event() {
     }
 
@@ -113,6 +116,10 @@ public class Event {
 
     public Set<User> getParticipants() {
         return participants;
+    }
+
+    public Set<User> getOrganizers() {
+        return organizers;
     }
 
     @Override
