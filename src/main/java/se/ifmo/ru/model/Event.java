@@ -40,7 +40,7 @@ public class Event {
     @Column
     private int maxPeople = 0;
 
-    @ManyToMany(mappedBy = "attentingEvents")
+    @ManyToMany(mappedBy = "attendingEvents")
     private Set<User> participants = new HashSet<>();
 
     public Event() {
