@@ -216,6 +216,20 @@ public class User {
         requestService.save(request);
     }
 
+    public void addAttendingEvent(Event event) {
+        UserService userService = new UserService();
+        this.attendingEvents.add(event);
+        event.getParticipants().add(this);
+        userService.update(this);
+    }
+
+    public void addOrganizedEvent(Event event) {
+        UserService userService = new UserService();
+        this.organizedEvents.add(event);
+        event.getParticipants().add(this);
+        userService.update(this);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (this.getClass().equals(obj.getClass()) && this.id.equals(((User) obj).id));

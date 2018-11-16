@@ -1,5 +1,6 @@
 package se.ifmo.ru.dao;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import se.ifmo.ru.model.Event;
@@ -17,14 +18,31 @@ public class EventDao {
 
     public Event getById(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Event where id = " + id);
-        return (Event)((org.hibernate.query.Query) query).list().get(0);
+        Event event = session.get(Event.class, id);
+        session.close();
+        return event;
     }
 
     public Event getByIdWithPlace(long id) {
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Event e inner join e.place p where p.id = e.place.id and e.id = " + id);
         return this.handleJoinResult(query).get(0);
+    }
+
+    public Event getByIdWithPartcipants(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Event event = session.get(Event.class, id);
+        Hibernate.initialize(event.getParticipants().size());
+        session.close();
+        return event;
+    }
+
+    public Event getByIdWithOrganizers(long id) {
+        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Event event = session.get(Event.class, id);
+        Hibernate.initialize(event.getOrganizers().size());
+        session.close();
+        return event;
     }
 
     public void save(Event event) {

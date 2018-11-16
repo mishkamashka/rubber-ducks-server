@@ -3,8 +3,10 @@ package se.ifmo.ru.ServiceTest;
 import org.junit.Test;
 import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Place;
+import se.ifmo.ru.model.User;
 import se.ifmo.ru.service.EventService;
 import se.ifmo.ru.service.PlaceService;
+import se.ifmo.ru.service.UserService;
 import se.ifmo.ru.util.DateFormatter;
 import java.util.List;
 
@@ -43,6 +45,57 @@ public class EventServiceTest {
         eventService.delete(event);
         placeService.delete(place);
     }
+
+    @Test
+    public void eventServiceSaveAndGetByIdWithParticipantsTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        EventService eventService = new EventService();
+        Event event = new Event("Another Event");
+        event.setDate("12-09-2020-13-00");
+        PlaceService placeService = new PlaceService();
+        Place place = new Place("Place to Be");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event);
+
+        user.addAttendingEvent(event);
+
+        Event event1 = eventService.getByIdWithPartcipants(event.getId());
+        System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getParticipants().get(0).getNickname());
+        assertEquals(eventService.getByIdWithPartcipants(event.getId()), event);
+        userService.delete(user);
+        eventService.delete(event);
+        placeService.delete(place);
+    }
+
+    @Test
+    public void eventServiceSaveAndGetByIdWithOrganizersTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        EventService eventService = new EventService();
+        Event event = new Event("Another Event");
+        event.setDate("12-09-2020-13-00");
+        PlaceService placeService = new PlaceService();
+        Place place = new Place("Place to Be");
+        placeService.save(place);
+        event.setPlace(place);
+        eventService.save(event);
+
+        user.addOrganizedEvent(event);
+
+        Event event1 = eventService.getByIdWithOrganizers(event.getId());
+        System.out.println(event1.getId() + " " + event1.getName() + " " + event1.getOrganizers().get(0).getNickname());
+        assertEquals(eventService.getByIdWithPartcipants(event.getId()), event);
+        userService.delete(user);
+        eventService.delete(event);
+        placeService.delete(place);
+    }
+
 
     @Test
     public void eventGetByNameTest() {
