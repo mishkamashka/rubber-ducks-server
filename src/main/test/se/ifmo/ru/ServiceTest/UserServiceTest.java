@@ -29,7 +29,7 @@ public class UserServiceTest {
         user.getDucks().add(duck);
         duckService.save(duck);
         user = userService.getById(user.getId());
-        System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(0));
+        System.out.println(user.getId() + " " + user.getNickname());
         userService.delete(user);
     }
 

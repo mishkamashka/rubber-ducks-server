@@ -187,8 +187,8 @@ public class User {
         return requests;
     }
 
-    public Set<Event> getParticipatedEvents() {
-        return participatedEvents;
+    public Set<Event> getAttendingEvents() {
+        return attendingEvents;
     }
 
     //TODO: test
