@@ -52,6 +52,10 @@ public class RequestService {
         requestDao.delete(request);
     }
 
+    /**
+     * Returns list of all Request objects contained in the database
+     * @return - list of all requests
+     */
     public List<Request> getAll() {
         return requestDao.getAll();
     }

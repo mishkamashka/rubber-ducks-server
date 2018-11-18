@@ -62,6 +62,10 @@ public class DuckService {
         duckDao.delete(duck);
     }
 
+    /**
+     * Returns list of all Duck objects contained in the database
+     * @return - list of all ducks
+     */
     public List<Duck> getAll() {
         return duckDao.getAll();
     }

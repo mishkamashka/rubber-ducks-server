@@ -41,6 +41,10 @@ public class PlaceService {
         placeDao.delete(place);
     }
 
+    /**
+     * Returns list of all Request objects contained in the database
+     * @return - list of all requests
+     */
     public List<Place> getAll() {
         return placeDao.getAll();
     }

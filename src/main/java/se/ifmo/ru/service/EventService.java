@@ -71,6 +71,10 @@ public class EventService {
         eventDao.delete(event);
     }
 
+    /**
+     * Returns list of all Event objects contained in the database
+     * @return - list of all events
+     */
     public List<Event> getAll() {
         return eventDao.getAll();
     }

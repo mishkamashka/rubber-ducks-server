@@ -42,6 +42,10 @@ public class FeatureSetService {
         featureSetDao.delete(featureSet);
     }
 
+    /**
+     * Returns list of all FeatureSet objects contained in the database
+     * @return - list of all featureSets
+     */
     public List<FeatureSet> getAll() {
         return featureSetDao.getAll();
     }

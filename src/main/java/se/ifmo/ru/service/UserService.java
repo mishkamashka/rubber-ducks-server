@@ -82,6 +82,10 @@ public class UserService {
         userDao.delete(user);
     }
 
+    /**
+     * Returns list of all User objects contained in the database
+     * @return - list of all users
+     */
     public List<User> getAll() {
         return userDao.getAll();
     }
