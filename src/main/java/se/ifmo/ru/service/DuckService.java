@@ -70,18 +70,37 @@ public class DuckService {
         return duckDao.getAll();
     }
 
+    /**
+     * Returns list of all Duck objects contained in the database, fields owner and featureSet of which can be accessed
+     * @return - list of all ducks
+     */
     public List<Duck> getAllWithOwnerAndFeatureSet() {
         return duckDao.getAllWithOwnerAndFeatureSet();
     }
 
+    /**
+     * Returns list of ducks, names of which contain a substring equal to the parameter, ordered from the best match to the worst
+     * @param name - substring to find among names
+     * @return - list of ducks or null, if nothing found
+     */
     public List<Duck> getByName(String name) {
         return duckDao.getByName(name);
     }
 
+    /**
+     * Returns list of ducks, names of which contain a substring equal to the parameter and fields owner and featureSet of which can be accessed, ordered from the best match to the worst
+     * @param name - substring to find among names
+     * @return - list of ducks or null, if nothing found
+     */
     public List<Duck> getByNameWithOwnerAndFeatureSet(String name) {
         return duckDao.getByNameWithOwnerAndFeatureSet(name);
     }
 
+    /**
+     * Returns list of ducks owned by a certain user
+     * @param ownerId - id of the user, whose ducks are required
+     * @return - list of ducks or null, if nothing found
+     */
     public List<Duck> getByOwnerId(long ownerId) {
         return duckDao.getByOwnerId(ownerId);
     }
