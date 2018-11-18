@@ -23,7 +23,7 @@ public class UserService {
     }
 
     /**
-     * Returns a User object contained in the database, list of Ducks of which can be accessed, or null if it does not exist
+     * Returns a User object contained in the database, list of ducks of which can be accessed, or null if it does not exist
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     /**
-     * Returns a User object contained in the database, list of Ducks and Requests of which can be accessed, or null if it does not exist
+     * Returns a User object contained in the database, list of ducks and requests of which can be accessed, or null if it does not exist
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     /**
-     * Returns a User object contained in the database, list of Attending Events of which can be accessed, or null if it does not exist
+     * Returns a User object contained in the database, list of attendingEvents of which can be accessed, or null if it does not exist
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -50,7 +50,7 @@ public class UserService {
     }
 
     /**
-     * Returns a User object contained in the database, list of Organized Events of which can be accessed, or null if it does not exist
+     * Returns a User object contained in the database, list of organizedEvents of which can be accessed, or null if it does not exist
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -75,7 +75,7 @@ public class UserService {
     }
 
     /**
-     * Deletes a User object from the database
+     * Deletes a User object from the database (will cascade to Duck only if was loaded by id from the db)
      * @param user - user to delete
      */
     public void delete(User user) {
@@ -90,42 +90,77 @@ public class UserService {
         return userDao.getAll();
     }
 
+    /**
+     * Returns list of Duck objects owned by the User
+     * @param user - user whose ducks will be returned
+     * @return - list of Ducks
+     */
     public List<Duck> getDucks(User user) {
-        List<Duck> allDucks = duckDao.getAll();
-        LinkedList<Duck> ducks = new LinkedList<>();
-        for (Duck allDuck : allDucks) {
-            if (allDuck.getOwner().equals(user)) {
-                ducks.addLast(allDuck);
-            }
-        }
-        return ducks;
+        return duckDao.getByOwnerId(user.getId());
     }
 
+    /**
+     * Returns User with certain nickname and email fields
+     * @param nickname - nickname of the required user
+     * @param email - email of the required user
+     * @return - User with certain nickname and email, if exists, or null if does not exist
+     */
     public User getByNicknameAndEmail(String nickname, String email) {
         return userDao.getByNicknameAndEmail(nickname, email);
     }
 
+    /**
+     * Returns User with certain nickname and email fields with the list of requests and ducks can accessed
+     * @param nickname - nickname of the required user
+     * @param email - email of the required user
+     * @return - User with certain nickname and email, if exists, or null if does not exist
+     */
     public User getByNicknameAndEmailWithDucksAndRequests(String nickname, String email) {
         return userDao.getByNicknameAndEmailWithDucksAndRequests(nickname, email);
     }
 
+    /**
+     * Returns list of users whose first and last names contain a substring equals to the parameters, ordered from the best match to the worst
+     * @param firstName - substring to find among firstNames
+     * @param lastName - substring to find among lastNames
+     * @return - list of users or null, if nothing found
+     */
     public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
         return userDao.getByFirstNameAndLastName(firstName, lastName);
     }
 
+    /**
+     * Returns list of users whose nickname contains a substring equals to the parameter, ordered from the best match to the worst
+     * @param nickname - substring to find among firstNames
+     * @return - list of users or null, if nothing found
+     */
     public List<User> getByNickname(String nickname) {
         return userDao.getByNickname(nickname);
     }
 
+    /**
+     * Returns list of users whose first name contains a substring equals to the parameter, ordered from the best match to the worst
+     * @param firstName - substring to find among firstNames
+     * @return - list of users or null, if nothing found
+     */
     public List<User> getByFirstName(String firstName) {
         return userDao.getByFirstName(firstName);
     }
 
+    /**
+     * Returns list of users whose last name contains a substring equals to the parameter, ordered from the best match to the worst
+     * @param lastName - substring to find among lastNames
+     * @return - list of users or null, if nothing found
+     */
     public List<User> getByLastName(String lastName) {
         return userDao.getByLastName(lastName);
     }
 
-    //TODO: test
+    /**
+     * Returns list of users with certain gender
+     * @param gender - required user's gender
+     * @return - list of users or null
+     */
     public List<User> getByGender(char gender) {
         List<User> allUsers = this.getAll();
         List<User> requiredUsers = new LinkedList<>();

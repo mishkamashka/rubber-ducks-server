@@ -52,6 +52,31 @@ public class UserServiceTest {
     }
 
     @Test
+    public void userServiceGetDucksTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        userService.save(user);
+
+        Duck duck = new Duck();
+        duck.setName("ducky");
+        FeatureSet featureSet = new FeatureSet();
+        duck.setFeatureSet(featureSet);
+        user.addDuck(duck);
+
+        Duck duck1 = new Duck();
+        duck1.setName("another_duck");
+        featureSet = new FeatureSet();
+        duck1.setFeatureSet(featureSet);
+        user.addDuck(duck1);
+
+        List<Duck> ducks = userService.getDucks(user);
+        for (Duck duck2 : ducks) {
+            System.out.println(duck2.getId() + " " + duck2.getName());
+        }
+        userService.delete(userService.getById(user.getId()));
+    }
+
+    @Test
     public void userServiceSaveAndGetByIdWithAttendingEventsTest() {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
@@ -280,5 +305,27 @@ public class UserServiceTest {
             System.out.println(user.getId() + " " + user.getNickname() + " " + user.getDucks().get(i).getName());
         }
         userService.delete(user);
+    }
+
+    @Test
+    public void userServiceGetByGenderTest() {
+        UserService userService = new UserService();
+        User user = new User("user", "email@mail.em");
+        user.setGender('f');
+        userService.save(user);
+
+        user = new User("name1", "email1");
+        user.setGender('m');
+        userService.save(user);
+
+        user = new User("name2", "email2");
+        user.setGender('f');
+        userService.save(user);
+
+        List<User> users = userService.getByGender('f');
+        for(User user1 : users) {
+            System.out.println(user1.getId() + " " + user1.getNickname() + " " + user1.getGender());
+            userService.delete(user1);
+        }
     }
 }

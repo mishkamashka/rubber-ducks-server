@@ -1,7 +1,6 @@
 package se.ifmo.ru.model;
 
 import se.ifmo.ru.service.DuckService;
-import se.ifmo.ru.service.FeatureSetService;
 import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
 
