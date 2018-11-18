@@ -7,9 +7,13 @@ import java.util.List;
 
 public class FeatureSetService {
 
-
     private FeatureSetDao featureSetDao = new FeatureSetDao();
 
+    /**
+     * Returns a FeatureSet object contained in the database
+     * @param id - id of the required FeatureSet
+     * @return - FeatureSet with the id
+     */
     public FeatureSet getById(long id) {
         return featureSetDao.getById(id);
     }

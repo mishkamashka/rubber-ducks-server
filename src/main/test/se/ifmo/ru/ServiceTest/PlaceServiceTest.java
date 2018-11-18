@@ -6,20 +6,18 @@ import se.ifmo.ru.service.PlaceService;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 public class PlaceServiceTest {
 
     @Test
-    public void placeServiceSaveTest() {
+    public void placeServiceSaveAndGetByIdTest() {
         PlaceService placeService = new PlaceService();
         Place place = new Place("Cosy Place");
         placeService.save(place);
-    }
-
-    @Test
-    public void placeServiceGetTest() {
-        PlaceService placeService = new PlaceService();
-        Place place = placeService.getById(20);
-        System.out.println(place.toString());
+        Place place1 = placeService.getById(place.getId());
+        assertEquals(place, place1);
+        placeService.delete(place1);
     }
 
     @Test
