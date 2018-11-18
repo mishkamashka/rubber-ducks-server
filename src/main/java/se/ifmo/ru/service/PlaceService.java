@@ -16,15 +16,27 @@ public class PlaceService {
     public Place getById(long id) {
         return placeDao.getById(id);
     }
-    
+
+    /**
+     * Saves a Place object to the database
+     * @param place - place to save
+     */
     public void save(Place place) {
         placeDao.save(place);
     }
 
+    /**
+     * Updates a Place object in the database
+     * @param place - place to update
+     */
     public void update(Place place) {
         placeDao.update(place);
     }
 
+    /**
+     * Deletes a Place object from the database
+     * @param place - place to delete
+     */
     public void delete(Place place) {
         placeDao.delete(place);
     }

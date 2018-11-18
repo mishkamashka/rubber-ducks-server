@@ -47,14 +47,26 @@ public class EventService {
         return eventDao.getByIdWithOrganizers(id);
     }
 
+    /**
+     * Saves a Event object to the database
+     * @param event - event to save
+     */
     public void save(Event event) {
         eventDao.save(event);
     }
 
+    /**
+     * Updates a Event object in the database
+     * @param event - event to update
+     */
     public void update(Event event) {
         eventDao.update(event);
     }
 
+    /**
+     * Deletes a Event object from the database
+     * @param event - event to delete
+     */
     public void delete(Event event) {
         eventDao.delete(event);
     }

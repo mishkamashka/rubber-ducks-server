@@ -17,15 +17,27 @@ public class FeatureSetService {
     public FeatureSet getById(long id) {
         return featureSetDao.getById(id);
     }
-    
+
+    /**
+     * Saves a FeatureSet object to the database
+     * @param featureSet - featureSet to save
+     */
     public void save(FeatureSet featureSet) {
         featureSetDao.save(featureSet);
     }
 
+    /**
+     * Updates a FeatureSet object in the database
+     * @param featureSet - featureSet to update
+     */
     public void update(FeatureSet featureSet) {
         featureSetDao.update(featureSet);
     }
 
+    /**
+     * Deletes a FeatureSet object from the database
+     * @param featureSet - featureSet to delete
+     */
     public void delete(FeatureSet featureSet) {
         featureSetDao.delete(featureSet);
     }

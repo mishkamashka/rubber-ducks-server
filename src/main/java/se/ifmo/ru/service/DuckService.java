@@ -38,16 +38,28 @@ public class DuckService {
         return duckDao.getByIdWithRequests(id);
     }
 
+    /**
+     * Saves a Duck object to the database
+     * @param duck - duck to save
+     */
     public void save(Duck duck) {
         duckDao.save(duck);
     }
 
-    public void delete(Duck duck) {
-        duckDao.delete(duck);
-    }
-
+    /**
+     * Updates a Duck object in the database
+     * @param duck - duck to update
+     */
     public void update(Duck duck) {
         duckDao.update(duck);
+    }
+
+    /**
+     * Deletes a Duck object from the database
+     * @param duck - duck to delete
+     */
+    public void delete(Duck duck) {
+        duckDao.delete(duck);
     }
 
     public List<Duck> getAll() {

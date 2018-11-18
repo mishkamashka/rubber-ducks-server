@@ -58,16 +58,25 @@ public class UserService {
         return userDao.getByIdWithOrganizedEvents(id);
     }
 
+    /**
+     * Saves a User object to the database
+     * @param user - user to save
+     */
     public void save(User user) {
         userDao.save(user);
     }
 
+    /**
+     * Updates a User object in the database
+     * @param user - user to update
+     */
     public void update(User user) {
         userDao.update(user);
     }
 
     /**
-     * @param user (must have id)
+     * Deletes a User object from the database
+     * @param user - user to delete
      */
     public void delete(User user) {
         userDao.delete(user);

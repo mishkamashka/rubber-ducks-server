@@ -28,14 +28,26 @@ public class RequestService {
         return requestDao.getByIdWithUserAndDuck(id);
     }
 
+    /**
+     * Saves a Request object to the database
+     * @param request - request to save
+     */
     public void save(Request request) {
         requestDao.save(request);
     }
 
+    /**
+     * Updates a Request object in the database
+     * @param request - request to update
+     */
     public void update(Request request) {
         requestDao.update(request);
     }
 
+    /**
+     * Deletes a Request object from the database
+     * @param request - request to delete
+     */
     public void delete(Request request) {
         requestDao.delete(request);
     }
