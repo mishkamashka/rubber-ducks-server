@@ -79,14 +79,29 @@ public class EventService {
         return eventDao.getAll();
     }
 
+    /**
+     * Returns list of events, names of which contain a substring equal to the parameter, ordered from the best match to the worst
+     * @param name - substring to find among names
+     * @return - list of places or null, if nothing found
+     */
     public List<Event> getByName(String name) {
         return eventDao.getByName(name);
     }
 
+    /**
+     * Returns list of events held at the certain place
+     * @param placeId - id of the place, at which events are held
+     * @return - list of events or null, if nothing found
+     */
     public List<Event> getByPlaceId(long placeId) {
         return eventDao.getByPlaceId(placeId);
     }
 
+    /**
+     * Returns list of events held on the certain date
+     * @param date - date of the required events
+     * @return - list of events or null, if nothing found
+     */
     public List<Event> getByDate(Date date) {
         EventService eventService = new EventService();
         List<Event> events = eventService.getAll();
@@ -102,6 +117,12 @@ public class EventService {
         return result;
     }
 
+    /**
+     * Returns list of events held at the certain place and on the certain date
+     * @param placeId - id of the place, at which events are held
+     * @param date - date of the required events
+     * @return - list of events or null, if nothing found
+     */
     public Event getByPlaceIdAndDate(long placeId, Date date) {
         EventService eventService = new EventService();
         List<Event> events = eventService.getAll();
