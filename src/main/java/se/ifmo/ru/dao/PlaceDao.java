@@ -58,5 +58,4 @@ public class PlaceDao {
         session.close();
         return places;
     }
-
 }

@@ -120,7 +120,7 @@ public class UserService {
     }
 
     /**
-     * Returns list of users whose first and last names contain a substring equals to the parameters, ordered from the best match to the worst
+     * Returns list of users whose first and last names contain a substring equal to the parameters, ordered from the best match to the worst
      * @param firstName - substring to find among firstNames
      * @param lastName - substring to find among lastNames
      * @return - list of users or null, if nothing found
@@ -130,7 +130,7 @@ public class UserService {
     }
 
     /**
-     * Returns list of users whose nickname contains a substring equals to the parameter, ordered from the best match to the worst
+     * Returns list of users whose nickname contains a substring equal to the parameter, ordered from the best match to the worst
      * @param nickname - substring to find among firstNames
      * @return - list of users or null, if nothing found
      */
@@ -139,7 +139,7 @@ public class UserService {
     }
 
     /**
-     * Returns list of users whose first name contains a substring equals to the parameter, ordered from the best match to the worst
+     * Returns list of users whose first name contains a substring equal to the parameter, ordered from the best match to the worst
      * @param firstName - substring to find among firstNames
      * @return - list of users or null, if nothing found
      */
@@ -148,7 +148,7 @@ public class UserService {
     }
 
     /**
-     * Returns list of users whose last name contains a substring equals to the parameter, ordered from the best match to the worst
+     * Returns list of users whose last name contains a substring equal to the parameter, ordered from the best match to the worst
      * @param lastName - substring to find among lastNames
      * @return - list of users or null, if nothing found
      */
