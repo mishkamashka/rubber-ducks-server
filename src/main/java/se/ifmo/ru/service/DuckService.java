@@ -105,7 +105,10 @@ public class DuckService {
         return duckDao.getByOwnerId(ownerId);
     }
 
-    //TODO: test
+    /**
+     * Returns list of accessible ducks, fields owner and featureSet of which can be accessed
+     * @return - list of ducks or null, if nothing found
+     */
     public List<Duck> getAccessibleWithOwnerAndFeatureSet() {
         List<Duck> allDucks = this.getAllWithOwnerAndFeatureSet();
         List<Duck> accessibleDucks = new LinkedList<>();

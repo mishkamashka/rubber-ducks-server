@@ -230,5 +230,3 @@ public class DuckServiceTest {
         userService.delete(user);
     }
 }
-
-//TODO:  delete from requests; delete from ducks; delete from users; (to clear tables)
