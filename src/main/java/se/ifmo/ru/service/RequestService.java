@@ -7,7 +7,6 @@ import java.util.List;
 
 public class RequestService {
 
-
     private RequestDao requestDao = new RequestDao();
 
     /**
@@ -60,14 +59,29 @@ public class RequestService {
         return requestDao.getAll();
     }
 
+    /**
+     * Returns list of all requests, owned by a certain user
+     * @param userId - id of the user, whose requests are required
+     * @return - list of requests or null, if nothing found
+     */
     public List<Request> getByUserId(long userId) {
         return requestDao.getByUserId(userId);
     }
 
+    /**
+     * Returns list of all requests on a certain duck
+     * @param duckId - id of the duck, requests on which are required
+     * @return - list of requests or null, if nothing found
+     */
     public List<Request> getByDuckId(long duckId) {
         return requestDao.getByDuckId(duckId);
     }
 
+    /**
+     * Returns list of requests approved or not, according to the parameter
+     * @param isApproved - boolean value to find among isApproved fields
+     * @return - list of requests or null, if nothing found
+     */
     public List<Request> getByIsApproved(boolean isApproved) {
         return requestDao.getByIsApproved(isApproved);
     }
