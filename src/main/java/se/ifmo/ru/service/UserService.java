@@ -13,22 +13,47 @@ public class UserService {
     private UserDao userDao = new UserDao();
     private DuckDao duckDao = new DuckDao();
 
+    /**
+     * Returns a User object contained in the database, or null if it does not exist
+     * @param id - id of the required User
+     * @return - required User if exists, null if does not exist
+     */
     public User getById(long id) {
         return userDao.getById(id);
     }
 
+    /**
+     * Returns a User object contained in the database, list of Ducks of which can be accessed, or null if it does not exist
+     * @param id - id of the required User
+     * @return - required User if exists, null if does not exist
+     */
     public User getByIdWithDucks(long id) {
         return userDao.getByIdWithDucks(id);
     }
 
+    /**
+     * Returns a User object contained in the database, list of Ducks and Requests of which can be accessed, or null if it does not exist
+     * @param id - id of the required User
+     * @return - required User if exists, null if does not exist
+     */
     public User getByIdWithDucksAndRequests(long id) {
         return userDao.getByIdWithDucksAndRequests(id);
     }
 
+    /**
+     * Returns a User object contained in the database, list of Attending Events of which can be accessed, or null if it does not exist
+     * @param id - id of the required User
+     * @return - required User if exists, null if does not exist
+     */
     public User getByIdWithAttendingEvents(long id) {
         return userDao.getByIdWithAttendingEvents(id);
     }
 
+    /**
+     * Returns a User object contained in the database, list of Organized Events of which can be accessed, or null if it does not exist
+     * @param id - id of the required User
+     * @return - required User if exists, null if does not exist
+     */
     public User getByIdWithOrganizedEvents(long id) {
         return userDao.getByIdWithOrganizedEvents(id);
     }

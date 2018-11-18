@@ -10,10 +10,20 @@ public class RequestService {
 
     private RequestDao requestDao = new RequestDao();
 
+    /**
+     * Returns a Request object contained in the database, or null if it does not exist
+     * @param id - id of the required Request
+     * @return - required Request if exists, null if does not exist
+     */
     public Request getById(long id) {
         return requestDao.getById(id);
     }
 
+    /**
+     * Returns a Request object contained in the database, fields ducks and user of which can be accessed, or null if it does not exist
+     * @param id - id of the required Request
+     * @return - required Request if exists, null if does not exist
+     */
     public Request getByIdWithUserAndDuck(long id) {
         return requestDao.getByIdWithUserAndDuck(id);
     }

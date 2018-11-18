@@ -8,6 +8,11 @@ public class PlaceService {
 
     private PlaceDao placeDao = new PlaceDao();
 
+    /**
+     * Returns a Place object contained in the database, or null if it does not exist
+     * @param id - id of the required Place
+     * @return - required Place if exists, null if does not exist
+     */
     public Place getById(long id) {
         return placeDao.getById(id);
     }

@@ -10,9 +10,9 @@ public class FeatureSetService {
     private FeatureSetDao featureSetDao = new FeatureSetDao();
 
     /**
-     * Returns a FeatureSet object contained in the database
+     * Returns a FeatureSet object contained in the database, or null if it does not exist
      * @param id - id of the required FeatureSet
-     * @return - FeatureSet with the id
+     * @return - required FeatureSet if exists, null if does not exist
      */
     public FeatureSet getById(long id) {
         return featureSetDao.getById(id);
