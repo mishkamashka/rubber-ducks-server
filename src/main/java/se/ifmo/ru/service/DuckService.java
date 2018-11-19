@@ -21,24 +21,6 @@ public class DuckService {
     }
 
     /**
-     * Returns a Duck object contained in the database, fields owner and featureSet of which can be accessed, or null if it does not exist
-     * @param id - id of the required Duck
-     * @return - required Duck if exists, null if does not exist
-     */
-    public Duck getByIdWithOwnerAndFeatureSet(long id) {
-        return duckDao.getByIdWithOwnerAndFeatureSet(id);
-    }
-
-    /**
-     * Returns a Duck object contained in the database, list of Requests of which can be accessed, or null if it does not exist
-     * @param id - id of the required Duck
-     * @return - required Duck if exists, null if does not exist
-     */
-    public Duck getByIdWithRequests(long id) {
-        return duckDao.getByIdWithRequests(id);
-    }
-
-    /**
      * Saves a Duck object to the database
      * @param duck - duck to save
      */
@@ -71,29 +53,12 @@ public class DuckService {
     }
 
     /**
-     * Returns list of all Duck objects contained in the database, fields owner and featureSet of which can be accessed
-     * @return - list of all ducks
-     */
-    public List<Duck> getAllWithOwnerAndFeatureSet() {
-        return duckDao.getAllWithOwnerAndFeatureSet();
-    }
-
-    /**
      * Returns list of ducks, names of which contain a substring equal to the parameter, ordered from the best match to the worst
      * @param name - substring to find among names
      * @return - list of ducks or null, if nothing found
      */
     public List<Duck> getByName(String name) {
         return duckDao.getByName(name);
-    }
-
-    /**
-     * Returns list of ducks, names of which contain a substring equal to the parameter and fields owner and featureSet of which can be accessed, ordered from the best match to the worst
-     * @param name - substring to find among names
-     * @return - list of ducks or null, if nothing found
-     */
-    public List<Duck> getByNameWithOwnerAndFeatureSet(String name) {
-        return duckDao.getByNameWithOwnerAndFeatureSet(name);
     }
 
     /**
@@ -110,7 +75,7 @@ public class DuckService {
      * @return - list of ducks or null, if nothing found
      */
     public List<Duck> getAccessibleWithOwnerAndFeatureSet() {
-        List<Duck> allDucks = this.getAllWithOwnerAndFeatureSet();
+        List<Duck> allDucks = this.getAll();
         List<Duck> accessibleDucks = new LinkedList<>();
         for (Duck duck : allDucks) {
             if (duck.isAccessible())

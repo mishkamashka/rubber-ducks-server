@@ -27,12 +27,6 @@ public class RequestDao {
         entityManager.getTransaction().commit();
     }
 
-    public void update(Request request) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(request);
-        entityManager.getTransaction().commit();
-    }
-
     public List<Request> getAll() {
         Query query = entityManager.createQuery("from Request");
         return query.getResultList();

@@ -27,14 +27,6 @@ public class PlaceService {
     }
 
     /**
-     * Updates a Place object in the database
-     * @param place - place to update
-     */
-    public void update(Place place) {
-        placeDao.update(place);
-    }
-
-    /**
      * Deletes a Place object from the database
      * @param place - place to delete
      */

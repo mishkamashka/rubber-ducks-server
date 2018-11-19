@@ -28,7 +28,7 @@ public class UserService {
      * @return - required User if exists, null if does not exist
      */
     public User getByIdWithDucks(long id) {
-        return userDao.getByIdWithDucks(id);
+        return userDao.getById(id);
     }
 
     /**
@@ -37,7 +37,7 @@ public class UserService {
      * @return - required User if exists, null if does not exist
      */
     public User getByIdWithDucksAndRequests(long id) {
-        return userDao.getByIdWithDucksAndRequests(id);
+        return userDao.getById(id);
     }
 
     /**
@@ -46,7 +46,7 @@ public class UserService {
      * @return - required User if exists, null if does not exist
      */
     public User getByIdWithAttendingEvents(long id) {
-        return userDao.getByIdWithAttendingEvents(id);
+        return userDao.getById(id);
     }
 
     /**
@@ -55,7 +55,7 @@ public class UserService {
      * @return - required User if exists, null if does not exist
      */
     public User getByIdWithOrganizedEvents(long id) {
-        return userDao.getByIdWithOrganizedEvents(id);
+        return userDao.getById(id);
     }
 
     /**
@@ -116,7 +116,7 @@ public class UserService {
      * @return - User with certain nickname and email, if exists, or null if does not exist
      */
     public User getByNicknameAndEmailWithDucksAndRequests(String nickname, String email) {
-        return userDao.getByNicknameAndEmailWithDucksAndRequests(nickname, email);
+        return userDao.getByNicknameAndEmail(nickname, email);
     }
 
     /**

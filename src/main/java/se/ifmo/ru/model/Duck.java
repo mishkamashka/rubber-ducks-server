@@ -90,8 +90,6 @@ public class Duck {
     }
 
     public void setFeatureSet(FeatureSet featureSet) {
-        FeatureSetService featureSetService = new FeatureSetService();
-        featureSetService.save(featureSet);
         this.featureSet = featureSet;
     }
 

@@ -27,12 +27,6 @@ public class EventDao {
         entityManager.getTransaction().commit();
     }
 
-    public void update(Event event) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(event);
-        entityManager.getTransaction().commit();
-    }
-
     public List<Event> getAll() {
         Query query = entityManager.createQuery("from Event");
         return query.getResultList();

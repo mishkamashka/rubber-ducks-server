@@ -27,12 +27,6 @@ public class PlaceDao {
         entityManager.getTransaction().commit();
     }
 
-    public void update(Place place) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(place);
-        entityManager.getTransaction().commit();
-    }
-
     public List<Place> getAll() {
         Query query = entityManager.createQuery("from Place");
         return query.getResultList();

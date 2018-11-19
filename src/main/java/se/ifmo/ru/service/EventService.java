@@ -29,14 +29,6 @@ public class EventService {
     }
 
     /**
-     * Updates a Event object in the database
-     * @param event - event to update
-     */
-    public void update(Event event) {
-        eventDao.update(event);
-    }
-
-    /**
      * Deletes a Event object from the database
      * @param event - event to delete
      */

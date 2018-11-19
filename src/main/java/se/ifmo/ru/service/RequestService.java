@@ -27,14 +27,6 @@ public class RequestService {
     }
 
     /**
-     * Updates a Request object in the database
-     * @param request - request to update
-     */
-    public void update(Request request) {
-        requestDao.update(request);
-    }
-
-    /**
      * Deletes a Request object from the database
      * @param request - request to delete
      */

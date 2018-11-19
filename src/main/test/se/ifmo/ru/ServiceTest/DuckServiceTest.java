@@ -19,23 +19,27 @@ public class DuckServiceTest {
 
     @Test
     public void duckServiceSaveAndGetByIdTest() {
+
         UserService userService = new UserService();
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
-        FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
+        FeatureSet featureSet = new FeatureSet();
+
         duck.setName("duck_name");
+
         duck.setFeatureSet(featureSet);
+
         duck.setOwner(user);
+
         user.getDucks().add(duck);
         duckService.save(duck);
-        Duck duck1 = duckService.getByIdWithOwnerAndFeatureSet(duck.getId());
+
+        Duck duck1 = duckService.getById(duck.getId());
         System.out.println(duck1.getId() + " " + duck1.getName());
         assertEquals(duck1, duck);
-        userService.delete(user);
+        userService.delete(user);//TODO
     }
 
     @Test
@@ -53,7 +57,7 @@ public class DuckServiceTest {
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
-        Duck duck1 = duckService.getByIdWithOwnerAndFeatureSet(duck.getId());
+        Duck duck1 = duckService.getById(duck.getId());
         System.out.println(duck1.getId() + " " + duck1.getName() + " " + duck1.getOwner().getNickname());
         assertEquals(duck1, duck);
         userService.delete(user);
@@ -80,7 +84,7 @@ public class DuckServiceTest {
         duck.getRequests().add(request);
         requestService.save(request);
 
-        Duck duck1 = duckService.getByIdWithRequests(duck.getId());
+        Duck duck1 = duckService.getById(duck.getId());
         System.out.println(duck1.getId() + " " + duck1.getName() + " " + duck1.getRequests().get(0));
         assertEquals(duck1, duck);
         userService.delete(user);
@@ -123,7 +127,7 @@ public class DuckServiceTest {
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
-        List <Duck> ducks = duckService.getByNameWithOwnerAndFeatureSet("duck");
+        List <Duck> ducks = duckService.getByName("duck");
         for (Duck duck1: ducks) {
             System.out.println(duck1.getId() + " " + duck1.getName()+ " " + duck1.getOwner().getNickname() +
                     " " + duck1.getFeatureSet().getId());

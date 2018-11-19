@@ -1,123 +1,48 @@
 package se.ifmo.ru.dao;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 import se.ifmo.ru.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
 public class UserDao {
 
-    private Session session;
-    private Transaction transaction;
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
     public User getById(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        session.close();
-        return user;
-    }
-
-    public User getByIdWithDucks(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        Hibernate.initialize(user.getDucks().size());
-        session.close();
-        return user;
-    }
-
-    public User getByIdWithRequests(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        Hibernate.initialize(user.getRequests().size());
-        session.close();
-        return user;
-    }
-
-    public User getByIdWithDucksAndRequests(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        Hibernate.initialize(user.getDucks().size());
-        Hibernate.initialize(user.getRequests().size());
-        session.close();
-        return user;
-    }
-
-    public User getByIdWithAttendingEvents(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        Hibernate.initialize(user.getAttendingEvents().size());
-        session.close();
-        return user;
-    }
-
-    public User getByIdWithOrganizedEvents(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        Hibernate.initialize(user.getOrganizedEvents().size());
-        session.close();
-        return user;
+        return entityManager.find(User.class, id);
     }
 
     public void save(User user) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(user);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
     }
 
     public void delete(User user) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(user);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(user);
+        entityManager.getTransaction().commit();
     }
 
     public void update(User user) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
     }
 
     public List<User> getAll() {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User");
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        Query query = entityManager.createQuery("from User");
+        return query.getResultList();
     }
 
     public User getByNicknameAndEmail(String nickname, String email) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where nickname = :nickname and email = :email");
+        Query query = entityManager.createQuery("from User where nickname = :nickname and email = :email");
         query.setParameter("nickname", nickname);
         query.setParameter("email", email);
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        if (users != null && users.size() > 0)
-            return users.get(0);
-        else
-            return null;
-    }
-
-    public User getByNicknameAndEmailWithDucksAndRequests(String nickname, String email) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where nickname = :nickname and email = :email");
-        query.setParameter("nickname", nickname);
-        query.setParameter("email", email);
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        if (users != null && users.size() > 0) {
-            Hibernate.initialize(users.get(0).getDucks().size());
-            Hibernate.initialize(users.get(0).getRequests().size());
-        }
-        session.close();
+        List<User> users = query.getResultList();
         if (users != null && users.size() > 0)
             return users.get(0);
         else
@@ -129,46 +54,31 @@ public class UserDao {
      * @return users whose nicknames contain "nickname" parameter, first - most similar
      */
     public List<User> getByNickname(String nickname) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where nickname like '%" + nickname + "%' order by length(nickname)");
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        Query query = entityManager.createQuery("from User where nickname like '%" + nickname + "%' order by length(nickname)");
+        return query.getResultList();
     }
 
     public List<User> getByFirstName(String firstName) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where first_name like '%" + firstName + "%' order by length(first_name)");
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        Query query = entityManager.createQuery("from User where first_name like '%" + firstName + "%' order by length(first_name)");
+        return query.getResultList();
     }
 
     public List<User> getByLastName(String lastName) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where last_name like '%" + lastName + "%' order by length(last_name)");
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        Query query = entityManager.createQuery("from User where last_name like '%" + lastName + "%' order by length(last_name)");
+        return query.getResultList();
     }
 
     public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where first_name = :first_name and last_name = :last_name");
+        Query query = entityManager.createQuery("from User where first_name = :first_name and last_name = :last_name");
         query.setParameter("first_name", firstName);
         query.setParameter("last_name", lastName);
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        return query.getResultList();
     }
 
     public List<User> getByGender(char gender) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from User where gender = :gender");
+        Query query = entityManager.createQuery("from User where gender = :gender");
         query.setParameter("gender", gender);
-        List<User> users = ((org.hibernate.query.Query) query).list();
-        session.close();
-        return users;
+        return query.getResultList();
     }
 
 }

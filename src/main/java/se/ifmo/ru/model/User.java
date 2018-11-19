@@ -194,22 +194,13 @@ public class User {
         return organizedEvents;
     }
 
-    public void addDuck(Duck duck) {
-        UserService userService = new UserService();
-        DuckService duckService = new DuckService();
-        User user = userService.getByIdWithDucksAndRequests(this.id);
-        duck.setOwner(user);
-        user.getDucks().add(duck);
-        duckService.save(duck);
-    }
-
     //TODO: test
     public void addRequest(Request request, Duck duck) {
         UserService userService = new UserService();
         DuckService duckService = new DuckService();
         RequestService requestService = new RequestService();
         User user = userService.getByIdWithDucksAndRequests(this.id);
-        duck = duckService.getByIdWithRequests(duck.getId());
+        duck = duckService.getById(duck.getId());
         user.getRequests().add(request);
         duck.getRequests().add(request);
         requestService.save(request);
