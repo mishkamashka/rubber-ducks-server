@@ -5,50 +5,42 @@ import org.hibernate.Transaction;
 import se.ifmo.ru.model.Place;
 import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
 public class PlaceDao {
 
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
     private Session session;
     private Transaction transaction;
 
     public Place getById(long id) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Place place = session.get(Place.class, id);
-        session.close();
-        return place;
+        return entityManager.find(Place.class, id);
     }
 
     public void save(Place place) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(place);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.persist(place);
+        entityManager.getTransaction().commit();
     }
 
     public void delete(Place place) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(place);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(place);
+        entityManager.getTransaction().commit();
     }
 
     public void update(Place place) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(place);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(place);
+        entityManager.getTransaction().commit();
     }
 
     public List<Place> getAll() {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Place");
-        List <Place> places = ((org.hibernate.query.Query) query).list();
-        return places;
+        Query query = entityManager.createQuery("from Place");
+        return query.getResultList();
     }
 
     public List<Place> getByName(String name) {
