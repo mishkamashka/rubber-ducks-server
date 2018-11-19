@@ -19,15 +19,6 @@ public class RequestService {
     }
 
     /**
-     * Returns a Request object contained in the database, fields ducks and user of which can be accessed, or null if it does not exist
-     * @param id - id of the required Request
-     * @return - required Request if exists, null if does not exist
-     */
-    public Request getByIdWithUserAndDuck(long id) {
-        return requestDao.getByIdWithUserAndDuck(id);
-    }
-
-    /**
      * Saves a Request object to the database
      * @param request - request to save
      */

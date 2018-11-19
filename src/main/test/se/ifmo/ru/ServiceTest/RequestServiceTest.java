@@ -38,33 +38,6 @@ public class RequestServiceTest {
         requestService.save(request);
 
         Request request1 = requestService.getById(request.getId());
-        System.out.println(request1.getId());
-        assertEquals(request, request1);
-        userService.delete(user);
-    }
-
-    @Test
-    public void requestServiceSaveAndGetByIdWithUserAndDuckTest() {
-        UserService userService = new UserService();
-        User user = new User("test", "email");
-        userService.save(user);
-        DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
-        FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
-        Duck duck = new Duck();
-        duck.setName("duck_name");
-        duck.setFeatureSet(featureSet);
-        duck.setOwner(user);
-        user.getDucks().add(duck);
-        duckService.save(duck);
-        RequestService requestService = new RequestService();
-        Request request = new Request(user, duck);
-        user.getRequests().add(request);
-        duck.getRequests().add(request);
-        requestService.save(request);
-
-        Request request1 = requestService.getByIdWithUserAndDuck(request.getId());
         System.out.println(request1.getId() + " " + request1.getUser().getNickname() + " " + request1.getDuck().getName());
         assertEquals(request, request1);
         userService.delete(user);

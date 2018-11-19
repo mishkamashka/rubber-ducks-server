@@ -1,9 +1,6 @@
 package se.ifmo.ru.dao;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import se.ifmo.ru.model.Place;
-import se.ifmo.ru.util.HibernateSessionFactoryUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -13,8 +10,6 @@ import java.util.List;
 public class PlaceDao {
 
     private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
-    private Session session;
-    private Transaction transaction;
 
     public Place getById(long id) {
         return entityManager.find(Place.class, id);
@@ -44,10 +39,8 @@ public class PlaceDao {
     }
 
     public List<Place> getByName(String name) {
-        session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("from Place where name like '%" + name + "%' order by length(name)");
+        Query query = entityManager.createQuery("from Place where name like '%" + name + "%' order by length(name)");
         List<Place> places = ((org.hibernate.query.Query) query).list();
-        session.close();
         return places;
     }
 }
