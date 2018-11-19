@@ -66,7 +66,7 @@ public class PlaceService {
      */
     public Place getByEvent(Event event) {
         EventService eventService = new EventService();
-        event = eventService.getByIdWithPlace(event.getId());
+        event = eventService.getById(event.getId());
         return event.getPlace();
     }
 }

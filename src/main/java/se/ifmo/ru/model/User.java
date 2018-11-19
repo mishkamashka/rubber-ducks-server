@@ -225,7 +225,7 @@ public class User {
     public void addOrganizedEvent(Event event) {
         UserService userService = new UserService();
         this.organizedEvents.add(event);
-        event.getParticipants().add(this);
+        event.getOrganizers().add(this);
         userService.update(this);
     }
 

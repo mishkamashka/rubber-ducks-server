@@ -21,33 +21,6 @@ public class EventService {
     }
 
     /**
-     * Returns a Event object contained in the database, field place of which can be accessed, or null if it does not exist
-     * @param id - id of the required Event
-     * @return - required Event if exists, null if does not exist
-     */
-    public Event getByIdWithPlace(long id) {
-        return eventDao.getByIdWithPlace(id);
-    }
-
-    /**
-     * Returns a Event object contained in the database, list of participants (Users) of which can be accessed, or null if it does not exist
-     * @param id - id of the required Event
-     * @return - required Event if exists, null if does not exist
-     */
-    public Event getByIdWithParticipants(long id) {
-        return eventDao.getByIdWithParticipants(id);
-    }
-
-    /**
-     * Returns a Event object contained in the database, list of organizers (Users) of which can be accessed, or null if it does not exist
-     * @param id - id of the required Event
-     * @return - required Event if exists, null if does not exist
-     */
-    public Event getByIdWithOrganizers(long id) {
-        return eventDao.getByIdWithOrganizers(id);
-    }
-
-    /**
      * Saves a Event object to the database
      * @param event - event to save
      */
