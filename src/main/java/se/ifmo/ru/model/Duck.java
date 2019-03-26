@@ -97,6 +97,19 @@ public class Duck {
         return requests;
     }
 
+    public void deleteRequest(Request request) {
+        for (int i = 0; i <= requests.size(); i++) {
+            if (request.equals(requests.get(i))) {
+                requests.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (this.getClass().equals(obj.getClass()) && this.id.equals(((Duck) obj).id));

@@ -182,6 +182,14 @@ public class User {
         return ducks;
     }
 
+    public void setDucks(List<Duck> ducks) {
+        this.ducks = ducks;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
     public void deleteDuck(Duck duck) {
         for (int i = 0; i <= ducks.size(); i++) {
             if (duck.equals(ducks.get(i))) {

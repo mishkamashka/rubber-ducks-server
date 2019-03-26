@@ -23,7 +23,7 @@ public class PlaceDao {
 
     public void delete(Place place) {
         entityManager.getTransaction().begin();
-        entityManager.remove(place);
+        entityManager.remove(entityManager.contains(place) ? place : entityManager.merge(place));
         entityManager.getTransaction().commit();
     }
 

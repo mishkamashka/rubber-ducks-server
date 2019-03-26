@@ -38,7 +38,7 @@ public class DuckServiceTest {
         Duck duck1 = duckService.getById(duck.getId());
         System.out.println(duck1.getId() + " " + duck1.getName());
         assertEquals(duck1, duck);
-        userService.delete(user);//TODO
+        userService.delete(user);
     }
 
     @Test
@@ -47,9 +47,7 @@ public class DuckServiceTest {
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -68,9 +66,7 @@ public class DuckServiceTest {
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -95,9 +91,7 @@ public class DuckServiceTest {
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -117,9 +111,7 @@ public class DuckServiceTest {
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -135,14 +127,12 @@ public class DuckServiceTest {
     }
 
     @Test
-    public void eventGetAll() {
+    public void duckGetAll() {
         UserService userService = new UserService();
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -157,14 +147,12 @@ public class DuckServiceTest {
     }
 
     @Test
-    public void eventGetAllWithOwnerAndFeatureSetTest() {
+    public void duckGetAllWithOwnerAndFeatureSetTest() {
         UserService userService = new UserService();
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -180,14 +168,12 @@ public class DuckServiceTest {
     }
 
     @Test
-    public void eventGetByOwnerId() {
+    public void duckGetByOwnerId() {
         UserService userService = new UserService();
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
@@ -197,7 +183,6 @@ public class DuckServiceTest {
         duck = new Duck();
         duck.setName("duck_name1");
         featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
         user.getDucks().add(duck);
@@ -215,9 +200,7 @@ public class DuckServiceTest {
         User user = new User("test user", "test email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setAccessibility(true);

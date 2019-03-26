@@ -7,6 +7,7 @@ import se.ifmo.ru.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
@@ -27,16 +28,16 @@ public class UserDao {
 
     public void delete(User user) {
         entityManager.getTransaction().begin();
+
         List<Duck> ducks = duckDao.getByOwnerId(user.getId());
-        ducks.forEach(duck -> {
-            user.deleteDuck(duck);
-            duckDao.delete(duck);
-        });
+        ducks.forEach(duck -> duckDao.delete(duck));
+
         List<Request> requests = requestDao.getByUserId(user.getId());
-        requests.forEach(request -> {
-            user.deleteRequest(request);
-            requestDao.delete(request);
-        });
+        requests.forEach(request -> requestDao.delete(request));
+
+        user.setDucks(new ArrayList<>());
+        user.setRequests(new ArrayList<>());
+
         entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
         entityManager.getTransaction().commit();
     }

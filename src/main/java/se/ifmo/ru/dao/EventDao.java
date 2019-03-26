@@ -23,7 +23,7 @@ public class EventDao {
 
     public void delete(Event event) {
         entityManager.getTransaction().begin();
-        entityManager.remove(event);
+        entityManager.remove(entityManager.contains(event) ? event : entityManager.merge(event));
         entityManager.getTransaction().commit();
     }
 
