@@ -23,7 +23,7 @@ public class DuckDao {
 
     public void delete(Duck duck) {
         entityManager.getTransaction().begin();
-        entityManager.remove(duck);
+        entityManager.remove(entityManager.contains(duck) ? duck : entityManager.merge(duck));
         entityManager.getTransaction().commit();
     }
 

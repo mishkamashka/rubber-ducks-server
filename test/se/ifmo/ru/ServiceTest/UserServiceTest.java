@@ -142,20 +142,22 @@ public class UserServiceTest {
         UserService userService = new UserService();
         User user = new User("user", "email@mail.em");
         userService.save(user);
+
         DuckService duckService = new DuckService();
         Duck duck = new Duck();
         duck.setName("ducky");
+
         FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
+
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
         user.getDucks().add(duck);
         duckService.save(duck);
+
         duck = new Duck();
         duck.setName("another_duck");
         featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
         user.getDucks().add(duck);
@@ -184,7 +186,7 @@ public class UserServiceTest {
         user.getDucks().add(duck);
         User user1 = userService.getByNicknameAndEmailWithDucksAndRequests("user", "email@mail.em");
         System.out.println(user1.getId() + " " + user1.getNickname() + " " + user1.getDucks().get(0).getName());
-        userService.delete(user);
+        userService.delete(user1);
     }
 
     @Test

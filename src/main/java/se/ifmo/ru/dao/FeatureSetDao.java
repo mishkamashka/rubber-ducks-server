@@ -23,7 +23,7 @@ public class FeatureSetDao {
 
     public void delete(FeatureSet featureSet) {
         entityManager.getTransaction().begin();
-        entityManager.remove(featureSet);
+        entityManager.remove(entityManager.contains(featureSet) ? featureSet : entityManager.merge(featureSet));
         entityManager.getTransaction().commit();
     }
 

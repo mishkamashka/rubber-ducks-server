@@ -182,6 +182,15 @@ public class User {
         return ducks;
     }
 
+    public void deleteDuck(Duck duck) {
+        for (int i = 0; i <= ducks.size(); i++) {
+            if (duck.equals(ducks.get(i))) {
+                ducks.remove(i);
+                break;
+            }
+        }
+    }
+
     public List<Request> getRequests() {
         return requests;
     }
