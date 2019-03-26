@@ -124,7 +124,7 @@ public class UserServiceTest {
         eventService.save(event);
 
         user.getOrganizedEvents().add(event);
-        event.getOrganizers().add(user);
+        event.setOrganizer(user);
 
         userService.update(user);
 

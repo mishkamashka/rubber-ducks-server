@@ -38,11 +38,16 @@ public class Event {
     @Column
     private int maxPeople = 0;
 
-    @ManyToMany(mappedBy = "attendingEvents")
-    private List<User> participants = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizer_id", nullable = false)
+    private User organizer;
 
-    @ManyToMany(mappedBy = "organizedEvents")
-    private List<User> organizers = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "EVENT_PARTICIPATION",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<User> participants = new ArrayList<>();
 
     public Event() {
     }
@@ -116,8 +121,16 @@ public class Event {
         return participants;
     }
 
-    public List<User> getOrganizers() {
-        return organizers;
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
+    }
+
+    public User getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
     }
 
     @Override

@@ -57,18 +57,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "EVENT_PARTICIPATION",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
+    @ManyToMany(mappedBy = "participants", fetch = FetchType.LAZY)
     private List<Event> attendingEvents = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "EVENT_ORGANIZER",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
+    @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> organizedEvents = new ArrayList<>();
 
     public User() {}
@@ -190,6 +182,14 @@ public class User {
         this.requests = requests;
     }
 
+    public void setOrganizedEvents(List<Event> organizedEvents) {
+        this.organizedEvents = organizedEvents;
+    }
+
+    public void setAttendingEvents(List<Event> attendingEvents) {
+        this.attendingEvents = attendingEvents;
+    }
+
     public void deleteDuck(Duck duck) {
         for (int i = 0; i <= ducks.size(); i++) {
             if (duck.equals(ducks.get(i))) {
@@ -203,6 +203,15 @@ public class User {
         for (int i = 0; i <= requests.size(); i++) {
             if (request.equals(requests.get(i))) {
                 requests.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void deleteOrganizedEvent(Event event) {
+        for (int i = 0; i <= organizedEvents.size(); i++) {
+            if (event.equals(organizedEvents.get(i))) {
+                organizedEvents.remove(i);
                 break;
             }
         }
@@ -236,13 +245,6 @@ public class User {
         UserService userService = new UserService();
         this.attendingEvents.add(event);
         event.getParticipants().add(this);
-        userService.update(this);
-    }
-
-    public void addOrganizedEvent(Event event) {
-        UserService userService = new UserService();
-        this.organizedEvents.add(event);
-        event.getOrganizers().add(this);
         userService.update(this);
     }
 

@@ -1,6 +1,7 @@
 package se.ifmo.ru.dao;
 
 import se.ifmo.ru.model.Duck;
+import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Request;
 import se.ifmo.ru.model.User;
 
@@ -15,6 +16,7 @@ public class UserDao {
     private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
     private DuckDao duckDao = new DuckDao();
     private RequestDao requestDao = new RequestDao();
+    private EventDao eventDao = new EventDao();
 
     public User getById(long id) {
         return entityManager.find(User.class, id);
@@ -35,8 +37,19 @@ public class UserDao {
         List<Request> requests = requestDao.getByUserId(user.getId());
         requests.forEach(request -> requestDao.delete(request));
 
+        List<Event> organizedEvents = eventDao.getByOrganizerId(user.getId());
+        organizedEvents.forEach(event -> eventDao.delete(event));
+
+//        List<Event> attendingEvents = eventDao.getByParticipantId(user.getId());
+//        attendingEvents.forEach(event -> eventDao.delete(event));
+
+        List<Event> attendingEvents = eventDao.getByParticipantId(user.getId());
+        attendingEvents.forEach(event -> event.getParticipants().remove(user));
+
         user.setDucks(new ArrayList<>());
         user.setRequests(new ArrayList<>());
+        user.setOrganizedEvents(new ArrayList<>());
+        user.setAttendingEvents(new ArrayList<>());
 
         entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
         entityManager.getTransaction().commit();
