@@ -22,14 +22,11 @@ public class RequestServiceTest {
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
-        user.getDucks().add(duck);
         duckService.save(duck);
         RequestService requestService = new RequestService();
         Request request = new Request(user, duck);
@@ -46,17 +43,14 @@ public class RequestServiceTest {
     @Test
     public void requestServiceGetByUserIdTest() {
         UserService userService = new UserService();
-        User user = new User("test", "email ");
+        User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
-        user.getDucks().add(duck);
         duckService.save(duck);
         RequestService requestService = new RequestService();
         Request request = new Request(user, duck);
@@ -77,14 +71,11 @@ public class RequestServiceTest {
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
-        user.getDucks().add(duck);
         duckService.save(duck);
         RequestService requestService = new RequestService();
         Request request = new Request(user, duck);
@@ -105,14 +96,11 @@ public class RequestServiceTest {
         User user = new User("test", "email");
         userService.save(user);
         DuckService duckService = new DuckService();
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
-        featureSetService.save(featureSet);
         Duck duck = new Duck();
         duck.setName("duck_name");
         duck.setFeatureSet(featureSet);
         duck.setOwner(user);
-        user.getDucks().add(duck);
         duckService.save(duck);
         RequestService requestService = new RequestService();
         Request request = new Request(user, duck);
