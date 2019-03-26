@@ -46,7 +46,7 @@ public class RequestServiceTest {
     @Test
     public void requestServiceGetByUserIdTest() {
         UserService userService = new UserService();
-        User user = new User("test", "email");
+        User user = new User("test", "email ");
         userService.save(user);
         DuckService duckService = new DuckService();
         FeatureSetService featureSetService = new FeatureSetService();
