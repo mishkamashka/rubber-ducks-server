@@ -16,7 +16,6 @@ import static junit.framework.TestCase.assertEquals;
 
 public class DuckServiceTest {
 
-
     @Test
     public void duckServiceSaveAndGetByIdTest() {
 

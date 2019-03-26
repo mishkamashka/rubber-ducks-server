@@ -1,0 +1,29 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="persistence" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>se.ifmo.ru.model.Duck</class>
+        <class>se.ifmo.ru.model.User</class>
+        <class>se.ifmo.ru.model.FeatureSet</class>
+        <class>se.ifmo.ru.model.Event</class>
+        <class>se.ifmo.ru.model.Place</class>
+        <class>se.ifmo.ru.model.Request</class>
+
+        <properties>
+            <property name="hibernate.connection.pool_size" value="1"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/rubber_ducks"/>
+            <property name="hibernate.connection.username" value="duck"/>
+            <property name="hibernate.connection.password" value="duck"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
