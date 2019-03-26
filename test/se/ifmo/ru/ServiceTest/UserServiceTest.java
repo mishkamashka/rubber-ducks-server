@@ -147,7 +147,6 @@ public class UserServiceTest {
         Duck duck = new Duck();
         duck.setName("ducky");
 
-        FeatureSetService featureSetService = new FeatureSetService();
         FeatureSet featureSet = new FeatureSet();
 
         duck.setFeatureSet(featureSet);
@@ -217,6 +216,7 @@ public class UserServiceTest {
         user = new User("test1", "whatever1@mail.com");
         user.setFirstName("Johny");
         user.setLastName("White");
+        userService.save(user);
         user = new User("test2", "whatever2@mail.com");
         user.setFirstName("John");
         user.setLastName("Black");

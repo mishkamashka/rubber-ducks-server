@@ -191,6 +191,15 @@ public class User {
         }
     }
 
+    public void deleteRequest(Request request) {
+        for (int i = 0; i <= requests.size(); i++) {
+            if (request.equals(requests.get(i))) {
+                requests.remove(i);
+                break;
+            }
+        }
+    }
+
     public List<Request> getRequests() {
         return requests;
     }

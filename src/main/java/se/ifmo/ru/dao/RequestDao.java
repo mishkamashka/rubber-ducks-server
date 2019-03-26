@@ -23,7 +23,7 @@ public class RequestDao {
 
     public void delete(Request request) {
         entityManager.getTransaction().begin();
-        entityManager.remove(request);
+        entityManager.remove(entityManager.contains(request) ? request : entityManager.merge(request));
         entityManager.getTransaction().commit();
     }
 

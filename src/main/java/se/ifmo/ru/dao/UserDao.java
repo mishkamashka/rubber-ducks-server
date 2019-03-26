@@ -1,6 +1,7 @@
 package se.ifmo.ru.dao;
 
 import se.ifmo.ru.model.Duck;
+import se.ifmo.ru.model.Request;
 import se.ifmo.ru.model.User;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ public class UserDao {
 
     private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
     private DuckDao duckDao = new DuckDao();
+    private RequestDao requestDao = new RequestDao();
 
     public User getById(long id) {
         return entityManager.find(User.class, id);
@@ -29,6 +31,11 @@ public class UserDao {
         ducks.forEach(duck -> {
             user.deleteDuck(duck);
             duckDao.delete(duck);
+        });
+        List<Request> requests = requestDao.getByUserId(user.getId());
+        requests.forEach(request -> {
+            user.deleteRequest(request);
+            requestDao.delete(request);
         });
         entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
         entityManager.getTransaction().commit();
