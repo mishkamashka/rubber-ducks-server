@@ -4,12 +4,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/authentication")
+@Path("/auth")
 public class AuthenticationEndpoint {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticateUser(Credentials credentials) {
 
         String username = credentials.getUsername();
@@ -34,11 +34,13 @@ public class AuthenticationEndpoint {
     private void authenticate(String username, String password) throws Exception {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
+
     }
 
     private String issueToken(String username) {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
+        return "token";
     }
 }
