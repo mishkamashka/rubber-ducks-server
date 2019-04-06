@@ -1,5 +1,6 @@
 package se.ifmo.ru.model;
 
+import se.ifmo.ru.auth.Authority;
 import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
@@ -50,6 +51,11 @@ public class User {
 
     @Column(name = "building_letter")
     private char buildingLetter = '-';
+
+    @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "authority")
+    private Set<Authority> authorities;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Duck> ducks = new ArrayList<>();

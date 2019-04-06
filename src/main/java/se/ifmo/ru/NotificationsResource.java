@@ -1,12 +1,16 @@
 package se.ifmo.ru;
 
+import se.ifmo.ru.auth.Authority;
+import se.ifmo.ru.auth.Secured;
+
 import javax.management.Notification;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/notifications")
+@Path("/notify")
 public class NotificationsResource {
+
     @GET
     @Path("/ping")
     public Response ping() {
@@ -14,6 +18,7 @@ public class NotificationsResource {
     }
 
     @GET
+    @Secured({Authority.USER})
     @Path("/get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotification(@PathParam("id") int id) {
