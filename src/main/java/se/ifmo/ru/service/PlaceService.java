@@ -3,8 +3,10 @@ import se.ifmo.ru.dao.PlaceDao;
 import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Place;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class PlaceService {
 
     private PlaceDao placeDao = new PlaceDao();

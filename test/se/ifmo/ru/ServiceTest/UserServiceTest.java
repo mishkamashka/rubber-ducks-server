@@ -197,10 +197,9 @@ public class UserServiceTest {
         userService.save(user);
         user = new User("test", "whatever@mail.com");
         userService.save(user);
-        List<User> users = userService.getByNickname("test");
-        for (User user1 : users) {
-            System.out.println(user1.getId() + " " + user1.getNickname());
-        }
+        User user1 = userService.getByNickname("test");
+        System.out.println(user1.getId() + " " + user1.getNickname());
+
         userService.delete(userService.getByNicknameAndEmail("test", "whatever@mail.com"));
         userService.delete(userService.getByNicknameAndEmail("test2", "whatever2@mail.com"));
         userService.delete(userService.getByNicknameAndEmail("test1", "whatever1@mail.com"));

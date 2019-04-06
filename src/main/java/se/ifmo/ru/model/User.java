@@ -1,6 +1,6 @@
 package se.ifmo.ru.model;
 
-import se.ifmo.ru.auth.Authority;
+import se.ifmo.ru.security.domain.Authority;
 import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
@@ -24,6 +24,9 @@ public class User {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column
+    private String password;
 
     @Column
     private char gender = '-';
@@ -51,6 +54,9 @@ public class User {
 
     @Column(name = "building_letter")
     private char buildingLetter = '-';
+
+    @Column
+    private boolean active = false;
 
     @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -178,6 +184,22 @@ public class User {
 
     public List<Duck> getDucks() {
         return ducks;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 
     public void setDucks(List<Duck> ducks) {

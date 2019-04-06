@@ -1,5 +1,7 @@
 package se.ifmo.ru.auth;
 
+import se.ifmo.ru.security.domain.Authority;
+
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

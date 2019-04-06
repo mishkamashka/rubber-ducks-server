@@ -3,10 +3,13 @@ package se.ifmo.ru.service;
 import org.joda.time.DateTime;
 import se.ifmo.ru.dao.EventDao;
 import se.ifmo.ru.model.Event;
+
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@ApplicationScoped
 public class EventService {
 
     private EventDao eventDao = new EventDao();

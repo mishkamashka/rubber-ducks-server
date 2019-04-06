@@ -3,8 +3,10 @@ package se.ifmo.ru.service;
 import se.ifmo.ru.dao.FeatureSetDao;
 import se.ifmo.ru.model.FeatureSet;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class FeatureSetService {
 
     private FeatureSetDao featureSetDao = new FeatureSetDao();

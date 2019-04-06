@@ -3,10 +3,12 @@ package se.ifmo.ru.service;
 import se.ifmo.ru.dao.DuckDao;
 import se.ifmo.ru.model.Duck;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+@ApplicationScoped
 public class DuckService {
 
     private DuckDao duckDao = new DuckDao();

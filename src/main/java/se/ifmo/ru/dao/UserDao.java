@@ -5,6 +5,7 @@ import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Request;
 import se.ifmo.ru.model.User;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -66,6 +67,26 @@ public class UserDao {
         return query.getResultList();
     }
 
+    public User getByEmail(String email) {
+        Query query = entityManager.createQuery("from User where email = :email");
+        query.setParameter("email", email);
+        List<User> users = query.getResultList();
+        if (users != null && users.size() > 0)
+            return users.get(0);
+        else
+            return null;
+    }
+
+    public User getByNickname(String nickname) {
+        Query query = entityManager.createQuery("from User where nickname = :nickname");
+        query.setParameter("nickname", nickname);
+        List<User> users = query.getResultList();
+        if (users != null && users.size() > 0)
+            return users.get(0);
+        else
+            return null;
+    }
+
     public User getByNicknameAndEmail(String nickname, String email) {
         Query query = entityManager.createQuery("from User where nickname = :nickname and email = :email");
         query.setParameter("nickname", nickname);
@@ -75,15 +96,6 @@ public class UserDao {
             return users.get(0);
         else
             return null;
-    }
-
-    /**
-     * @param nickname substring to look for
-     * @return users whose nicknames contain "nickname" parameter, first - most similar
-     */
-    public List<User> getByNickname(String nickname) {
-        Query query = entityManager.createQuery("from User where nickname like '%" + nickname + "%' order by length(nickname)");
-        return query.getResultList();
     }
 
     public List<User> getByFirstName(String firstName) {

@@ -3,8 +3,10 @@ package se.ifmo.ru.service;
 import se.ifmo.ru.dao.RequestDao;
 import se.ifmo.ru.model.Request;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class RequestService {
 
     private RequestDao requestDao = new RequestDao();

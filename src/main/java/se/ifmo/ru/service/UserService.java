@@ -5,9 +5,11 @@ import se.ifmo.ru.dao.UserDao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.User;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.LinkedList;
 import java.util.List;
 
+@ApplicationScoped
 public class UserService {
 
     private UserDao userDao = new UserDao();
@@ -99,6 +101,10 @@ public class UserService {
         return duckDao.getByOwnerId(user.getId());
     }
 
+    public User getByEmail(String email) {
+        return userDao.getByEmail(email);
+    }
+
     /**
      * Returns User with certain nickname and email fields
      * @param nickname - nickname of the required user
@@ -134,7 +140,7 @@ public class UserService {
      * @param nickname - substring to find among firstNames
      * @return - list of users or null, if nothing found
      */
-    public List<User> getByNickname(String nickname) {
+    public User getByNickname(String nickname) {
         return userDao.getByNickname(nickname);
     }
 

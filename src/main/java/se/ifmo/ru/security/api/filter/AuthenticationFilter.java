@@ -1,4 +1,6 @@
-package se.ifmo.ru.auth;
+package se.ifmo.ru.security.api.filter;
+
+import se.ifmo.ru.auth.Secured;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;

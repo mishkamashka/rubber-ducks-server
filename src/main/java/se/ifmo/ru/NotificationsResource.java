@@ -1,7 +1,7 @@
 package se.ifmo.ru;
 
-import se.ifmo.ru.auth.Authority;
 import se.ifmo.ru.auth.Secured;
+import se.ifmo.ru.security.domain.Authority;
 
 import javax.management.Notification;
 import javax.ws.rs.*;
