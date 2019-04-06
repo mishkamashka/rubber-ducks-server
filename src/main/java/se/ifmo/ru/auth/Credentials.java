@@ -7,6 +7,9 @@ public class Credentials implements Serializable {
     private String username;
     private String password;
 
+    public Credentials(){
+
+    }
     public Credentials(String username, String password) {
         this.password = password;
         this.username = username;

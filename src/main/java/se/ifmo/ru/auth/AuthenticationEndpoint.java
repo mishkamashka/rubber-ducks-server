@@ -10,6 +10,7 @@ public class AuthenticationEndpoint {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/login")
     public Response authenticateUser(Credentials credentials) {
 
         String username = credentials.getUsername();
