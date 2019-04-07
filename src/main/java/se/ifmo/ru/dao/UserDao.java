@@ -8,12 +8,15 @@ import se.ifmo.ru.model.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
 
+//    @PersistenceContext(name="persistence")
+//    private EntityManager entityManager;
     private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
     private DuckDao duckDao = new DuckDao();
     private RequestDao requestDao = new RequestDao();
