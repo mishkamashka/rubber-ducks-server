@@ -9,7 +9,6 @@ import java.util.Set;
 /**
  * {@link Principal} implementation with a set of {@link Authority}.
  *
- * @author cassiomolin
  */
 public final class AuthenticatedUserDetails implements Principal {
 

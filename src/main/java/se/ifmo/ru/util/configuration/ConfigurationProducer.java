@@ -3,13 +3,15 @@ package se.ifmo.ru.util.configuration;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.util.Properties;
 
 /**
- * Read the <code>application.properties</code> file from the classpath and produce values that can be injected with @{@link Configurable}.
+ * Read the application.properties file from the classpath and produce values that can be injected with @{@link Configurable}.
  * <p>
  * It's a simple and lightweight alternative to the Apache DeltaSpike Configuration Mechanism.
  */
@@ -18,21 +20,17 @@ public class ConfigurationProducer {
 
     private Properties properties;
 
-    @PostConstruct
-    public void init() {
-
+    ConfigurationProducer() {
         properties = new Properties();
-        InputStream stream = ConfigurationProducer.class.getResourceAsStream("/application.properties");
-
-        if (stream == null) {
-            throw new RuntimeException("Cannot find application.properties configuration file.");
-        }
-
-        try {
-            this.properties.load(stream);
-        } catch (final IOException e) {
-            throw new RuntimeException("Configuration file cannot be loaded.");
-        }
+        properties.put("authentication.jwt.secret", "secret");
+        properties.put("authentication.jwt.issuer", "http://example.org");
+        properties.put("authentication.jwt.audience", "http://example.org");
+        properties.put("authentication.jwt.clockSkew", "10");
+        properties.put("authentication.jwt.validFor", "36000");
+        properties.put("authentication.jwt.refreshLimit", "1");
+        properties.put("authentication.jwt.claimNames.authorities", "authorities");
+        properties.put("authentication.jwt.claimNames.refreshCount", "refreshCount");
+        properties.put("authentication.jwt.claimNames.refreshLimit", "refreshLimit");
     }
 
     @Produces

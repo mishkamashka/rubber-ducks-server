@@ -7,8 +7,6 @@ import javax.inject.Inject;
 
 /**
  * Settings for signing and verifying JWT tokens.
- *
- * @author cassiomolin
  */
 @Dependent
 class AuthenticationTokenSettings {

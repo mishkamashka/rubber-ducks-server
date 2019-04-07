@@ -10,7 +10,6 @@ import java.util.Set;
 /**
  * Model that holds details about an authentication token.
  *
- * @author cassiomolin
  */
 public final class AuthenticationTokenDetails {
 

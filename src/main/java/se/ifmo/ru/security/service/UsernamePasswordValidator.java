@@ -9,8 +9,6 @@ import javax.inject.Inject;
 
 /**
  * Component for validating user credentials.
- *
- * @author cassiomolin
  */
 @ApplicationScoped
 public class UsernamePasswordValidator {

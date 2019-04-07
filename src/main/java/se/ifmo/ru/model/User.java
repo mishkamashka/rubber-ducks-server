@@ -25,7 +25,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
     @Column
@@ -56,7 +56,7 @@ public class User {
     private char buildingLetter = '-';
 
     @Column
-    private boolean active = false;
+    private boolean active;
 
     @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -75,11 +75,14 @@ public class User {
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> organizedEvents = new ArrayList<>();
 
-    public User() {}
+    public User() {
+        this.active = false;
+    }
 
     public User(String nickname, String email) {
         this.nickname = nickname;
         this.email = email;
+        this.active = false;
     }
 
     public long getId() {

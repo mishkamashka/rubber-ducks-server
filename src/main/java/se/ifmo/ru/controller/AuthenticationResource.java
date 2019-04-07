@@ -62,7 +62,7 @@ public class AuthenticationResource {
      * @return
      */
     @POST
-    @Path("refresh")
+    @Path("/refresh")
     @Produces(MediaType.APPLICATION_JSON)
     public Response refresh() {
 
