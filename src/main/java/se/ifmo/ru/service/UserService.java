@@ -5,18 +5,23 @@ import se.ifmo.ru.dao.UserDao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.User;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.util.LinkedList;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class UserService {
 
-    private UserDao userDao = new UserDao();
-    private DuckDao duckDao = new DuckDao();
+    @EJB
+    private UserDao userDao;
+
+    @EJB
+    private DuckDao duckDao;
 
     /**
      * Returns a User object contained in the database, or null if it does not exist
+     *
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -26,6 +31,7 @@ public class UserService {
 
     /**
      * Returns a User object contained in the database, list of ducks of which can be accessed, or null if it does not exist
+     *
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -35,6 +41,7 @@ public class UserService {
 
     /**
      * Returns a User object contained in the database, list of ducks and requests of which can be accessed, or null if it does not exist
+     *
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -44,6 +51,7 @@ public class UserService {
 
     /**
      * Returns a User object contained in the database, list of attendingEvents of which can be accessed, or null if it does not exist
+     *
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -53,6 +61,7 @@ public class UserService {
 
     /**
      * Returns a User object contained in the database, list of organizedEvents of which can be accessed, or null if it does not exist
+     *
      * @param id - id of the required User
      * @return - required User if exists, null if does not exist
      */
@@ -62,6 +71,7 @@ public class UserService {
 
     /**
      * Saves a User object to the database
+     *
      * @param user - user to save
      */
     public void save(User user) {
@@ -70,6 +80,7 @@ public class UserService {
 
     /**
      * Updates a User object in the database
+     *
      * @param user - user to update
      */
     public void update(User user) {
@@ -78,6 +89,7 @@ public class UserService {
 
     /**
      * Deletes a User object from the database (will cascade to Duck only if was loaded by id from the db)
+     *
      * @param user - user to delete
      */
     public void delete(User user) {
@@ -86,6 +98,7 @@ public class UserService {
 
     /**
      * Returns list of all User objects contained in the database
+     *
      * @return - list of all users
      */
     public List<User> getAll() {
@@ -94,6 +107,7 @@ public class UserService {
 
     /**
      * Returns list of Duck objects owned by the User
+     *
      * @param user - user whose ducks will be returned
      * @return - list of Ducks
      */
@@ -107,8 +121,9 @@ public class UserService {
 
     /**
      * Returns User with certain nickname and email fields
+     *
      * @param nickname - nickname of the required user
-     * @param email - email of the required user
+     * @param email    - email of the required user
      * @return - User with certain nickname and email, if exists, or null if does not exist
      */
     public User getByNicknameAndEmail(String nickname, String email) {
@@ -117,8 +132,9 @@ public class UserService {
 
     /**
      * Returns User with certain nickname and email fields with the list of requests and ducks can accessed
+     *
      * @param nickname - nickname of the required user
-     * @param email - email of the required user
+     * @param email    - email of the required user
      * @return - User with certain nickname and email, if exists, or null if does not exist
      */
     public User getByNicknameAndEmailWithDucksAndRequests(String nickname, String email) {
@@ -127,8 +143,9 @@ public class UserService {
 
     /**
      * Returns list of users whose first and last names contain a substring equal to the parameters, ordered from the best match to the worst
+     *
      * @param firstName - substring to find among firstNames
-     * @param lastName - substring to find among lastNames
+     * @param lastName  - substring to find among lastNames
      * @return - list of users or null, if nothing found
      */
     public List<User> getByFirstNameAndLastName(String firstName, String lastName) {
@@ -137,6 +154,7 @@ public class UserService {
 
     /**
      * Returns list of users whose nickname contains a substring equal to the parameter, ordered from the best match to the worst
+     *
      * @param nickname - substring to find among firstNames
      * @return - list of users or null, if nothing found
      */
@@ -146,6 +164,7 @@ public class UserService {
 
     /**
      * Returns list of users whose first name contains a substring equal to the parameter, ordered from the best match to the worst
+     *
      * @param firstName - substring to find among firstNames
      * @return - list of users or null, if nothing found
      */
@@ -155,6 +174,7 @@ public class UserService {
 
     /**
      * Returns list of users whose last name contains a substring equal to the parameter, ordered from the best match to the worst
+     *
      * @param lastName - substring to find among lastNames
      * @return - list of users or null, if nothing found
      */
@@ -164,6 +184,7 @@ public class UserService {
 
     /**
      * Returns list of users with certain gender
+     *
      * @param gender - required user's gender
      * @return - list of users or null
      */

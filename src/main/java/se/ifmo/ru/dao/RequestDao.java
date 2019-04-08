@@ -2,14 +2,18 @@ package se.ifmo.ru.dao;
 
 import se.ifmo.ru.model.Request;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+@Stateless
 public class RequestDao {
 
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    @PersistenceContext(unitName = "persistence")
+    private EntityManager entityManager;
 
     public Request getById(long id) {
         return entityManager.find(Request.class, id);

@@ -3,15 +3,20 @@ package se.ifmo.ru.dao;
 import se.ifmo.ru.model.Duck;
 import se.ifmo.ru.model.Request;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class DuckDao {
 
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    @PersistenceContext(unitName = "persistence")
+    private EntityManager entityManager;
+    //    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
     private RequestDao requestDao = new RequestDao();
 
     public Duck getById(long id) {

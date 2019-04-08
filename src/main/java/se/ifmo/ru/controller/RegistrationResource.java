@@ -7,6 +7,7 @@ import se.ifmo.ru.security.service.PasswordEncoder;
 import se.ifmo.ru.service.UserService;
 
 import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -18,7 +19,8 @@ import javax.ws.rs.core.Response;
 @Path("/register")
 public class RegistrationResource {
 
-    private UserService userService = new UserService();
+    @EJB
+    private UserService userService;
 
     private PasswordEncoder passwordEncoder = new PasswordEncoder();
 
@@ -27,13 +29,12 @@ public class RegistrationResource {
 //    @PermitAll
     @Path("/new")
     public Response register(Credentials credentials) {
-
         User user = userService.getByNickname(credentials.getUsername());
         if (user != null)
             return Response.status(Response.Status.CONFLICT).build();
         user = new User(credentials.getUsername(), passwordEncoder.hashPassword(credentials.getPassword()));
 //        try {
-            userService.save(user);
+        userService.save(user);
 //        } catch (PSQLException e) {
 //            e.printStackTrace();
 //        }

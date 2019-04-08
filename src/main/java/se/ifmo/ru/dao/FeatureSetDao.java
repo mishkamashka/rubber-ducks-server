@@ -2,14 +2,18 @@ package se.ifmo.ru.dao;
 
 import se.ifmo.ru.model.FeatureSet;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+@Stateless
 public class FeatureSetDao {
 
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    @PersistenceContext(unitName = "persistence")
+    private EntityManager entityManager;
 
     public FeatureSet getById(long id) {
         return entityManager.find(FeatureSet.class, id);

@@ -3,18 +3,22 @@ package se.ifmo.ru.service;
 import se.ifmo.ru.dao.DuckDao;
 import se.ifmo.ru.model.Duck;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class DuckService {
 
-    private DuckDao duckDao = new DuckDao();
+    @EJB
+    private DuckDao duckDao;
 
     /**
      * Returns a Duck object contained in the database, or null if it does not exist
+     *
      * @param id - id of the required Duck
      * @return - required Duck if exists, null if does not exist
      */
@@ -24,6 +28,7 @@ public class DuckService {
 
     /**
      * Saves a Duck object to the database
+     *
      * @param duck - duck to save
      */
     public void save(Duck duck) {
@@ -32,6 +37,7 @@ public class DuckService {
 
     /**
      * Updates a Duck object in the database
+     *
      * @param duck - duck to update
      */
     public void update(Duck duck) {
@@ -40,6 +46,7 @@ public class DuckService {
 
     /**
      * Deletes a Duck object from the database
+     *
      * @param duck - duck to delete
      */
     public void delete(Duck duck) {
@@ -48,6 +55,7 @@ public class DuckService {
 
     /**
      * Returns list of all Duck objects contained in the database
+     *
      * @return - list of all ducks
      */
     public List<Duck> getAll() {
@@ -56,6 +64,7 @@ public class DuckService {
 
     /**
      * Returns list of ducks, names of which contain a substring equal to the parameter, ordered from the best match to the worst
+     *
      * @param name - substring to find among names
      * @return - list of ducks or null, if nothing found
      */
@@ -65,6 +74,7 @@ public class DuckService {
 
     /**
      * Returns list of ducks owned by a certain user
+     *
      * @param ownerId - id of the user, whose ducks are required
      * @return - list of ducks or null, if nothing found
      */
@@ -74,6 +84,7 @@ public class DuckService {
 
     /**
      * Returns list of accessible ducks, fields owner and featureSet of which can be accessed
+     *
      * @return - list of ducks or null, if nothing found
      */
     public List<Duck> getAccessibleWithOwnerAndFeatureSet() {

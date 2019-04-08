@@ -3,15 +3,19 @@ package se.ifmo.ru.dao;
 import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.User;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class EventDao {
 
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    @PersistenceContext(unitName = "persistence")
+    private EntityManager entityManager;
 
     public Event getById(long id) {
         return entityManager.find(Event.class, id);

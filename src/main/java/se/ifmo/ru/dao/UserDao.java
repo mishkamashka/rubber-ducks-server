@@ -19,36 +19,20 @@ import java.util.List;
 @Stateless
 public class UserDao {
 
-//    @PersistenceContext(name="persistence")
-//    private EntityManager entityManager;
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    @PersistenceContext(unitName = "persistence")
+    private EntityManager entityManager;
+
+//    TODO: how to work with this?
     private DuckDao duckDao = new DuckDao();
     private RequestDao requestDao = new RequestDao();
     private EventDao eventDao = new EventDao();
-
-    @Resource
-    private UserTransaction userTransaction;
 
     public User getById(long id) {
         return entityManager.find(User.class, id);
     }
 
     public void save(User user) {
-//        entityManager.getTransaction().begin();
-//        try {
-//            userTransaction.begin();
-//
-//            userTransaction.commit();
-//        } catch (RollbackException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | SystemException e) {
-//            e.printStackTrace();
-//        }
-
         entityManager.persist(user);
-
-
-//        entityManager.flush();
-
-//        entityManager.getTransaction().commit();
     }
 
     public void delete(User user) {
