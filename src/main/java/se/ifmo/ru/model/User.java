@@ -25,13 +25,13 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "password")
+    @Column(nullable = true, name = "password")
     private String password;
 
     @Column
     private char gender = '-';
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
     @Column(name = "birth_date")
@@ -79,9 +79,9 @@ public class User {
         this.active = false;
     }
 
-    public User(String nickname, String email) {
+    public User(String nickname, String password) {
         this.nickname = nickname;
-        this.email = email;
+        this.password = password;
         this.active = false;
     }
 

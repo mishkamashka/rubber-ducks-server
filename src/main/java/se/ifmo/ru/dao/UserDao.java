@@ -5,14 +5,18 @@ import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Request;
 import se.ifmo.ru.model.User;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class UserDao {
 
 //    @PersistenceContext(name="persistence")
@@ -22,14 +26,29 @@ public class UserDao {
     private RequestDao requestDao = new RequestDao();
     private EventDao eventDao = new EventDao();
 
+    @Resource
+    private UserTransaction userTransaction;
+
     public User getById(long id) {
         return entityManager.find(User.class, id);
     }
 
     public void save(User user) {
-        entityManager.getTransaction().begin();
+//        entityManager.getTransaction().begin();
+//        try {
+//            userTransaction.begin();
+//
+//            userTransaction.commit();
+//        } catch (RollbackException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | SystemException e) {
+//            e.printStackTrace();
+//        }
+
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
+
+
+//        entityManager.flush();
+
+//        entityManager.getTransaction().commit();
     }
 
     public void delete(User user) {

@@ -1,4 +1,4 @@
-package se.ifmo.ru;
+package se.ifmo.ru.controller;
 
 import se.ifmo.ru.auth.Secured;
 import se.ifmo.ru.security.domain.Authority;
@@ -15,6 +15,13 @@ public class NotificationsResource {
     @Path("/ping")
     public Response ping() {
         return Response.ok().entity("Service online\n").build();
+    }
+
+    @GET
+    @Secured(Authority.USER)
+    @Path("/secured")
+    public Response pingSecured() {
+        return Response.ok().entity("Secured service online\n").build();
     }
 
     @GET
