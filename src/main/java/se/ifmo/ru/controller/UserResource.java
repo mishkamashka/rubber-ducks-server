@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/users")
-public class UserController {
+public class UserResource {
 
     @EJB
     private UserService userService;
@@ -49,6 +49,11 @@ public class UserController {
     private String usersToJSON(List<User> users) {
         StringBuilder stringBuilder = new StringBuilder("[");
         for (User user : users) {
+            StringBuilder image = new StringBuilder();
+            byte[] b = user.getImage();
+            for (int i = 0; i < b.length; i++) {
+                image.append(b);
+            }
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(user.getId())
@@ -57,6 +62,7 @@ public class UserController {
                     .append(",\"lastName\":\"").append(user.getLastName()).append("\"")
                     .append(",\"gender\":\"").append(user.getGender()).append("\"")
                     .append(",\"email\":\"").append(user.getEmail()).append("\"")
+                    .append(",\"image\":\"").append(image.toString()).append("\"")
                     .append(",\"birthDate\":\"").append(user.getBirthDate()).append("\"")
                     .append(",\"phoneNumber\":\"").append(user.getPhoneNumber()).append("\"")
                     .append(",\"country\":\"").append(user.getCountry()).append("\"")
@@ -72,6 +78,11 @@ public class UserController {
     }
 
     private String userToJSON(User user) {
+        StringBuilder image = new StringBuilder();
+        byte[] b = user.getImage();
+        for (int i = 0; i < b.length; i++) {
+            image.append(b);
+        }
         StringBuilder stringBuilder = new StringBuilder("{");
         stringBuilder
                 .append("\"id\":").append(user.getId())
@@ -80,6 +91,7 @@ public class UserController {
                 .append(",\"lastName\":\"").append(user.getLastName()).append("\"")
                 .append(",\"gender\":\"").append(user.getGender()).append("\"")
                 .append(",\"email\":\"").append(user.getEmail()).append("\"")
+                .append(",\"image\":\"").append(image.toString()).append("\"")
                 .append(",\"birthDate\":\"").append(user.getBirthDate()).append("\"")
                 .append(",\"phoneNumber\":\"").append(user.getPhoneNumber()).append("\"")
                 .append(",\"country\":\"").append(user.getCountry()).append("\"")

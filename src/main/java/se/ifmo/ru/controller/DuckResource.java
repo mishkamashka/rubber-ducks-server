@@ -118,12 +118,18 @@ public class DuckResource {
     private String ducksToJSON(List<Duck> ducks) {
         StringBuilder stringBuilder = new StringBuilder("[");
         for (Duck duck : ducks) {
+            StringBuilder image = new StringBuilder();
+            byte[] b = duck.getImage();
+            for (int i = 0; i < b.length; i++) {
+                image.append(b);
+            }
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(duck.getId())
                     .append(",\"name\":\"").append(duck.getName()).append("\"")
                     .append(",\"description\":\"").append(duck.getDescription()).append("\"")
                     .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"")
+                    .append(",\"image\":\"").append(image.toString()).append("\"")
                     .append("}, ");
         }
         stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
@@ -132,13 +138,18 @@ public class DuckResource {
     }
 
     private String duckDetailsToJSON(Duck duck) {
+        StringBuilder image = new StringBuilder();
+        byte[] b = duck.getImage();
+        for (int i = 0; i < b.length; i++) {
+            image.append(b);
+        }
         StringBuilder stringBuilder = new StringBuilder("{");
         stringBuilder
                 .append("\"id\":").append(duck.getId())
                 .append(",\"name\":\"").append(duck.getName()).append("\"")
                 .append(",\"description\":\"").append(duck.getDescription()).append("\"")
-                .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"");
-
+                .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"")
+                .append(",\"image\":\"").append(image.toString()).append("\"");
         stringBuilder
                 .append(", \"featureSet\":{")
                 .append("\"gender\":\"").append(duck.getFeatureSet().getGender()).append("\"")

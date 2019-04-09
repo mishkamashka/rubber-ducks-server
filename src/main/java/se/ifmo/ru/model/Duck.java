@@ -20,6 +20,9 @@ public class Duck {
     @Column
     private String description;
 
+    @Column
+    private byte[] image;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "feature_set_id", unique = true)
     private FeatureSet featureSet;
@@ -95,6 +98,14 @@ public class Duck {
 
     public List<Request> getRequests() {
         return requests;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 
     public void deleteRequest(Request request) {

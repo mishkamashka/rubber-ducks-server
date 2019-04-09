@@ -25,7 +25,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(nullable = true, name = "password")
+    @Column(nullable = false, name = "password")
     private String password;
 
     @Column
@@ -54,6 +54,9 @@ public class User {
 
     @Column(name = "building_letter")
     private char buildingLetter = '-';
+
+    @Column
+    private byte[] image;
 
     @Column
     private boolean active;
@@ -199,6 +202,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 
     public Set<Authority> getAuthorities() {
