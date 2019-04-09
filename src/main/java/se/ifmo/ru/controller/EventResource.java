@@ -19,6 +19,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
+/**
+ * Better not to use update here for a while
+ */
+
 @Path("/events")
 public class EventResource {
 
