@@ -137,13 +137,17 @@ public class DuckResource {
                 .append("\"id\":").append(duck.getId())
                 .append(",\"name\":\"").append(duck.getName()).append("\"")
                 .append(",\"description\":\"").append(duck.getDescription()).append("\"")
-                .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"")
-                .append(",\"gender\":\"").append(duck.getFeatureSet().getGender()).append("\"")
+                .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"");
+
+        stringBuilder
+                .append(", \"featureSet\":{")
+                .append("\"gender\":\"").append(duck.getFeatureSet().getGender()).append("\"")
                 .append(",\"colour\":\"").append(duck.getFeatureSet().getColour()).append("\"")
                 .append(",\"beakColour\":\"").append(duck.getFeatureSet().getBeakColour()).append("\"")
                 .append(",\"length\":").append(duck.getFeatureSet().getLength())
                 .append(",\"weigh\":").append(duck.getFeatureSet().getWeight())
-                .append(",\"swimmingSkill\":").append(duck.getFeatureSet().getSwimmingSkill());
+                .append(",\"swimmingSkill\":").append(duck.getFeatureSet().getSwimmingSkill())
+                .append("}");
         stringBuilder.append("}");
         return stringBuilder.toString();
     }

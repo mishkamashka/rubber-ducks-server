@@ -73,4 +73,8 @@ public class PlaceService {
         event = eventService.getById(event.getId());
         return event.getPlace();
     }
+
+    public void update(Place place) {
+        placeDao.update(place);
+    }
 }

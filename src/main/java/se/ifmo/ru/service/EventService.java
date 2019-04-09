@@ -74,6 +74,10 @@ public class EventService {
         return eventDao.getByPlaceId(placeId);
     }
 
+    public List<Event> getByOrganizerId(Long id) {
+        return eventDao.getByOrganizerId(id);
+    }
+
     /**
      * Returns list of events held on the certain date
      *
@@ -115,5 +119,17 @@ public class EventService {
             }
         }
         return result.size() > 0 ? result.get(0) : null;
+    }
+
+    public List<Event> getAllWithPlace() {
+        return eventDao.getAllWithPlace();
+    }
+
+    public Event getByIdWithPlace(Long id) {
+        return eventDao.getByIdWithPlace(id);
+    }
+
+    public void update(Event event) {
+        eventDao.update(event);
     }
 }

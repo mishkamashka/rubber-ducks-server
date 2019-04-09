@@ -17,25 +17,20 @@ public class PlaceDao {
     @PersistenceContext(unitName = "persistence")
     private EntityManager entityManager;
 
-    private EventDao eventDao = new EventDao();
-
     public Place getById(long id) {
         return entityManager.find(Place.class, id);
     }
 
     public void save(Place place) {
-        entityManager.getTransaction().begin();
         entityManager.persist(place);
-        entityManager.getTransaction().commit();
     }
 
     public void delete(Place place) {
-        entityManager.getTransaction().begin();
-        List<Event> events = eventDao.getByPlaceId(place.getId());
-        events.forEach(request -> eventDao.delete(request));
-        place.setEvents(new ArrayList<>());
         entityManager.remove(entityManager.contains(place) ? place : entityManager.merge(place));
-        entityManager.getTransaction().commit();
+    }
+
+    public void update(Place place) {
+        entityManager.merge(place);
     }
 
     public List<Place> getAll() {

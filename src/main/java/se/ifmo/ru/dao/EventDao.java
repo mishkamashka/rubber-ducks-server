@@ -1,14 +1,11 @@
 package se.ifmo.ru.dao;
 
 import se.ifmo.ru.model.Event;
-import se.ifmo.ru.model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -27,6 +24,10 @@ public class EventDao {
 
     public void delete(Event event) {
         entityManager.remove(entityManager.contains(event) ? event : entityManager.merge(event));
+    }
+
+    public void update(Event event) {
+        entityManager.merge(event);
     }
 
     public List<Event> getAll() {
@@ -52,5 +53,15 @@ public class EventDao {
     public List<Event> getByParticipantId(long participantId) {
         Query query = entityManager.createQuery("from Event ev inner join ev.participants ep on ep.id=" + participantId);
         return query.getResultList();
+    }
+
+    public List<Event> getAllWithPlace() {
+        Query query = entityManager.createQuery("select d from Event d join fetch d.place", Event.class);
+        return query.getResultList();
+    }
+
+    public Event getByIdWithPlace(Long id) {
+        Query query = entityManager.createQuery("select d from Event d join fetch d.place where d.id = " + id, Event.class);
+        return (Event) query.getSingleResult();
     }
 }
