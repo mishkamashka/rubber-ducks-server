@@ -59,25 +59,48 @@ public class DuckResource {
     @POST
     @Secured(Authority.USER)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/update/{id}")
+    public Response updateDuckDetails(@PathParam("id") Long id, Duck newDuck) {
+
+        Duck oldDuck = duckService.getByIdWithFeatureSet(id);
+        if (oldDuck == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        FeatureSet featureSet = oldDuck.getFeatureSet();
+        featureSet.setBeakColour(newDuck.getFeatureSet().getBeakColour());
+        featureSet.setColour(newDuck.getFeatureSet().getColour());
+        featureSet.setGender(newDuck.getFeatureSet().getGender());
+        featureSet.setLength(newDuck.getFeatureSet().getLength());
+        featureSet.setWeight(newDuck.getFeatureSet().getWeight());
+        featureSet.setSwimmingSkill(newDuck.getFeatureSet().getSwimmingSkill());
+        oldDuck.setName(newDuck.getName());
+        oldDuck.setAccessibility(newDuck.isAccessible());
+        oldDuck.setDescription(newDuck.getDescription());
+
+        duckService.update(oldDuck);
+
+        return Response.ok("duck's details have been updated").build();
+    }
+
+    @POST
+    @Secured(Authority.USER)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/new")
     public Response addDuck(@HeaderParam("Authorization") String token, Duck duck) {
         User user = getCurrentUser(token);
         duck.setOwner(user);
         duckService.save(duck);
-        return Response.ok().build();
+        return Response.ok("duck has been added").build();
     }
 
     @GET
     @Secured(Authority.USER)
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/delete/{id}")
     public Response deleteDuck(@PathParam("id") Long id) {
         Duck duck = duckService.getByIdWithFeatureSet(id);
         duckService.delete(duck);
         if (duck == null)
             return Response.status(Response.Status.NO_CONTENT).build();
-        return Response.ok().build();
+        return Response.ok("duck has been deleted").build();
     }
 
     @GET
