@@ -2,15 +2,19 @@ package se.ifmo.ru.controller;
 
 import se.ifmo.ru.auth.Secured;
 import se.ifmo.ru.model.Duck;
+import se.ifmo.ru.model.FeatureSet;
 import se.ifmo.ru.model.User;
+import se.ifmo.ru.security.api.AuthenticationTokenDetails;
 import se.ifmo.ru.security.domain.Authority;
+import se.ifmo.ru.security.service.AuthenticationTokenService;
 import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.UserService;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+import java.security.Principal;
 import java.util.List;
 
 @Path("/ducks")
@@ -21,6 +25,12 @@ public class DuckResource {
 
     @EJB
     private DuckService duckService;
+
+    @Context
+    private SecurityContext securityContext;
+
+    @EJB
+    private AuthenticationTokenService authenticationTokenService;
 
     @POST
     @Secured(Authority.USER)
@@ -34,7 +44,6 @@ public class DuckResource {
             return Response.status(Response.Status.NO_CONTENT).build();
         String json = ducksToJSON(ducks);
         return Response.ok(json).build();
-
     }
 
     @GET
@@ -46,6 +55,34 @@ public class DuckResource {
         if (duck == null)
             return Response.status(Response.Status.NO_CONTENT).build();
         String json = duckDetailsToJSON(duck);
+        return Response.ok(json).build();
+    }
+
+    @POST
+    @Secured(Authority.USER)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/new")
+    public Response addDuck(@HeaderParam("Authorization") String token, Duck duck) {
+
+        User user = getCurrentUser(token);
+
+
+        duck.setOwner(user);
+        duckService.save(duck);
+
+        return Response.ok("ok").build();
+    }
+
+    @GET
+    @Secured(Authority.USER)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/all")
+    public Response getAllDucks() {
+        List<Duck> ducks = duckService.getAll();
+        if (ducks == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        String json = ducksToJSON(ducks);
         return Response.ok(json).build();
     }
 
@@ -74,12 +111,19 @@ public class DuckResource {
                 .append(",\"accessibility\":\"").append(duck.isAccessible()).append("\"")
                 .append(",\"gender\":\"").append(duck.getFeatureSet().getGender()).append("\"")
                 .append(",\"colour\":\"").append(duck.getFeatureSet().getColour()).append("\"")
-                .append(",\"beak-colour\":\"").append(duck.getFeatureSet().getBeakColour()).append("\"")
+                .append(",\"beakColour\":\"").append(duck.getFeatureSet().getBeakColour()).append("\"")
                 .append(",\"length\":").append(duck.getFeatureSet().getLength())
                 .append(",\"weigh\":").append(duck.getFeatureSet().getWeight())
-                .append(",\"swimming-skill\":").append(duck.getFeatureSet().getSwimmingSkill());
+                .append(",\"swimmingSkill\":").append(duck.getFeatureSet().getSwimmingSkill());
         stringBuilder.append("}");
         return stringBuilder.toString();
+    }
+
+    private User getCurrentUser(String token) {
+        String authenticationToken = token.substring(7);
+
+        AuthenticationTokenDetails authenticationTokenDetails = authenticationTokenService.parseToken(authenticationToken);
+        return userService.getByNickname(authenticationTokenDetails.getUsername());
     }
 
 }

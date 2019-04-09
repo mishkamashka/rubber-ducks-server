@@ -5,6 +5,7 @@ import se.ifmo.ru.security.domain.Authority;
 import se.ifmo.ru.security.exception.AuthenticationTokenRefreshmentException;
 import se.ifmo.ru.util.configuration.Configurable;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
@@ -15,7 +16,7 @@ import java.util.UUID;
  * Service which provides operations for authentication tokens.
  *
  */
-@ApplicationScoped
+@Stateless
 public class AuthenticationTokenService {
 
     /**

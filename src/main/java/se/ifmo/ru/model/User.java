@@ -82,7 +82,7 @@ public class User {
     public User(String nickname, String password) {
         this.nickname = nickname;
         this.password = password;
-        this.active = false;
+        this.active = true;
     }
 
     public long getId() {
