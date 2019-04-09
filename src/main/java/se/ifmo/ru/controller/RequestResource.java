@@ -10,6 +10,7 @@ import se.ifmo.ru.security.service.AuthenticationTokenService;
 import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
+import se.ifmo.ru.util.MailService;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -69,6 +70,8 @@ public class RequestResource {
         Duck duck = duckService.getByIdWithOwner(id);
         request.setDuck(duck);
         requestService.save(request);
+//        MailService.sendMessage(duck.getOwner().getEmail(), "Hello! Your duck was chosen! User " + user.getNickname() +
+//                " wants to share your duck " + duck.getName() + ".");
         return Response.ok("request has been added").build();
     }
 

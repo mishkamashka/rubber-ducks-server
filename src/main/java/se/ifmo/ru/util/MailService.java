@@ -7,15 +7,15 @@ import java.util.Properties;
 
 public class MailService {
     public static void sendMessage(String to, String text) {
-        String username = "rubber.ducks.fanclub@yandex.ru";
-        String password = "rubber.ducks.fanclub";
+        String username = "rubber.ducks.club@yandex.ru";
+        String password = "rubberducksclub";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.yandex.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
-        prop.put("mail.smtp.from","rubber.ducks.fanclub@yandex.ru");
+        prop.put("mail.smtp.from","rubber.ducks.club@yandex.ru");
         prop.put("mail.smtp.ssl.trust", "smtp.yandex.com");
 
         Session session = Session.getInstance(prop,

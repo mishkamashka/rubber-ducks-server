@@ -16,7 +16,7 @@ public class NotificationsResource {
     @Path("/ping")
     public Response ping() {
 
-        MailService.sendMessage("just-another-log-in@yandex.ru", "Hi");
+        MailService.sendMessage("liza.lopyreva@gmail.com", "hello");
         return Response.ok().entity("Service online\n").build();
     }
 
