@@ -24,7 +24,6 @@ public class RegistrationResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-//    @PermitAll
     @Path("/new")
     public Response register(Credentials credentials) {
         User user = userService.getByNickname(credentials.getUsername());

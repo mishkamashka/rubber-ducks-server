@@ -43,7 +43,7 @@ public class EventResource {
 
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/users/all")
@@ -57,7 +57,7 @@ public class EventResource {
     }
 
     @GET
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/details/{id}")
     public Response getEventDetails(@PathParam("id") Long id) {
@@ -69,7 +69,7 @@ public class EventResource {
     }
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/update/{id}")
     public Response updateDuckDetails(@PathParam("id") Long id, Event newEvent) {
@@ -97,7 +97,7 @@ public class EventResource {
     }
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/new")
     public Response addEvent(@HeaderParam("Authorization") String token, Event event) {
@@ -122,7 +122,7 @@ public class EventResource {
     }
 
     @GET
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")
     public Response getAllEvents() {

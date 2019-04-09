@@ -31,7 +31,7 @@ public class DuckResource {
     private AuthenticationTokenService authenticationTokenService;
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/users/all")
@@ -45,7 +45,7 @@ public class DuckResource {
     }
 
     @GET
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/details/{id}")
     public Response getDuckDetails(@PathParam("id") Long id) {
@@ -57,7 +57,7 @@ public class DuckResource {
     }
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/update/{id}")
     public Response updateDuckDetails(@PathParam("id") Long id, Duck newDuck) {
@@ -82,7 +82,7 @@ public class DuckResource {
     }
 
     @POST
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/new")
     public Response addDuck(@HeaderParam("Authorization") String token, Duck duck) {
@@ -93,7 +93,7 @@ public class DuckResource {
     }
 
     @GET
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Path("/delete/{id}")
     public Response deleteDuck(@PathParam("id") Long id) {
         Duck duck = duckService.getByIdWithFeatureSet(id);
@@ -104,7 +104,7 @@ public class DuckResource {
     }
 
     @GET
-    @Secured(Authority.USER)
+    @Secured({Authority.USER, Authority.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")
     public Response getAllDucks() {
