@@ -69,4 +69,14 @@ public class DuckDao {
         Query query = entityManager.createQuery("select d from Duck d join fetch d.requests where d.id = " + id, Duck.class);
         return (Duck) query.getSingleResult();
     }
+
+    public List<Duck> getAllWithOwner() {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.owner", Duck.class);
+        return query.getResultList();
+    }
+
+    public Duck getByIdWithOwner(Long id) {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.owner where d.id = " + id, Duck.class);
+        return (Duck) query.getSingleResult();
+    }
 }

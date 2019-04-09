@@ -20,15 +20,11 @@ public class RequestDao {
     }
 
     public void save(Request request) {
-        entityManager.getTransaction().begin();
         entityManager.persist(request);
-        entityManager.getTransaction().commit();
     }
 
     public void delete(Request request) {
-        entityManager.getTransaction().begin();
         entityManager.remove(entityManager.contains(request) ? request : entityManager.merge(request));
-        entityManager.getTransaction().commit();
     }
 
     public List<Request> getAll() {
@@ -49,6 +45,17 @@ public class RequestDao {
     public List<Request> getByIsApproved(boolean isApproved) {
         Query query = entityManager.createQuery("from Request where is_approved =" + isApproved);
         return ((org.hibernate.query.Query) query).list();
+    }
+
+    public List<Request> getAllWithDuckAndUser() {
+        Query query = entityManager.createQuery("select d from Request d join fetch d.duck join fetch d.user", Request.class);
+        return query.getResultList();
+    }
+
+    public Request getByIdWithDuckAndUser(Long id) {
+        Query query = entityManager.createQuery("select d from Request d join fetch d.duck join fetch d.user " +
+                "where d.id = " + id, Request.class);
+        return (Request) query.getSingleResult();
     }
 
 }

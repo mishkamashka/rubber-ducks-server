@@ -2,6 +2,7 @@ package se.ifmo.ru.controller;
 
 import se.ifmo.ru.auth.Secured;
 import se.ifmo.ru.security.domain.Authority;
+import se.ifmo.ru.util.MailService;
 
 import javax.management.Notification;
 import javax.ws.rs.*;
@@ -14,6 +15,8 @@ public class NotificationsResource {
     @GET
     @Path("/ping")
     public Response ping() {
+
+        MailService.sendMessage("just-another-log-in@yandex.ru", "Hi");
         return Response.ok().entity("Service online\n").build();
     }
 

@@ -43,6 +43,14 @@ public class Request {
         return duck;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDuck(Duck duck) {
+        this.duck = duck;
+    }
+
     public boolean isApproved() {
         return isApproved;
     }

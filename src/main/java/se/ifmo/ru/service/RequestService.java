@@ -80,4 +80,12 @@ public class RequestService {
     public List<Request> getByIsApproved(boolean isApproved) {
         return requestDao.getByIsApproved(isApproved);
     }
+
+    public List<Request> getAllWithDuckAndUser() {
+        return requestDao.getAllWithDuckAndUser();
+    }
+
+    public Request getByIdWithDuckAndUser(Long id) {
+        return requestDao.getByIdWithDuckAndUser(id);
+    }
 }

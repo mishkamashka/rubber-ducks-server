@@ -34,6 +34,6 @@ public class RegistrationResource {
 //        } catch (PSQLException e) {
 //            e.printStackTrace();
 //        }
-        return Response.ok().build();
+        return Response.ok("new user has been registered").build();
     }
 }

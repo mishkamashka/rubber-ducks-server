@@ -113,4 +113,12 @@ public class DuckService {
         return duckDao.getByIdWithRequests(id);
     }
 
+    public List<Duck> getAllWithOwner() {
+        return duckDao.getAllWithOwner();
+    }
+
+    public Duck getByIdWithOwner(Long id) {
+        return duckDao.getByIdWithOwner(id);
+    }
+
 }
