@@ -97,4 +97,20 @@ public class DuckService {
         return accessibleDucks;
     }
 
+    public List<Duck> getAllWithFeatureSet() {
+        return duckDao.getAllWithFeatureSet();
+    }
+
+    public Duck getByIdWithFeatureSet(Long id) {
+       return duckDao.getByIdWithFeatureSet(id);
+    }
+
+    public List<Duck> getAllWithRequests() {
+        return duckDao.getAllWithRequests();
+    }
+
+    public Duck getByIdWithRequests(Long id) {
+        return duckDao.getByIdWithRequests(id);
+    }
+
 }

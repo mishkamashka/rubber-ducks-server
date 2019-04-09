@@ -5,14 +5,10 @@ import se.ifmo.ru.model.Event;
 import se.ifmo.ru.model.Request;
 import se.ifmo.ru.model.User;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.*;
 import java.util.ArrayList;
 import java.util.List;
 

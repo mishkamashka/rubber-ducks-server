@@ -24,24 +24,18 @@ public class DuckDao {
     }
 
     public void save(Duck duck) {
-        entityManager.getTransaction().begin();
         entityManager.persist(duck);
-        entityManager.getTransaction().commit();
     }
 
     public void delete(Duck duck) {
-        entityManager.getTransaction().begin();
         List<Request> requests = requestDao.getByDuckId(duck.getId());
         requests.forEach(request -> requestDao.delete(request));
         duck.setRequests(new ArrayList<>());
         entityManager.remove(entityManager.contains(duck) ? duck : entityManager.merge(duck));
-        entityManager.getTransaction().commit();
     }
 
     public void update(Duck duck) {
-        entityManager.getTransaction().begin();
         entityManager.merge(duck);
-        entityManager.getTransaction().commit();
     }
 
     public List<Duck> getAll() {
@@ -57,5 +51,25 @@ public class DuckDao {
     public List<Duck> getByOwnerId(long ownerId) {
         Query query = entityManager.createQuery("from Duck where owner_id =" + ownerId);
         return query.getResultList();
+    }
+
+    public List<Duck> getAllWithFeatureSet() {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.featureSet", Duck.class);
+        return query.getResultList();
+    }
+
+    public Duck getByIdWithFeatureSet(Long id) {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.featureSet where d.id = " + id, Duck.class);
+        return (Duck) query.getSingleResult();
+    }
+
+    public List<Duck> getAllWithRequests() {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.requests", Duck.class);
+        return query.getResultList();
+    }
+
+    public Duck getByIdWithRequests(Long id) {
+        Query query = entityManager.createQuery("select d from Duck d join fetch d.requests where d.id = " + id, Duck.class);
+        return (Duck) query.getSingleResult();
     }
 }

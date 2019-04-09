@@ -1,12 +1,10 @@
 package se.ifmo.ru.controller;
 
-import org.postgresql.util.PSQLException;
 import se.ifmo.ru.auth.Credentials;
 import se.ifmo.ru.model.User;
 import se.ifmo.ru.security.service.PasswordEncoder;
 import se.ifmo.ru.service.UserService;
 
-import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
