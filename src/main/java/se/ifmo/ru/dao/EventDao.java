@@ -22,16 +22,11 @@ public class EventDao {
     }
 
     public void save(Event event) {
-        entityManager.getTransaction().begin();
         entityManager.persist(event);
-        entityManager.getTransaction().commit();
     }
 
     public void delete(Event event) {
-        entityManager.getTransaction().begin();
-        event.setParticipants(new ArrayList<>());
         entityManager.remove(entityManager.contains(event) ? event : entityManager.merge(event));
-        entityManager.getTransaction().commit();
     }
 
     public List<Event> getAll() {

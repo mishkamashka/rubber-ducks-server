@@ -11,10 +11,8 @@ import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.UserService;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.security.Principal;
 import java.util.List;
 
 @Path("/ducks")
@@ -64,14 +62,22 @@ public class DuckResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/new")
     public Response addDuck(@HeaderParam("Authorization") String token, Duck duck) {
-
         User user = getCurrentUser(token);
-
-
         duck.setOwner(user);
         duckService.save(duck);
+        return Response.ok().build();
+    }
 
-        return Response.ok("ok").build();
+    @GET
+    @Secured(Authority.USER)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/delete/{id}")
+    public Response deleteDuck(@PathParam("id") Long id) {
+        Duck duck = duckService.getByIdWithFeatureSet(id);
+        duckService.delete(duck);
+        if (duck == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.ok().build();
     }
 
     @GET
@@ -121,7 +127,6 @@ public class DuckResource {
 
     private User getCurrentUser(String token) {
         String authenticationToken = token.substring(7);
-
         AuthenticationTokenDetails authenticationTokenDetails = authenticationTokenService.parseToken(authenticationToken);
         return userService.getByNickname(authenticationTokenDetails.getUsername());
     }

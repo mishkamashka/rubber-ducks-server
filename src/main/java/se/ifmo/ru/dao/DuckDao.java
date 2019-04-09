@@ -16,7 +16,7 @@ public class DuckDao {
 
     @PersistenceContext(unitName = "persistence")
     private EntityManager entityManager;
-    //    private EntityManager entityManager = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+
     private RequestDao requestDao = new RequestDao();
 
     public Duck getById(long id) {
@@ -28,9 +28,6 @@ public class DuckDao {
     }
 
     public void delete(Duck duck) {
-        List<Request> requests = requestDao.getByDuckId(duck.getId());
-        requests.forEach(request -> requestDao.delete(request));
-        duck.setRequests(new ArrayList<>());
         entityManager.remove(entityManager.contains(duck) ? duck : entityManager.merge(duck));
     }
 
