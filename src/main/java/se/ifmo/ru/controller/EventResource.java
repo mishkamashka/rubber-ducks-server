@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -125,6 +126,19 @@ public class EventResource {
     @Path("/all")
     public Response getAllEvents() {
         List<Event> events = eventService.getAll();
+        if (events == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        String json = eventsToJSON(events);
+        return Response.ok(json).build();
+    }
+
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/upcoming")
+    public Response getNotPastEvents() {
+        Date date = new Date();
+        List<Event> events = eventService.getNotOlderThan(date);
         if (events == null)
             return Response.status(Response.Status.NO_CONTENT).build();
         String json = eventsToJSON(events);

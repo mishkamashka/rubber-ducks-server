@@ -184,7 +184,7 @@ public class DuckResource {
                 .append(",\"colour\":\"").append(duck.getFeatureSet().getColour()).append("\"")
                 .append(",\"beakColour\":\"").append(duck.getFeatureSet().getBeakColour()).append("\"")
                 .append(",\"length\":").append(duck.getFeatureSet().getLength())
-                .append(",\"weigh\":").append(duck.getFeatureSet().getWeight())
+                .append(",\"weight\":").append(duck.getFeatureSet().getWeight())
                 .append(",\"swimmingSkill\":").append(duck.getFeatureSet().getSwimmingSkill())
                 .append("}");
         stringBuilder.append("}");

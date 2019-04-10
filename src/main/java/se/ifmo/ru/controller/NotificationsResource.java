@@ -15,14 +15,12 @@ public class NotificationsResource {
     @GET
     @Path("/ping")
     public Response ping() {
-
-        MailService.sendMessage("liza.lopyreva@gmail.com", "hello");
         return Response.ok().entity("Service online\n").build();
     }
 
     @GET
-    @Secured(Authority.USER)
-    @Path("/secured")
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Path("/token")
     public Response pingSecured() {
         return Response.ok().entity("Secured service online\n").build();
     }

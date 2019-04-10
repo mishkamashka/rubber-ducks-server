@@ -6,7 +6,6 @@ import se.ifmo.ru.model.Event;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,14 +84,27 @@ public class EventService {
      * @return - list of events or null, if nothing found
      */
     public List<Event> getByDate(Date date) {
-        EventService eventService = new EventService();
-        List<Event> events = eventService.getAll();
+        List<Event> events = this.getAll();
         List<Event> result = new ArrayList<>();
         DateTime reqDate = new DateTime(date);
         DateTime eventDate;
         for (Event event1 : events) {
             eventDate = new DateTime(event1.getDate());
             if (reqDate.equals(eventDate)) {
+                result.add(event1);
+            }
+        }
+        return result;
+    }
+
+    public List<Event> getNotOlderThan(Date date) {
+        List<Event> events = this.getAll();
+        List<Event> result = new ArrayList<>();
+        DateTime reqDate = new DateTime(date);
+        DateTime eventDate;
+        for (Event event1 : events) {
+            eventDate = new DateTime(event1.getDate());
+            if (eventDate.compareTo(reqDate) > 0) {
                 result.add(event1);
             }
         }

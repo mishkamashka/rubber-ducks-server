@@ -58,7 +58,7 @@ public class UserResource {
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(user.getId())
-                    .append(",\"name\":\"").append(user.getNickname()).append("\"")
+                    .append(",\"nickname\":\"").append(user.getNickname()).append("\"")
                     .append(",\"firstName\":\"").append(user.getFirstName()).append("\"")
                     .append(",\"lastName\":\"").append(user.getLastName()).append("\"")
                     .append(",\"gender\":\"").append(user.getGender()).append("\"")
@@ -89,7 +89,7 @@ public class UserResource {
         StringBuilder stringBuilder = new StringBuilder("{");
         stringBuilder
                 .append("\"id\":").append(user.getId())
-                .append(",\"name\":\"").append(user.getNickname()).append("\"")
+                .append(",\"nickname\":\"").append(user.getNickname()).append("\"")
                 .append(",\"firstName\":\"").append(user.getFirstName()).append("\"")
                 .append(",\"lastName\":\"").append(user.getLastName()).append("\"")
                 .append(",\"gender\":\"").append(user.getGender()).append("\"")
