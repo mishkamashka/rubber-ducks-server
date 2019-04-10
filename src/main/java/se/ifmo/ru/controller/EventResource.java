@@ -102,9 +102,6 @@ public class EventResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/new")
     public Response addEvent(@HeaderParam("Authorization") String token, Event event) {
-        //TODO: places are always added as new ones and never deleted
-        if (event.getPlace() != null)
-            placeService.save(event.getPlace());
         User user = getCurrentUser(token);
         event.setOrganizer(user);
         eventService.save(event);
@@ -147,7 +144,8 @@ public class EventResource {
                     .append(",\"maxPeople\":").append(event.getMaxPeople())
                     .append("}, ");
         }
-        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
+        if (stringBuilder.length() > 5)
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
         stringBuilder.append("]");
         return stringBuilder.toString();
     }

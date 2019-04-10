@@ -73,7 +73,8 @@ public class UserResource {
                     .append(",\"buildingLetter\":\"").append(user.getBuildingLetter()).append("\"")
                     .append("}, ");
         }
-        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
+        if (stringBuilder.length() > 5)
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
         stringBuilder.append("]");
         return stringBuilder.toString();
     }

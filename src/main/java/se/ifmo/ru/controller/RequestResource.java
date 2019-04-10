@@ -78,14 +78,15 @@ public class RequestResource {
 
     private String requestsToJSON(List<Request> requests) {
         StringBuilder stringBuilder = new StringBuilder("[");
-        for (Request request: requests) {
+        for (Request request : requests) {
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(request.getId())
                     .append(",\"isApproved\":\"").append(request.isApproved()).append("\"")
                     .append("}, ");
         }
-        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
+        if (stringBuilder.length() > 5)
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
