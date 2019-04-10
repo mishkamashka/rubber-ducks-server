@@ -10,6 +10,7 @@ import se.ifmo.ru.security.service.AuthenticationTokenService;
 import se.ifmo.ru.service.EventService;
 import se.ifmo.ru.service.PlaceService;
 import se.ifmo.ru.service.UserService;
+import se.ifmo.ru.util.DateFormatter;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -86,7 +87,7 @@ public class EventResource {
         place.setBuildingLetter(newEvent.getPlace().getBuildingLetter());
 
         oldEvent.setName(newEvent.getName());
-        oldEvent.setDate(newEvent.getDate().toString()); //TODO: doesn't work
+        oldEvent.setDate(DateFormatter.dateToSQLString(newEvent.getDate())); //TODO: doesn't work
         oldEvent.setCost(newEvent.getCost());
         oldEvent.setMaxPeople(newEvent.getMaxPeople());
 

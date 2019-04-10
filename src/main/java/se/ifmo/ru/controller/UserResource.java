@@ -51,9 +51,10 @@ public class UserResource {
         for (User user : users) {
             StringBuilder image = new StringBuilder();
             byte[] b = user.getImage();
-            for (int i = 0; i < b.length; i++) {
-                image.append(b);
-            }
+            if (b != null)
+                for (int i = 0; i < b.length; i++) {
+                    image.append(b);
+                }
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(user.getId())
@@ -80,9 +81,10 @@ public class UserResource {
     private String userToJSON(User user) {
         StringBuilder image = new StringBuilder();
         byte[] b = user.getImage();
-        for (int i = 0; i < b.length; i++) {
-            image.append(b);
-        }
+        if (b != null)
+            for (int i = 0; i < b.length; i++) {
+                image.append(b);
+            }
         StringBuilder stringBuilder = new StringBuilder("{");
         stringBuilder
                 .append("\"id\":").append(user.getId())
