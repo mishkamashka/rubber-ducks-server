@@ -59,7 +59,7 @@ public class User {
     private byte[] image;
 
     @Column
-    private boolean active;
+    private boolean active = true;
 
     @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
