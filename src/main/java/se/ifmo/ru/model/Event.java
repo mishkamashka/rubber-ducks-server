@@ -129,6 +129,10 @@ public class Event {
         this.participants.add(user);
     }
 
+    public void deleteParticipant(User user) {
+        this.participants.remove(user);
+    }
+
     public User getOrganizer() {
         return organizer;
     }

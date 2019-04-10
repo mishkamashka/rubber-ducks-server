@@ -56,17 +56,17 @@ public class EventDao {
     }
 
     public List<Event> getAllWithPlace() {
-        Query query = entityManager.createQuery("select d from Event d join fetch d.place", Event.class);
+        Query query = entityManager.createQuery("select d from Event d left join fetch d.place", Event.class);
         return query.getResultList();
     }
 
     public Event getByIdWithPlace(Long id) {
-        Query query = entityManager.createQuery("select d from Event d join fetch d.place where d.id = " + id, Event.class);
+        Query query = entityManager.createQuery("select d from Event d left join fetch d.place where d.id = " + id, Event.class);
         return (Event) query.getSingleResult();
     }
 
     public Event getByIdWithParticipants(Long id) {
-        Query query = entityManager.createQuery("select d from Event d join fetch d.participants where d.id = " + id, Event.class);
+        Query query = entityManager.createQuery("select d from Event d left join fetch d.participants where d.id = " + id, Event.class);
         return (Event) query.getSingleResult();
     }
 }

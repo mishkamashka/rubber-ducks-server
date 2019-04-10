@@ -146,21 +146,33 @@ public class EventResource {
         return Response.ok(json).build();
     }
 
-//    @GET
-//    @Secured({Authority.USER, Authority.ADMIN})
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("/register/{id}")
-//    public Response registerOnEvent(@HeaderParam("Authorization") String token, @PathParam("id") Long eventId) {
-//        Event event = eventService.getById(eventId);
-//        event = eventService.getByIdWithParticipants(eventId);
-//        if (event == null)
-//            return Response.status(Response.Status.NO_CONTENT).build();
-//        User user = getCurrentUser(token);
-//        event.addParticipant(user);
-//        eventService.update(event);
-////        user.addAttendingEvent(event);
-//        return Response.ok("you've registered on the event").build();
-//    }
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/register/{id}")
+    public Response registerOnEvent(@HeaderParam("Authorization") String token, @PathParam("id") Long eventId) {
+        Event  event = eventService.getByIdWithParticipants(eventId);
+        if (event == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        User user = getCurrentUser(token);
+        event.addParticipant(user);
+        eventService.update(event);
+        return Response.ok("you've registered on the event").build();
+    }
+
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/unregister/{id}")
+    public Response unregisterOnEvent(@HeaderParam("Authorization") String token, @PathParam("id") Long eventId) {
+        Event  event = eventService.getByIdWithParticipants(eventId);
+        if (event == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        User user = getCurrentUser(token);
+        event.deleteParticipant(user);
+        eventService.update(event);
+        return Response.ok("you've cancelled registration on the event").build();
+    }
 
     private String eventsToJSON(List<Event> events) {
         StringBuilder stringBuilder = new StringBuilder("[");
