@@ -60,7 +60,7 @@ public class EventResource {
     }
 
     @GET
-    @Secured({Authority.USER, Authority.ADMIN})
+    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/details/{id}")
     public Response getEventDetails(@PathParam("id") Long id) {
@@ -75,7 +75,7 @@ public class EventResource {
     @Secured({Authority.USER, Authority.ADMIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/update/{id}")
-    public Response updateDuckDetails(@PathParam("id") Long id, Event newEvent) {
+    public Response updateEventDetails(@PathParam("id") Long id, Event newEvent) {
 
         Event oldEvent = eventService.getByIdWithPlace(id);
         if (oldEvent == null)

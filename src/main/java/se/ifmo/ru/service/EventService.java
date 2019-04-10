@@ -111,6 +111,20 @@ public class EventService {
         return result;
     }
 
+    public List<Event> getNotOlderThanWithPlace(Date date) {
+        List<Event> events = this.getAllWithPlace();
+        List<Event> result = new ArrayList<>();
+        DateTime reqDate = new DateTime(date);
+        DateTime eventDate;
+        for (Event event1 : events) {
+            eventDate = new DateTime(event1.getDate());
+            if (eventDate.compareTo(reqDate) > 0) {
+                result.add(event1);
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns list of events held at the certain place and on the certain date
      *
