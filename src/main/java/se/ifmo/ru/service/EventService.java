@@ -144,4 +144,8 @@ public class EventService {
     public void update(Event event) {
         eventDao.update(event);
     }
+
+    public Event getByIdWithParticipants(Long id) {
+        return eventDao.getByIdWithParticipants(id);
+    }
 }

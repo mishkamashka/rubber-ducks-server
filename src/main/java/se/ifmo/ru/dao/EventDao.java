@@ -64,4 +64,9 @@ public class EventDao {
         Query query = entityManager.createQuery("select d from Event d join fetch d.place where d.id = " + id, Event.class);
         return (Event) query.getSingleResult();
     }
+
+    public Event getByIdWithParticipants(Long id) {
+        Query query = entityManager.createQuery("select d from Event d join fetch d.participants where d.id = " + id, Event.class);
+        return (Event) query.getSingleResult();
+    }
 }

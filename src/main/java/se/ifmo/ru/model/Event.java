@@ -125,6 +125,10 @@ public class Event {
         this.participants = participants;
     }
 
+    public void addParticipant(User user) {
+        this.participants.add(user);
+    }
+
     public User getOrganizer() {
         return organizer;
     }
