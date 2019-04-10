@@ -87,7 +87,7 @@ public class DuckService {
      *
      * @return - list of ducks or null, if nothing found
      */
-    public List<Duck> getAccessibleWithOwnerAndFeatureSet() {
+    public List<Duck> getAccessible() {
         List<Duck> allDucks = this.getAll();
         List<Duck> accessibleDucks = new LinkedList<>();
         for (Duck duck : allDucks) {

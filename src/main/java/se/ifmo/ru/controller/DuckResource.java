@@ -115,6 +115,31 @@ public class DuckResource {
         return Response.ok(json).build();
     }
 
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/accessible")
+    public Response getAllAccessibleDucks() {
+        List<Duck> ducks = duckService.getAccessible();
+        if (ducks == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        String json = ducksToJSON(ducks);
+        return Response.ok(json).build();
+    }
+
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/name/{name}")
+    public Response getByName(@PathParam("name") String name) {
+        List<Duck> ducks = duckService.getByName(name);
+        if (ducks == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        String json = ducksToJSON(ducks);
+        return Response.ok(json).build();
+    }
+
+
     private String ducksToJSON(List<Duck> ducks) {
         StringBuilder stringBuilder = new StringBuilder("[");
         for (Duck duck : ducks) {
