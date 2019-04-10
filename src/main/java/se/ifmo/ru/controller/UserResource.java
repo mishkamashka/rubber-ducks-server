@@ -72,7 +72,7 @@ public class UserResource {
     @Secured({Authority.USER, Authority.ADMIN})
     @Path("/delete/{id}")
     public Response deleteUser(@PathParam("id") Long id) {
-        User user = userService.getByIdWithEverything(id);
+        User user = userService.getById(id);
         userService.delete(user);
         if (user == null)
             return Response.status(Response.Status.NO_CONTENT).build();

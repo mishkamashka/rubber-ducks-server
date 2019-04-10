@@ -198,7 +198,4 @@ public class UserService {
         return requiredUsers;
     }
 
-    public User getByIdWithEverything(Long id) {
-        return userDao.getByIdWithEverything(id);
-    }
 }

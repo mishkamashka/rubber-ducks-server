@@ -30,7 +30,7 @@ public class Event {
      * available for non-members or not
      */
     @Column
-    private boolean isClubOnly = false;
+    private boolean isClubOnly;
 
     /**
      *  0 - no limit
@@ -105,7 +105,7 @@ public class Event {
         return isClubOnly;
     }
 
-    public void setClubOnly(boolean clubOnly) {
+    public void setIsClubOnly(boolean clubOnly) {
         isClubOnly = clubOnly;
     }
 

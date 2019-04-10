@@ -97,14 +97,4 @@ public class UserDao {
         query.setParameter("gender", gender);
         return query.getResultList();
     }
-
-    public User getByIdWithEverything(Long id) {
-        Query query = entityManager.createQuery("select d from User d " +
-                     "join fetch d.ducks " +
-                     "join fetch d.requests " +
-                     "join fetch d.organizedEvents " +
-                     "join fetch d.attendingEvents where d.id = " + id, User.class);
-        return (User) query.getSingleResult();
-    }
-
 }
