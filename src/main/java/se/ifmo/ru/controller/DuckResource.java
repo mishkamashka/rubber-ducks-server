@@ -46,6 +46,20 @@ public class DuckResource {
 
     @GET
     @Secured({Authority.USER, Authority.ADMIN})
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/users/all/get")
+    public Response getUserDucksGet(String nickname) {
+        User user = userService.getByNickname(nickname);
+        List<Duck> ducks = duckService.getByOwnerId(user.getId());
+        if (ducks == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        String json = ducksToJSON(ducks);
+        return Response.ok(json).build();
+    }
+
+    @GET
+    @Secured({Authority.USER, Authority.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/details/{id}")
     public Response getDuckDetails(@PathParam("id") Long id) {
