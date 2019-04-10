@@ -143,12 +143,13 @@ public class DuckResource {
     private String ducksToJSON(List<Duck> ducks) {
         StringBuilder stringBuilder = new StringBuilder("[");
         for (Duck duck : ducks) {
-            byte[] b = duck.getImage();
             StringBuilder image = new StringBuilder();
-            if (b != null)
+            if (duck.getImage() != null) {
+                byte[] b = duck.getImage();
                 for (int i = 0; i < b.length; i++) {
                     image.append(b);
                 }
+            }
             stringBuilder
                     .append("{")
                     .append("\"id\":").append(duck.getId())
@@ -166,11 +167,12 @@ public class DuckResource {
 
     private String duckDetailsToJSON(Duck duck) {
         StringBuilder image = new StringBuilder();
-        byte[] b = duck.getImage();
-        if (b != null)
+        if (duck.getImage() != null) {
+            byte[] b = duck.getImage();
             for (int i = 0; i < b.length; i++) {
                 image.append(b);
             }
+        }
         StringBuilder stringBuilder = new StringBuilder("{");
         stringBuilder
                 .append("\"id\":").append(duck.getId())

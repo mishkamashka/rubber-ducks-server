@@ -4,6 +4,7 @@ import se.ifmo.ru.security.domain.Authority;
 import se.ifmo.ru.service.DuckService;
 import se.ifmo.ru.service.RequestService;
 import se.ifmo.ru.service.UserService;
+import se.ifmo.ru.util.DateFormatter;
 
 import javax.persistence.*;
 import java.util.*;
@@ -136,8 +137,13 @@ public class User {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String dateString) {
+        try {
+            this.birthDate = DateFormatter.stringToDate(dateString);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Not valid date");
+        }
     }
 
     public String getPhoneNumber() {
@@ -162,6 +168,10 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getStreet() {

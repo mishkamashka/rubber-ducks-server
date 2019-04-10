@@ -32,36 +32,11 @@ public class UserDao {
     }
 
     public void delete(User user) {
-        entityManager.getTransaction().begin();
-
-        List<Duck> ducks = duckDao.getByOwnerId(user.getId());
-        ducks.forEach(duck -> duckDao.delete(duck));
-
-        List<Request> requests = requestDao.getByUserId(user.getId());
-        requests.forEach(request -> requestDao.delete(request));
-
-        List<Event> organizedEvents = eventDao.getByOrganizerId(user.getId());
-        organizedEvents.forEach(event -> eventDao.delete(event));
-
-//        List<Event> attendingEvents = eventDao.getByParticipantId(user.getId());
-//        attendingEvents.forEach(event -> eventDao.delete(event));
-
-        List<Event> attendingEvents = eventDao.getByParticipantId(user.getId());
-        attendingEvents.forEach(event -> event.getParticipants().remove(user));
-
-        user.setDucks(new ArrayList<>());
-        user.setRequests(new ArrayList<>());
-        user.setOrganizedEvents(new ArrayList<>());
-        user.setAttendingEvents(new ArrayList<>());
-
         entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
-        entityManager.getTransaction().commit();
     }
 
     public void update(User user) {
-        entityManager.getTransaction().begin();
         entityManager.merge(user);
-        entityManager.getTransaction().commit();
     }
 
     public List<User> getAll() {
@@ -121,6 +96,15 @@ public class UserDao {
         Query query = entityManager.createQuery("from User where gender = :gender");
         query.setParameter("gender", gender);
         return query.getResultList();
+    }
+
+    public User getByIdWithEverything(Long id) {
+        Query query = entityManager.createQuery("select d from User d " +
+                     "join fetch d.ducks " +
+                     "join fetch d.requests " +
+                     "join fetch d.organizedEvents " +
+                     "join fetch d.attendingEvents where d.id = " + id, User.class);
+        return (User) query.getSingleResult();
     }
 
 }
