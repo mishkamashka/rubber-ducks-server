@@ -70,8 +70,8 @@ public class RequestResource {
         Duck duck = duckService.getByIdWithOwner(id);
         request.setDuck(duck);
         requestService.save(request);
-//        MailService.sendMessage(duck.getOwner().getEmail(), "Hello! Your duck was chosen! User " + user.getNickname() +
-//                " wants to share your duck " + duck.getName() + ".");
+        MailService.sendMessage(duck.getOwner().getEmail(), "Hello! Your duck was chosen! User " + user.getNickname() +
+                " wants to share your duck " + duck.getName() + ".");
         return Response.ok("request has been added").build();
     }
 
